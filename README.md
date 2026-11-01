@@ -2,6 +2,22 @@
 
 Webサイト制作用リポジトリです。要件・計画・作業項目を整理するため、GitHub Spec Kit v1.2.1を導入しています。
 
+## 開発の始め方
+
+Node.js 24 が必要です。
+
+```text
+npm ci                                   # 依存のインストール（初回）
+npx playwright install chromium webkit   # テスト用ブラウザ（初回）
+npm run dev                              # 開発サーバー http://localhost:4321/ （スタイルガイドは /styleguide/）
+npm run build                            # 本番用の出力（dist/）
+npm run test:local                       # 画面テスト（スクリーンショット比較以外）
+```
+
+- 現行サイトの調査資料：[docs/current-site/](docs/current-site/README.md)
+- 画面テストと基準画像の更新：[docs/testing.md](docs/testing.md)
+- ブランチの保護の設定：[docs/branch-protection.md](docs/branch-protection.md)
+
 ## Spec Kitの使い方
 
 Claude Codeでこのリポジトリを開き、スラッシュコマンドとして利用します。追加したスキルが表示されない場合は、新しいセッションで開き直してください。
@@ -16,7 +32,7 @@ Claude Codeでこのリポジトリを開き、スラッシュコマンドとし
 
 例：`/speckit-specify 店舗紹介、商品紹介、営業時間、アクセス、問い合わせ導線を備えたスマートフォン対応サイトを作りたい`
 
-この例は入力例であり、サイトの要件や技術構成はまだ決定していません。開発原則も初期テンプレートの状態です。
+開発原則は `.specify/memory/constitution.md`、各機能の仕様・計画・作業項目は `specs/` にあります。
 
 ページ追加や問い合わせ機能など、まとまった変更に使います。文言や余白だけの小さな修正では、毎回すべての手順を実行する必要はありません。
 
