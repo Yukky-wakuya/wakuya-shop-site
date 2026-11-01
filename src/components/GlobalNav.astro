@@ -1,0 +1,154 @@
+---
+// ヘッダーナビ。PC幅は現行と同じ縦書きの横並び、スマートフォン幅は <details> の開閉メニュー。
+// どちらも JavaScript を使わない（FR-012、research.md §5）。項目は site.ts の nav の1か所で管理する。
+import { nav } from '../data/site';
+
+const current = Astro.url.pathname;
+const isCurrent = (href: string) => href === current;
+---
+
+<nav class="nav-pc" aria-label="メインメニュー">
+  <ul>
+    {
+      nav.map((item) => (
+        <li>
+          <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}>
+            {item.label}
+            {item.external && <span class="visually-hidden">（外部サイト・新しいタブで開きます）</span>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<details class="nav-sp">
+  <summary>
+    <span class="nav-sp__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="nav-sp__label">メニュー</span>
+  </summary>
+  <nav aria-label="メインメニュー（スマートフォン）">
+    <ul>
+      {
+        nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}>
+              {item.label}
+              {item.external && <span class="visually-hidden">（外部サイト・新しいタブで開きます）</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</details>
+
+<style>
+  /* ---- PC：縦書きの横並び（現行 .global_nav と同じ） ---- */
+  .nav-pc {
+    display: none;
+  }
+
+  .nav-pc ul {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .nav-pc li {
+    width: 50px; /* 現行 .global_nav ul li の幅。縦書き1列分の固定幅のためトークン化しない */
+  }
+
+  .nav-pc a {
+    display: block;
+    margin-inline-start: auto;
+    padding-block: var(--space-2xs);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-base);
+    text-decoration: none;
+    writing-mode: vertical-rl;
+  }
+
+  .nav-pc a:hover,
+  .nav-pc a[aria-current='page'] {
+    color: var(--color-accent);
+  }
+
+  /* ---- スマートフォン：<details> の開閉メニュー ---- */
+  .nav-sp summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+    min-width: var(--size-tap-min);
+    min-height: var(--size-tap-min);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .nav-sp summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-sp__bars {
+    display: grid;
+    gap: 6px; /* 現行 .hamburger span の間隔（10px 間隔の3本線を再現） */
+    width: 30px; /* 現行 .hamburger span の幅 */
+  }
+
+  .nav-sp__bars span {
+    display: block;
+    height: 3px; /* 現行 .hamburger span の太さ */
+    background: var(--color-text-muted);
+  }
+
+  .nav-sp__label {
+    font-size: var(--font-size-xs);
+    line-height: 1;
+  }
+
+  .nav-sp[open] .nav-sp__bars span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-sp > nav {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    z-index: 100;
+    padding-block: var(--space-md) var(--space-lg);
+    background: var(--color-bg-subtle);
+  }
+
+  .nav-sp li {
+    width: 74%; /* 現行 .sp_global_nav ul li の幅 */
+    margin-inline: auto;
+    border-bottom: 1px solid var(--color-text-muted);
+  }
+
+  .nav-sp a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--size-tap-min);
+    padding: var(--space-xs) var(--space-sm);
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .nav-sp a[aria-current='page'] {
+    color: var(--color-accent);
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md） */
+  @media (min-width: 768px) {
+    .nav-pc {
+      display: block;
+    }
+
+    .nav-sp {
+      display: none;
+    }
+  }
+</style>

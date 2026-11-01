@@ -1,0 +1,40 @@
+---
+// リンクボタン。現行の「>もっと見る」（.more_text）とフォームの送信ボタン（.form_submit）をまとめた部品
+interface Props {
+  href: string;
+  variant?: 'more' | 'primary';
+  external?: boolean;
+}
+
+const { href, variant = 'more', external = false } = Astro.props;
+---
+
+<a class:list={['button', `button--${variant}`]} href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
+  <slot />
+  {external && <span class="visually-hidden">（外部サイト・新しいタブで開きます）</span>}
+</a>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--size-tap-min);
+    text-decoration: none;
+  }
+
+  .button--more::before {
+    content: '>';
+  }
+
+  .button--more:hover {
+    color: var(--color-accent);
+  }
+
+  .button--primary {
+    padding-inline: var(--space-lg);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+// サンプルページ（FR-011）。共通レイアウトとテストの確認用の仮ページで、002 で実際のトップページに置き換える。
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Button from '../components/Button.astro';
+import storefront from '../assets/brand/footer_bg.jpg';
+import { shopUrl } from '../data/site';
+---
+
+<BaseLayout
+  title="福島県民芸雑貨 有限会社和久屋"
+  description="福島で長く愛されてきた郷土民芸品や和雑貨を扱う「わくや」の公式サイトです。商品はオンラインショップでお求めいただけます。"
+  path="/"
+>
+  <div class="content-inner sample">
+    <h1 class="sample__catch">
+      ふくしまで、<br />長く愛されてきた民芸品、<br />めんこい和雑貨たち、<br />心の琴線にふれるお気に入りに<br />めぐり会う「わくや」です。
+    </h1>
+
+    <section class="sample__section">
+      <SectionTitle>新しいサイトを準備しています</SectionTitle>
+      <p>
+        このページは、新しい公式サイトの共通レイアウト（ヘッダー・ナビゲーション・フッター）を確認するための仮のページです。
+        各ページの内容は、順次この上に作っていきます。
+      </p>
+      <ul class="sample__list">
+        <li>郷土民芸品・和雑貨のご紹介</li>
+        <li>店主のブログとお知らせ</li>
+        <li>出張わくや（催事・出店）のご案内</li>
+      </ul>
+    </section>
+
+    <section class="sample__section">
+      <SectionTitle>わくやの店先</SectionTitle>
+      <figure>
+        <Image src={storefront} alt="「民芸くらふと 和久屋」ののれんが掛かった、かつての店先の写真" widths={[360, 720, 1000]} sizes="(min-width: 1112px) 1000px, 90vw" />
+        <figcaption>民芸くらふと和久屋の店先（昭和50年創業）</figcaption>
+      </figure>
+    </section>
+
+    <section class="sample__section">
+      <SectionTitle>商品のお求め</SectionTitle>
+      <p>商品の購入は、カラーミーショップのオンラインショップで承っています。</p>
+      <p class="sample__actions">
+        <Button href={shopUrl} variant="primary" external>オンラインショップを見る</Button>
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .sample__catch {
+    margin-block: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-md);
+    line-height: 2;
+  }
+
+  .sample__section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .sample__section p + p,
+  .sample__section p + ul {
+    margin-top: var(--space-sm);
+  }
+
+  .sample__list {
+    padding-left: 1.5em;
+    list-style: disc;
+  }
+
+  figcaption {
+    margin-top: var(--space-xs);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+  }
+
+  .sample__actions {
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .sample__catch {
+      font-size: var(--font-size-xl);
+    }
+
+    .sample__section {
+      margin-bottom: var(--space-2xl);
+    }
+  }
+</style>

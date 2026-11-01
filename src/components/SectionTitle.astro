@@ -1,0 +1,43 @@
+---
+// セクション見出し。現行 .h2_title と同じく、アイコン＋明朝の見出し
+import { Image } from 'astro:assets';
+import icon from '../assets/brand/h_icon.svg';
+
+interface Props {
+  level?: 'h1' | 'h2';
+}
+
+const { level: Tag = 'h2' } = Astro.props;
+---
+
+<div class="section-title">
+  <Image class="section-title__icon" src={icon} alt="" />
+  <Tag class="section-title__text"><slot /></Tag>
+</div>
+
+<style>
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .section-title :global(.section-title__icon) {
+    width: 30px; /* 現行 .title_icon（SP）の幅 */
+  }
+
+  .section-title__text {
+    font-size: var(--font-size-lg);
+  }
+
+  @media (min-width: 768px) {
+    .section-title :global(.section-title__icon) {
+      width: 46px; /* 現行 .title_icon の幅 */
+    }
+
+    .section-title__text {
+      font-size: var(--font-size-2xl);
+    }
+  }
+</style>

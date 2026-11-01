@@ -1,0 +1,51 @@
+---
+// オンラインショップ（カラーミーショップ）への帯。現行 .shop_link と同じ見た目（開発原則III）
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo_w.svg';
+import { shopUrl } from '../data/site';
+---
+
+<div class="content-inner">
+  <a class="shop-banner" href={shopUrl} target="_blank" rel="noopener">
+    <span class="shop-banner__text">オンラインショップ<span class="visually-hidden">（外部サイト・新しいタブで開きます）</span></span>
+    <Image class="shop-banner__logo" src={logo} alt="" />
+  </a>
+</div>
+
+<style>
+  .shop-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md) var(--space-sm);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    text-decoration: none;
+  }
+
+  .shop-banner__text {
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-md);
+  }
+
+  .shop-banner :global(.shop-banner__logo) {
+    width: 100px; /* 現行 .shop_link_logo（SP）の幅 */
+  }
+
+  @media (min-width: 768px) {
+    .shop-banner {
+      margin-bottom: var(--space-2xl);
+      padding: var(--space-lg) 45px; /* 左右は現行 .shop_link の 45px */
+    }
+
+    .shop-banner__text {
+      font-size: var(--font-size-display);
+    }
+
+    .shop-banner :global(.shop-banner__logo) {
+      width: 232px; /* 現行 .shop_link_logo の幅 */
+    }
+  }
+</style>
