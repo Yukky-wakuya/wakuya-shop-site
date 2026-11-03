@@ -6,8 +6,20 @@ import Button from '../components/Button.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { readTokens, type Token } from './tokens';
 import { shopUrl } from '../data/site';
+import RecommendedProducts from '../components/RecommendedProducts.astro';
+import PostCards from '../components/PostCards.astro';
+import MoreLink from '../components/MoreLink.astro';
+import Pagination from '../components/Pagination.astro';
+import PostNav from '../components/PostNav.astro';
+import BlogSidebar from '../components/BlogSidebar.astro';
+import TopHero from '../components/TopHero.astro';
+import PageHero from '../components/PageHero.astro';
+import ThoughtIntro from '../components/ThoughtIntro.astro';
+import blogsHero from '../assets/blog/blogs_hero.jpg';
+import { getPublishedPosts } from '../lib/blog';
 
 const tokens = readTokens();
+const samplePosts = (await getPublishedPosts()).slice(0, 4);
 const CATEGORY_LABEL: Record<string, string> = {
   color: '色',
   font: 'フォント・文字サイズ',
@@ -82,11 +94,34 @@ for (const t of tokens) groups.set(t.category, [...(groups.get(t.category) ?? []
       <div class="dark-bg"><SocialLinks variant="light" size={30} /></div>
       <h3>ヘッダー・ナビ・オンラインショップの帯・フッター</h3>
       <p>このページの上下に表示されているものが共通レイアウトです（BaseLayout）。</p>
+
+      <h3>カード（Card・CardGrid）／おすすめ商品（RecommendedProducts）</h3>
     </section>
   </div>
+  <RecommendedProducts />
+  <div class="content-inner sg">
+    <h3>記事のカード（PostCards）・もっと見る（MoreLink）</h3>
+    <PostCards posts={samplePosts} columns={4} />
+    <MoreLink href="/blogs/" what="お知らせを" />
+    <h3>ページ送り（Pagination）</h3>
+    <Pagination base="/blogs/" current={2} last={3} />
+    <h3>前後の記事（PostNav）</h3>
+    <PostNav older={samplePosts[1]} newer={samplePosts[0]} />
+    <h3>ブログのサイドバー（BlogSidebar）</h3>
+    <div class="narrow"><BlogSidebar current="news" /></div>
+    <h3>トップのメインビジュアル（TopHero）・下層ページの見出し部分（PageHero）・わくやの想い（ThoughtIntro）</h3>
+    <p>幅いっぱいに広がる部品のため、下に並べています。PageHero は記事ページではページ名を見出しにしません（heading=false）。</p>
+  </div>
+  <TopHero />
+  <PageHero title="ブログ一覧" photo={blogsHero} photoAlt="" />
+  <ThoughtIntro />
 </BaseLayout>
 
 <style>
+  .narrow {
+    max-width: 260px;
+  }
+
   .sg h1 {
     margin-block: var(--space-md);
     font-size: var(--font-size-2xl);

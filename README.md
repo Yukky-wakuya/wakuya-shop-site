@@ -16,11 +16,15 @@ npm run test:docker                      # スクリーンショット比較も�
 npm run test:unit                        # スクリプトの単体テスト
 npm run survey                           # 現行サイトの調査（docs/current-site/ を作り直す）
 npm run readme:generate                  # このREADMEの「開発の進捗」以下を specs/ から作り直す
+npm run migrate:blog                     # 現行サイトのブログ記事を src/content/blog/ に取り込む（再実行しても同じ結果）
+npm run check:shop-links                 # カラーミーショップへのリンク切れを確認（外部にアクセスする）
 ```
 
 - 現行サイトの調査資料：[docs/current-site/](docs/current-site/README.md)
 - 画面テストと基準画像の更新：[docs/testing.md](docs/testing.md)
 - ブランチの保護の設定：[docs/branch-protection.md](docs/branch-protection.md)
+- ブログの記事の追加・おすすめ商品の入れ替え：[docs/updating.md](docs/updating.md)
+- テスト公開（Cloudflare Pages）とドメインの切り替え：[docs/deploy.md](docs/deploy.md)
 
 ## Spec Kitの使い方
 
@@ -72,23 +76,13 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 
 | 機能 | 工程 | 作業項目 | 完了率 |
 |------|------|----------|--------|
-| [002 トップページとブログ](specs/002-top-blog/spec.md) | 実装中 | 43 / 55 | 78% |
+| [002 トップページとブログ](specs/002-top-blog/spec.md) | 実装中 | 52 / 55 | 94% |
 
 ### 002 トップページとブログ：未完了の作業
 
-<details><summary>12 件</summary>
+<details><summary>3 件</summary>
 
-- **Phase 6: User Story 4**
-  - T043 `scripts/blog-next-id.ts` を作る：`src/content/blog/` の最大の番号＋1を表示する
-  - T044 `docs/updating.md` を書く（FR-026）：記事の追加（番号の決め方、ディレクトリと index.md の書き方、写真の置き方と代替テキスト、カテゴリの一覧、下書き、確認のしかた、ビルドが失敗したときのエラーの読み方）と、おすすめ商品の入れ替え（`src/data/recommended.ts` と画像）。contracts/blog-content.md を元に、更新担当者向けの言葉で書く。README の手書き部分からリンクする
-  - T045 手順書どおりに見本の記事を1件追加し、記事ページ・ブログ一覧の先頭・カテゴリ一覧・トップのお知らせの先頭・サイトマップに出ることを確かめる。`categories` を存在しない値にしてビルドが失敗し、ファイル名と項目名が出ることを確かめる。確認後に見本の記事を消す（SC-004）
 - **Phase 7: Polish & Cross-Cutting Concerns**
-  - T046 `src/dev/styleguide.astro` に新しい部品を追加する：PageHero・BlogSidebar・PostNav・Card／CardGrid／RecommendedProducts／PostCards・MoreLink・TopHero・ThoughtIntro・Pagination（FR-023）
-  - T048 `docs/current-site/url-mapping.md` のトップ・記事29件・ブログ一覧3ページ・カテゴリ一覧7ページの行の「新URL」を同じパス、「対応方法」を「同じURL」にする。別表記（末尾のスラッシュなし）は「公開先が `/` 付きに転送」と備考に書く（FR-020・FR-021）
-  - T049 `public/_redirects` を作る：転送が必要なものがないことを先頭のコメントに書き、書式の例をコメントで残す（Cloudflare Pages の形式）
-  - T050 `docs/deploy.md` を書く（FR-029）：Cloudflare Pages のアカウント作成とリポジトリの接続（本番ブランチ `main`、ビルドコマンド `npm run build`、出力 `dist`、環境変数 `SITE_ENV=test`・`NODE_VERSION=24`）、テスト公開の確認（noindex・robots.txt）、ドメインの切り替え（カスタムドメインの追加、`SITE_ENV=production`・`SITE_URL` の設定、再デプロイ、確認すること：`check-site-config.ts`・Search Console）。README の手書き部分からリンクする
-  - T051 `docs/development-log.md` に 002 で決めたこと（記事の取り込み方法、URL を現行と同じにしたこと、テスト公開と `SITE_ENV`・`SITE_URL`、Cloudflare Pages、画面比較を代表ページに絞ったこと）を追記する
-  - T052 `src/` で色・余白・文字サイズを直接書いている箇所を検索し、トークンに置き換えるか理由をコメントに書く（001 の T072 と同じ）
   - T053 作業ブランチを push し、Actions の `update-snapshots` を `branch: 002-top-blog` で実行して基準画像の PR を作り、画像を目で確認してマージする。その後の `ci` が成功し、10分以内に終わることを確かめる
   - T054 Lighthouse（モバイル）でトップページと記事ページ（`/82/`・`/257/`）を測り、4項目の点数を `docs/development-log.md` に記録する。90点未満の項目は原因と対応方針を書く（SC-007）。テスト公開の noindex による SEO の減点は、原因として記録する
   - T055 quickstart.md の手順（6 の所有者の作業を除く）を順に実行し、すべての「確認すること」を満たすことを確かめる

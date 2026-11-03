@@ -116,15 +116,15 @@ import MoreLink from './MoreLink.astro';
   /* 写真が文章に重ならない広さでは、現行と同じく写真を大きく見せる */
   @media (min-width: 1025px) {
     .thought__photos :global(.thought__photo--1) {
-      width: 250px;
+      width: 250px; /* 1025px 以上で写真を大きく見せる幅（現行の PC での見た目に合わせた値） */
     }
 
     .thought__photos :global(.thought__photo--2) {
-      width: 330px;
+      width: 330px; /* 同上 */
     }
 
     .thought__photos :global(.thought__photo--3) {
-      width: 350px;
+      width: 350px; /* 同上 */
     }
   }
 </style>
