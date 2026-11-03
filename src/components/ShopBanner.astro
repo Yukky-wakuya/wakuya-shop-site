@@ -34,6 +34,7 @@ import { shopUrl } from '../data/site';
     width: 100px; /* 現行 .shop_link_logo（SP）の幅 */
   }
 
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
   @media (min-width: 768px) {
     .shop-banner {
       margin-bottom: var(--space-2xl);

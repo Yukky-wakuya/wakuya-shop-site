@@ -61,7 +61,7 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-focus);
+  outline: 3px solid var(--color-focus); /* 現行にフォーカス表示がないため新規。見落とされない太さ */
   outline-offset: 2px;
 }
 
@@ -82,7 +82,7 @@ a {
 
 .visually-hidden {
   position: absolute;
-  width: 1px;
+  width: 1px; /* 画面には見せず読み上げにだけ残す定型の書き方 */
   height: 1px;
   overflow: hidden;
   clip-path: inset(50%);

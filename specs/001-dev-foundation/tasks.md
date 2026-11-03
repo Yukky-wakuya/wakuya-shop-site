@@ -147,21 +147,21 @@ description: "Task list for 001-dev-foundation"
 
 ### Tests for User Story 4
 
-- [ ] T057 [P] [US4] `scripts/readme/fixtures/` に入力例を作る：(a) `spec.md` だけの機能、(b) テンプレートのままの `plan.md`（`[FEATURE]` を含む）がある機能、(c) 本物の `plan.md` だけの機能、(d) `tasks.md` に作業項目0件の機能、(e) 一部完了の機能（`- [X]` 大文字・チェック欄のない行・`[P]`・`[US1]` ラベル入りを含む）、(f) すべて完了の機能、と `constitution.md`、目印が正しい `README.md`・目印がない・start が2つ・end が start より前の README
-- [ ] T058 [US4] `scripts/readme/generate.test.ts` に `node:test` の単体テストを書く：工程の判定（data-model.md §8 の表のとおり：`仕様作成中`・`計画済み`・`作業分解済み`・`実装中`・`完了`）、作業項目の集計（チェック欄で始まらない行は無視、`id`・`phase`・`story` の取り出し）、完了率は切り捨ての整数で0件なら `—`、目印の外が変わらないこと、同じ入力で2回生成して同じ結果になること、目印の異常で終了コード 1 かつ README が変わらないこと、`--check` で差分ありなら終了コード 2、開発原則が読めないとき「不明」と出して失敗しないこと（contracts/readme-generator.md）
+- [X] T057 [P] [US4] `scripts/readme/fixtures/` に入力例を作る：(a) `spec.md` だけの機能、(b) テンプレートのままの `plan.md`（`[FEATURE]` を含む）がある機能、(c) 本物の `plan.md` だけの機能、(d) `tasks.md` に作業項目0件の機能、(e) 一部完了の機能（`- [X]` 大文字・チェック欄のない行・`[P]`・`[US1]` ラベル入りを含む）、(f) すべて完了の機能、と `constitution.md`、目印が正しい `README.md`・目印がない・start が2つ・end が start より前の README
+- [X] T058 [US4] `scripts/readme/generate.test.ts` に `node:test` の単体テストを書く：工程の判定（data-model.md §8 の表のとおり：`仕様作成中`・`計画済み`・`作業分解済み`・`実装中`・`完了`）、作業項目の集計（チェック欄で始まらない行は無視、`id`・`phase`・`story` の取り出し）、完了率は切り捨ての整数で0件なら `—`、目印の外が変わらないこと、同じ入力で2回生成して同じ結果になること、目印の異常で終了コード 1 かつ README が変わらないこと、`--check` で差分ありなら終了コード 2、開発原則が読めないとき「不明」と出して失敗しないこと（contracts/readme-generator.md）
 
 ### Implementation for User Story 4
 
-- [ ] T059 [P] [US4] `scripts/readme/lib/parse-spec.ts` を作る：`spec.md` から `title`（1行目 `# Feature Specification: (.+)`）、`summary`（`**Input**:` 行の `User description: "…"` の中身、なければ最初の段落）、`userStories`（`### User Story N - タイトル (Priority: Px)` の N・タイトル・優先度）を取り出す
-- [ ] T060 [P] [US4] `scripts/readme/lib/parse-tasks.ts` を作る：`tasks.md` の各行から Task（`done`：`- [x]`/`- [X]` なら true・`- [ ]` なら false、`id`：`T\d+` または null、`text`：`[P]`・`[USn]` を除いた残り、`phase`：直前の `## ` 見出し、`story`：`[USn]` または null）を取り出す。チェック欄で始まらない行は無視する（data-model.md §9）
-- [ ] T061 [P] [US4] `scripts/readme/lib/parse-constitution.ts` を作る：`**Version**: x.y.z | **Ratified**: YYYY-MM-DD | **Last Amended**: YYYY-MM-DD` の行から版と最終改定日を取り出す。読めなければ null
-- [ ] T062 [US4] `scripts/readme/lib/features.ts` を作る：`specs/` 直下の `^\d{3}-` のディレクトリを番号順に読み、Feature（`number`・`slug`・`title`・`summary`・`userStories`・`hasPlan`（`plan.md` があり `[FEATURE]` を含まない）・`tasks`・`stage`）を作る。`stage` は data-model.md §8 の表のとおりに決める
-- [ ] T063 [US4] `scripts/readme/lib/render.ts` を作る：contracts/readme-generator.md の出力構成どおりに自動生成部分の Markdown を作る（自動生成の注意書き、開発原則の版と最終改定日、進捗表、機能ごとの未完了作業を `<details>` でフェーズ別に全件、完成した機能の仕様一覧（概要・US の要約・仕様へのリンク）、該当なしのときの文言）。改行は LF、行末の空白なし、日時や git の情報を使わない
-- [ ] T064 [US4] `scripts/readme/lib/markers.ts` を作る：`<!-- speckit-readme:start -->` と `<!-- speckit-readme:end -->` がそれぞれちょうど1つで start が先にあることを確認し、間を差し替えた文字列を返す。異常なら原因を表す例外を投げる
-- [ ] T065 [US4] `scripts/readme/generate.ts` を作る（CLI）：`--check`・`--root <dir>` を受け取り、README がない・目印の異常なら標準エラーに原因を出して終了コード 1、`--check` で差分ありなら 2、内容が同じならファイルに書き込まずに 0、変わるなら書き込んで 0（contracts/readme-generator.md）
-- [ ] T066 [US4] `npm run test:readme` を実行し、T058 のテストがすべて成功することを確かめる
-- [ ] T067 [US4] `README.md` を手書き部分と自動生成部分に分ける：既存の Spec Kit の説明は残し、古くなった記述（「開発原則も初期テンプレートの状態です」など）を直す。開発の始め方（`npm ci`・`npm run dev`・テスト・調査）と、`docs/testing.md`・`docs/branch-protection.md`・`docs/current-site/` へのリンクを手書き部分に追加する。末尾に目印の2行を入れて `npm run readme:generate` を実行し、2回目の実行で差分が出ないことを確かめる（FR-024・FR-029・FR-033）
-- [ ] T068 [US4] `.github/workflows/readme.yml` を作る（contracts/ci-workflows.md）：`push`（`branches: [develop, main]`）、`if: ${{ !startsWith(github.event.head_commit.message, 'chore(readme):') }}`、`concurrency: readme-${{ github.ref }}`・`cancel-in-progress: false`、`actions/checkout` を `ssh-key: ${{ secrets.README_BOT_DEPLOY_KEY }}` で、setup-node（`.nvmrc`）。依存のインストールは不要（Node 標準機能のみ）。`npm run readme:generate` → `git diff --quiet README.md` なら終了 → コミットの作成者を `github-actions[bot]` にして `chore(readme): 進捗表を自動更新` でコミット → push。拒否されたら `git fetch` → `git reset --hard origin/<branch>` → 生成からやり直す（最大3回）。終了コード 1 ならジョブを失敗させ、原因をジョブサマリーに書く
+- [X] T059 [P] [US4] `scripts/readme/lib/parse-spec.ts` を作る：`spec.md` から `title`（1行目 `# Feature Specification: (.+)`）、`summary`（`**Input**:` 行の `User description: "…"` の中身、なければ最初の段落）、`userStories`（`### User Story N - タイトル (Priority: Px)` の N・タイトル・優先度）を取り出す
+- [X] T060 [P] [US4] `scripts/readme/lib/parse-tasks.ts` を作る：`tasks.md` の各行から Task（`done`：`- [x]`/`- [X]` なら true・`- [ ]` なら false、`id`：`T\d+` または null、`text`：`[P]`・`[USn]` を除いた残り、`phase`：直前の `## ` 見出し、`story`：`[USn]` または null）を取り出す。チェック欄で始まらない行は無視する（data-model.md §9）
+- [X] T061 [P] [US4] `scripts/readme/lib/parse-constitution.ts` を作る：`**Version**: x.y.z | **Ratified**: YYYY-MM-DD | **Last Amended**: YYYY-MM-DD` の行から版と最終改定日を取り出す。読めなければ null
+- [X] T062 [US4] `scripts/readme/lib/features.ts` を作る：`specs/` 直下の `^\d{3}-` のディレクトリを番号順に読み、Feature（`number`・`slug`・`title`・`summary`・`userStories`・`hasPlan`（`plan.md` があり `[FEATURE]` を含まない）・`tasks`・`stage`）を作る。`stage` は data-model.md §8 の表のとおりに決める
+- [X] T063 [US4] `scripts/readme/lib/render.ts` を作る：contracts/readme-generator.md の出力構成どおりに自動生成部分の Markdown を作る（自動生成の注意書き、開発原則の版と最終改定日、進捗表、機能ごとの未完了作業を `<details>` でフェーズ別に全件、完成した機能の仕様一覧（概要・US の要約・仕様へのリンク）、該当なしのときの文言）。改行は LF、行末の空白なし、日時や git の情報を使わない
+- [X] T064 [US4] `scripts/readme/lib/markers.ts` を作る：`<!-- speckit-readme:start -->` と `<!-- speckit-readme:end -->` がそれぞれちょうど1つで start が先にあることを確認し、間を差し替えた文字列を返す。異常なら原因を表す例外を投げる
+- [X] T065 [US4] `scripts/readme/generate.ts` を作る（CLI）：`--check`・`--root <dir>` を受け取り、README がない・目印の異常なら標準エラーに原因を出して終了コード 1、`--check` で差分ありなら 2、内容が同じならファイルに書き込まずに 0、変わるなら書き込んで 0（contracts/readme-generator.md）
+- [X] T066 [US4] `npm run test:readme` を実行し、T058 のテストがすべて成功することを確かめる
+- [X] T067 [US4] `README.md` を手書き部分と自動生成部分に分ける：既存の Spec Kit の説明は残し、古くなった記述（「開発原則も初期テンプレートの状態です」など）を直す。開発の始め方（`npm ci`・`npm run dev`・テスト・調査）と、`docs/testing.md`・`docs/branch-protection.md`・`docs/current-site/` へのリンクを手書き部分に追加する。末尾に目印の2行を入れて `npm run readme:generate` を実行し、2回目の実行で差分が出ないことを確かめる（FR-024・FR-029・FR-033）
+- [X] T068 [US4] `.github/workflows/readme.yml` を作る（contracts/ci-workflows.md）：`push`（`branches: [develop, main]`）、`if: ${{ !startsWith(github.event.head_commit.message, 'chore(readme):') }}`、`concurrency: readme-${{ github.ref }}`・`cancel-in-progress: false`、`actions/checkout` を `ssh-key: ${{ secrets.README_BOT_DEPLOY_KEY }}` で、setup-node（`.nvmrc`）。依存のインストールは不要（Node 標準機能のみ）。`npm run readme:generate` → `git diff --quiet README.md` なら終了 → コミットの作成者を `github-actions[bot]` にして `chore(readme): 進捗表を自動更新` でコミット → push。拒否されたら `git fetch` → `git reset --hard origin/<branch>` → 生成からやり直す（最大3回）。終了コード 1 ならジョブを失敗させ、原因をジョブサマリーに書く
 - [ ] T069 [US4] リポジトリの所有者が `docs/branch-protection.md` の手順でデプロイキーと Secrets を登録した後、この機能ブランチを develop にマージし、tasks.md のチェックを1つ変えて develop に push する。5分以内に README の自動更新コミットができること（SC-008）、そのコミットで `readme`・`ci` が再実行されないこと（FR-030）を確かめる
 
 **Checkpoint**: US4 の Independent Test を満たす。ここでフェーズのコミットを作る
@@ -172,9 +172,9 @@ description: "Task list for 001-dev-foundation"
 
 **Purpose**: 全体の仕上げと、開発原則への適合の確認
 
-- [ ] T070 [P] `docs/development-log.md` に本機能で決めたこと（技術構成、基準画像の運用、README 自動更新の仕組み、PowerShell の実行ポリシーにより Spec Kit のスクリプトを `-ExecutionPolicy Bypass` 付きで実行していること）を追記する
-- [ ] T071 [P] `src/` 全体で、色・余白・文字サイズを直接書いている箇所がないか検索し（例：`#[0-9a-fA-F]{3,6}`、`\d+px` を `src/components/`・`src/layouts/`・`src/pages/` で）、あれば `var(--…)` に置き換えるか理由をコメントに書く（開発原則VII）
-- [ ] T072 `docs/current-site/design.md` の「現行から変える点」と、共通レイアウトの実際の差分が一致しているかを見直す（開発原則I）
+- [X] T070 [P] `docs/development-log.md` に本機能で決めたこと（技術構成、基準画像の運用、README 自動更新の仕組み、PowerShell の実行ポリシーにより Spec Kit のスクリプトを `-ExecutionPolicy Bypass` 付きで実行していること）を追記する
+- [X] T071 [P] `src/` 全体で、色・余白・文字サイズを直接書いている箇所がないか検索し（例：`#[0-9a-fA-F]{3,6}`、`\d+px` を `src/components/`・`src/layouts/`・`src/pages/` で）、あれば `var(--…)` に置き換えるか理由をコメントに書く（開発原則VII）
+- [X] T072 `docs/current-site/design.md` の「現行から変える点」と、共通レイアウトの実際の差分が一致しているかを見直す（開発原則I）
 - [ ] T073 quickstart.md の手順を最初から順に実行し、すべての「確認すること」を満たすことを確かめる。満たさない項目は該当のタスクに戻って直す
 
 ---

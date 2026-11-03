@@ -64,7 +64,7 @@ const bg = await getImage({ src: footerBg, width: 1600, format: 'webp' });
 
   .footer__arch {
     height: 80px; /* 現行 .footer_arch の高さ（アーチの半径と同じ） */
-    margin: -80px -80px 0;
+    margin: -80px -80px 0; /* 高さと同じだけ上へ重ね、左右は半径分はみ出させて弧を作る */
     background: var(--color-footer-bg);
     border-top-left-radius: var(--radius-arch);
     border-top-right-radius: var(--radius-arch);
@@ -112,6 +112,7 @@ const bg = await getImage({ src: footerBg, width: 1600, format: 'webp' });
     text-align: center;
   }
 
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
   @media (min-width: 768px) {
     .footer__nav {
       display: flex;

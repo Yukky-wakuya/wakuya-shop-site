@@ -12,6 +12,10 @@ npx playwright install chromium webkit   # テスト用ブラウザ（初回）
 npm run dev                              # 開発サーバー http://localhost:4321/ （スタイルガイドは /styleguide/）
 npm run build                            # 本番用の出力（dist/）
 npm run test:local                       # 画面テスト（スクリーンショット比較以外）
+npm run test:docker                      # スクリーンショット比較も含めた画面テスト（Docker Desktop が必要）
+npm run test:unit                        # スクリプトの単体テスト
+npm run survey                           # 現行サイトの調査（docs/current-site/ を作り直す）
+npm run readme:generate                  # このREADMEの「開発の進捗」以下を specs/ から作り直す
 ```
 
 - 現行サイトの調査資料：[docs/current-site/](docs/current-site/README.md)
@@ -40,7 +44,8 @@ Claude Codeでこのリポジトリを開き、スラッシュコマンドとし
 
 - `.claude/skills/`：Claude Code用のSpec Kitスキル。
 - `.specify/`：開発原則、テンプレート、PowerShellスクリプト、ワークフロー設定。
-- `specs/`：今後の仕様作成で生成される機能ごとの仕様・計画・作業項目。
+- `specs/`：機能ごとの仕様・計画・作業項目。進捗はこのREADMEの末尾に自動でまとめられます。
+- `src/`：サイト本体（Astro）。`tests/`：画面テスト（Playwright）。`scripts/`：調査・README生成などのスクリプト。
 - `.tools/`：ローカル実行環境（Git管理対象外）。
 
 ## CLI
@@ -57,3 +62,33 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 `.tools/`は別環境へのcloneには含まれません。別環境でCLIが必要な場合は、[公式インストール手順](https://github.github.io/spec-kit/installation.html)に従ってください。プロジェクト用のスキルとテンプレートはリポジトリに含めて共有します。
 
 参考：[GitHub Spec Kit](https://github.com/github/spec-kit)、[エージェント連携](https://github.github.io/spec-kit/reference/integrations)
+
+<!-- speckit-readme:start -->
+<!-- このブロックは自動生成されます。手で編集しないでください（scripts/readme/generate.ts） -->
+
+## 開発の進捗
+
+開発原則：v1.0.0（最終改定 2026-10-18）
+
+| 機能 | 工程 | 作業項目 | 完了率 |
+|------|------|----------|--------|
+| [001 開発基盤の整備（現行サイト調査・デザイン基盤・画面テスト・README自動更新）](specs/001-dev-foundation/spec.md) | 実装中 | 70 / 73 | 95% |
+
+### 001 開発基盤の整備（現行サイト調査・デザイン基盤・画面テスト・README自動更新）：未完了の作業
+
+<details><summary>3 件</summary>
+
+- **Phase 5: User Story 3**
+  - T056 安定性の確認（SC-007）：変更のない状態で `ci` を10回再実行し、10回とも成功することを確かめる。不安定なテストがあれば原因（フォント・アニメーション・遅延読み込みなど）を直す
+- **Phase 6: User Story 4**
+  - T069 リポジトリの所有者が `docs/branch-protection.md` の手順でデプロイキーと Secrets を登録した後、この機能ブランチを develop にマージし、tasks.md のチェックを1つ変えて develop に push する。5分以内に README の自動更新コミットができること（SC-008）、そのコミットで `readme`・`ci` が再実行されないこと（FR-030）を確かめる
+- **Phase 7: Polish & Cross-Cutting Concerns**
+  - T073 quickstart.md の手順を最初から順に実行し、すべての「確認すること」を満たすことを確かめる。満たさない項目は該当のタスクに戻って直す
+
+</details>
+
+## 仕様一覧（完成した機能）
+
+まだありません
+
+<!-- speckit-readme:end -->

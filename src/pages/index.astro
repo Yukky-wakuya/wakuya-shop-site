@@ -66,7 +66,7 @@ import { shopUrl } from '../data/site';
   }
 
   .sample__list {
-    padding-left: 1.5em;
+    padding-left: 1.5em; /* 黒丸の分の字下げ。文字の大きさに合わせるため em で書く */
     list-style: disc;
   }
 
@@ -80,6 +80,7 @@ import { shopUrl } from '../data/site';
     text-align: center;
   }
 
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
   @media (min-width: 768px) {
     .sample__catch {
       font-size: var(--font-size-xl);
