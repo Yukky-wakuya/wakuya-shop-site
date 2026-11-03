@@ -7,6 +7,12 @@ for (const path of VISUAL_PATHS) {
   test(`見た目が基準画像と一致する: ${path}`, async ({ page }) => {
     await page.goto(path, { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
+    // 画面外の遅延読み込み（loading="lazy"）の画像は、WebKit ではページ全体を撮っても読み込まれないため、撮る前にすべて読み込む
+    await page.evaluate(async () => {
+      const images = [...document.images];
+      for (const img of images) img.loading = 'eager';
+      await Promise.all(images.map((img) => img.decode().catch(() => undefined)));
+    });
     await expect(page).toHaveScreenshot(`${toSlug(path)}.png`, {
       fullPage: true,
       mask: [page.locator('[data-visual-mask]')],
