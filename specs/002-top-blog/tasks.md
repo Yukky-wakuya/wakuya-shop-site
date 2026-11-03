@@ -141,9 +141,9 @@ description: "Task list for 002-top-blog"
 - [X] T050 [P] `docs/deploy.md` を書く（FR-029）：Cloudflare Pages のアカウント作成とリポジトリの接続（本番ブランチ `main`、ビルドコマンド `npm run build`、出力 `dist`、環境変数 `SITE_ENV=test`・`NODE_VERSION=24`）、テスト公開の確認（noindex・robots.txt）、ドメインの切り替え（カスタムドメインの追加、`SITE_ENV=production`・`SITE_URL` の設定、再デプロイ、確認すること：`check-site-config.ts`・Search Console）。README の手書き部分からリンクする
 - [X] T051 `docs/development-log.md` に 002 で決めたこと（記事の取り込み方法、URL を現行と同じにしたこと、テスト公開と `SITE_ENV`・`SITE_URL`、Cloudflare Pages、画面比較を代表ページに絞ったこと）を追記する
 - [X] T052 `src/` で色・余白・文字サイズを直接書いている箇所を検索し、トークンに置き換えるか理由をコメントに書く（001 の T072 と同じ）
-- [ ] T053 作業ブランチを push し、Actions の `update-snapshots` を `branch: 002-top-blog` で実行して基準画像の PR を作り、画像を目で確認してマージする。その後の `ci` が成功し、10分以内に終わることを確かめる
+- [X] T053 作業ブランチを push し、Actions の `update-snapshots` を `branch: 002-top-blog` で実行して基準画像の PR を作り、画像を目で確認してマージする。その後の `ci` が成功し、10分以内に終わることを確かめる
 - [X] T054 Lighthouse（モバイル）でトップページと記事ページ（`/82/`・`/257/`）を測り、4項目の点数を `docs/development-log.md` に記録する。90点未満の項目は原因と対応方針を書く（SC-007）。テスト公開の noindex による SEO の減点は、原因として記録する
-- [ ] T055 quickstart.md の手順（6 の所有者の作業を除く）を順に実行し、すべての「確認すること」を満たすことを確かめる
+- [X] T055 quickstart.md の手順（6 の所有者の作業を除く）を順に実行し、すべての「確認すること」を満たすことを確かめる
 
 ---
 
