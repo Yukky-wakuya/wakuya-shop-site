@@ -45,4 +45,4 @@ export function readBuiltHtml(path: string): string {
  * スクリーンショット比較の対象（代表のページ。specs/002-top-blog/research.md §8）。
  * 記事は同じ部品の繰り返しのため、写真あり・アイキャッチなし・YouTube ありの3件で代表させる。
  */
-export const VISUAL_PATHS = ['/', '/blogs/', '/blogs/page/3/', '/category/column/', '/257/', '/251/', '/219/'];
+export const VISUAL_PATHS = ['/', '/blogs/', '/blogs/page/3/', '/category/column/', '/257/', '/251/', '/219/', '/summary/', '/thought/', '/deliver/', '/contact/'];

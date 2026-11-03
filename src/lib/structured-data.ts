@@ -25,7 +25,6 @@ export function storeJsonLd(): JsonLdObject {
       streetAddress: store.streetAddress,
       addressCountry: 'JP',
     },
-    openingHours: store.openingHours,
     sameAs: store.sameAs,
   };
 }
@@ -79,4 +78,25 @@ export function blogPostingJsonLd(post: { title: string; date: Date; path: strin
     publisher: { '@id': `${siteUrl}/#store` },
     ...(post.image ? { image: new URL(post.image, siteUrl).href } : {}),
   };
+}
+
+/** 固定ページの種類（わくや概要・お問い合わせ）。店舗情報（#store）を主題として示す */
+function storePageJsonLd(type: 'AboutPage' | 'ContactPage', page: { name: string; path: string; description: string }): JsonLdObject {
+  return {
+    '@context': 'https://schema.org',
+    '@type': type,
+    name: page.name,
+    url: new URL(page.path, siteUrl).href,
+    description: page.description,
+    inLanguage: 'ja',
+    mainEntity: { '@id': `${siteUrl}/#store` },
+  };
+}
+
+export function aboutPageJsonLd(page: { name: string; path: string; description: string }): JsonLdObject {
+  return storePageJsonLd('AboutPage', page);
+}
+
+export function contactPageJsonLd(page: { name: string; path: string; description: string }): JsonLdObject {
+  return storePageJsonLd('ContactPage', page);
 }

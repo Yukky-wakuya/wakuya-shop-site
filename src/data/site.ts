@@ -51,17 +51,16 @@ export const social: SocialLink[] = [
 export const store = {
   name: 'わくや',
   legalName: '有限会社和久屋',
+  representative: '渡辺智己',
   postalCode: '963-8004',
   region: '福島県',
   locality: '郡山市',
-  streetAddress: '中町10-14',
-  // TODO: 店舗情報ページの機能で確認（現行ブログに「実店舗閉店」「4月1日以降の運営体制およびお問い合わせ先変更」の記事がある）
+  // 2026年3月30日で実店舗の営業を終え、事務所になった（記事 /251/）。営業時間は持たない（specs/003-fixed-pages/plan.md）
+  streetAddress: '中町10-14 和久屋ビル',
   telephone: '024-922-1250',
+  telephoneNote: '不在時は携帯へ転送、または折り返しいたします',
   email: 'shop@waku-8.com',
-  // TODO: 店舗情報ページの機能で確認（同上。定休日：火曜日・水曜日）
-  openingHours: ['Mo,Th,Fr,Sa,Su 10:00-18:00'],
-  openingHoursText: '10:00〜18:00（定休日：火曜日・水曜日）',
   sameAs: [shopUrl, ...social.map((s) => s.href)],
 } as const;
 
-export const storeAddressText = `〒${store.postalCode} ${store.region}${store.locality}${store.streetAddress}`;
+export const storeAddressText = `〒${store.postalCode} ${store.region}${store.locality}${store.streetAddress}（事務所）`;

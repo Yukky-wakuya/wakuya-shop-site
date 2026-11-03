@@ -1,0 +1,228 @@
+---
+// わくやの想い（FR-016、specs/003-fixed-pages/research.md §5）。4つの章を現行の文章・写真・模様で並べる
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ShopBanner from '../components/ShopBanner.astro';
+import RecommendedProducts from '../components/RecommendedProducts.astro';
+import photo from '../assets/pages/thought_hero.jpg';
+import icon from '../assets/brand/icon_red.png';
+import red1 from '../assets/brand/bg_red01.svg';
+import red2 from '../assets/brand/bg_red02.svg';
+import gray1 from '../assets/brand/bg_gray01.svg';
+import gray2 from '../assets/brand/bg_gray02.svg';
+import photo1 from '../assets/top/thought01.png';
+import photo2 from '../assets/top/thought02.png';
+import photo3 from '../assets/top/thought03.png';
+import { breadcrumbJsonLd } from '../lib/structured-data';
+
+const path = '/thought/';
+---
+
+<BaseLayout
+  title="わくやの想い"
+  description="「来て。」から「かなえる。」へ。東日本大震災を経て、郡山で三代続く有限会社和久屋が、ふくしまの民芸品とともに歩むわくやの想いをお伝えします。"
+  path={path}
+  shopBanner={false}
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'トップ', path: '/' },
+      { name: 'わくやの想い', path },
+    ]),
+  ]}
+>
+  <PageHero title="わくやの想い" photo={photo} photoAlt="白い手袋で支えられた、色鮮やかな張り子の面" icon={icon} />
+
+  <div class="thought-wrap">
+  <div class="content-inner thought-page">
+    <section class="chapter">
+      <div class="chapter__side">
+        <h2 class="blob-title">
+          <Image class="blob-title__bg" src={red1} alt="" />
+          <span>はじまりは<br />「来て。」から、<br />こんどは<br />「かなえる。」ために。</span>
+        </h2>
+        <Image class="chapter__photo" src={photo1} alt="" widths={[300, 600]} sizes="300px" />
+      </div>
+      <div class="chapter__body chapter__body--tint">
+        <Image class="chapter__tint" src={gray1} alt="" />
+        <p>つながった交流をより豊かに持続可能に、深く確かなものとするために、はじめます。</p>
+        <p>
+          東日本大震災と福島第一原子力発電所の事故にあってから、多くの方々が、ふくしまからの「来て。」という呼びかけに、応えてきてくださってきたことにとても感謝しています。県の「そと」の日常をうらやましく思う時期もありましたが、県の「うち」で互いに助け合い、つながっていくことで取り戻してきた日常にも幾度となく助けられました。
+        </p>
+        <p>
+          わたくしの心の復興は、その日常の「かけがいのない」価値に気づいたことからはじまり、今なお続いています。
+          命にかかわる一大事を経て、屋号が生まれ育ったこの地で、商いを続けてこれたこともまた本当に幸運でありました。
+        </p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="chapter__side">
+        <h2 class="blob-title blob-title--high">
+          <Image class="blob-title__bg" src={red2} alt="" />
+          <span>会社から毎日<br />拝んでいる<br />『安積国造神社』に<br />続く道は、</span>
+        </h2>
+      </div>
+      <div class="chapter__body">
+        <p>明治時代から立ち続ける石造りの鳥居の佇まいもあいまって、今なお表参道と呼ばれています。旧奥州街道と交わるこの要衝は、かって江戸時代に町を上町と下町に区分けする「まちのどまんなか」でもありました。</p>
+        <p>郡山の名を有名にした明治政府の国づくり『安積開拓』からはじまり、現在では交通や経済の要衝でもある郡山を創業の地と選び、多くの企業が大きく成長した歴史もあります。</p>
+      </div>
+    </section>
+
+    <section class="chapter chapter--reverse">
+      <div class="chapter__side">
+        <Image class="chapter__photo" src={photo2} alt="" widths={[300, 600]} sizes="300px" />
+      </div>
+      <div class="chapter__body chapter__body--tint">
+        <Image class="chapter__tint" src={gray2} alt="" />
+        <h2 class="plain-title">有限会社和久屋は、</h2>
+        <p>じいちゃん、とうちゃん、わたくしで三代続いてきた法人です。</p>
+        <p>会社成立は１９５７年（昭和３２年）で、屋号「和久屋」は、江戸時代の郡山宿とともに歴史を重ねた『和久屋旅館』から引き継ぎました。</p>
+        <p>代々の旅館業は昭和とともにその役割を終えましたが、先代と女将の「かあちゃん」が、１９７５年（昭和５０年）から創業した民芸品の販売業、１９９１年（平成３年）建立の自社ビル賃貸経営を事業に加え、現在に至っています。</p>
+      </div>
+    </section>
+
+    <section class="chapter chapter--stack">
+      <div class="chapter__side">
+        <h2 class="blob-title">
+          <Image class="blob-title__bg" src={red1} alt="" />
+          <span>郡山の<br />フロンティア<br />スピリット</span>
+        </h2>
+        <Image class="chapter__photo chapter__photo--large" src={photo3} alt="" widths={[400, 800]} sizes="400px" />
+      </div>
+      <div class="chapter__body">
+        <p>
+          先代と同じく郡山生まれ郡山育ちの三代目も、郡山のフロンティアスピリットにのっとって生きなければなりません。これから「うち」「そと」の出会いをガイドし、「そと」に学び、これを「かんまかす」ムーブメントを興す一員として、ひらがな『わくや』を育てていきたいと思います。
+        </p>
+        <p>「わくわくするね（わ）　楽しいね（わ）　粋だね（わ）　さりげないね（わ）　なごむね（わ）」と、 より多くの方々にお声がけを頂けるように、余生をかけて取り組んでまいります。</p>
+      </div>
+    </section>
+  </div>
+
+  </div>
+
+  <ShopBanner />
+  <RecommendedProducts />
+</BaseLayout>
+
+<style>
+  .chapter {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); /* 写真の大きさで列が画面より広がらないようにする */
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .chapter__side {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+    justify-items: center;
+  }
+
+  /* 模様の上に白い文字を置く見出し（現行 .thought01 h3 と .thought_bg01）。isolation で模様を文字の後ろに固定する */
+  .blob-title {
+    position: relative;
+    display: grid;
+    align-content: end;
+    justify-content: center;
+    width: min(100%, 320px); /* 文字が模様の内側に収まる幅（現行 .thought_bg01 の 277px では、この文字の大きさだとはみ出す） */
+    aspect-ratio: 404 / 338; /* bg_red01.svg の縦横比 */
+    padding-bottom: 12%; /* 模様は上が細いため、文字を下寄りに置く */
+    color: var(--color-on-accent);
+    font-size: var(--font-size-base); /* 現行 .thought01 h3 の 16px */
+    line-height: var(--line-height-base);
+    isolation: isolate;
+  }
+
+  /* bg_red02 は下側が細いため、文字を上寄りに置く */
+  .blob-title--high {
+    padding-bottom: 24%;
+  }
+
+  .blob-title :global(.blob-title__bg) {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+
+  .plain-title {
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-md);
+  }
+
+  .chapter__body p + p {
+    margin-top: var(--space-sm);
+  }
+
+  /* スマートフォンは生成り色の角丸の面（模様を置くと本文の幅が足りない）。PC は現行の bg_gray の模様 */
+  .chapter__body--tint {
+    position: relative;
+    padding: var(--space-md) var(--space-sm);
+    border-radius: var(--space-lg);
+    background: var(--color-bg-subtle);
+    isolation: isolate;
+  }
+
+  .chapter__body--tint :global(.chapter__tint) {
+    display: none;
+  }
+
+  .chapter :global(.chapter__photo) {
+    width: min(100%, 300px); /* 現行の写真の見た目に近い大きさ */
+  }
+
+  .chapter :global(.chapter__photo--large) {
+    width: min(100%, 400px); /* 現行の第4章の写真の大きさに近い値 */
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    /* 模様が本文幅より広がるぶんを横スクロールにしない。はみ出しを隠すので、スマートフォン幅には適用しない（横スクロールのテストが効かなくなるため） */
+    .thought-wrap {
+      overflow-x: clip;
+    }
+
+    .chapter {
+      grid-template-columns: 40% 1fr;
+      gap: var(--space-lg);
+      align-items: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .chapter--reverse {
+      grid-template-columns: 1fr 40%;
+    }
+
+    .chapter--reverse .chapter__side {
+      order: 2;
+    }
+
+    .chapter--stack {
+      grid-template-columns: 1fr;
+    }
+
+    .chapter--stack .chapter__side {
+      grid-template-columns: 320px minmax(0, 1fr); /* 見出しの模様の幅（.blob-title）を確保する */
+      align-items: end;
+    }
+
+    .chapter__body--tint {
+      padding: var(--space-lg);
+      border-radius: 0;
+      background: none;
+    }
+
+    .chapter__body--tint :global(.chapter__tint) {
+      position: absolute;
+      inset: -15%; /* 現行と同じく、本文より一回り大きく広げる */
+      z-index: -1;
+      display: block;
+      width: 130%;
+      max-width: none;
+      height: 130%;
+    }
+  }
+</style>
