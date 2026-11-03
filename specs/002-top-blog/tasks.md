@@ -39,7 +39,7 @@ description: "Task list for 002-top-blog"
 - [ ] T004 `site.config.ts` に `resolveSiteConfig(env)` と `siteConfig`（`resolveSiteConfig(process.env)`）を作り、T003 を通す
 - [ ] T005 `astro.config.mjs` の `site` を `siteConfig.url` に、`src/data/site.ts` の `siteUrl` を `siteConfig.url` に、`tests/helpers/pages.ts` の `SITE_URL` を `siteConfig.url` に変える。ほかに URL を直接書いている箇所がないことを `waku-8.com` の検索で確かめる（店のメールアドレス・カラーミーショップ・調査スクリプトは除く）
 - [ ] T006 `src/components/Seo.astro` で、`siteConfig.indexable` が false のときは全ページに `<meta name="robots" content="noindex, nofollow">` を出す（ページ個別の `noindex` とは重複させない）
-- [ ] T007 `public/robots.txt` を削除し、`src/pages/robots.txt.ts` で生成する：test は `User-agent: *` / `Disallow: /`、production は `User-agent: *` / `Allow: /` / `Sitemap: <url>/sitemap-index.xml`。既存の `tests/seo/sitemap.spec.ts` の robots.txt の確認をテスト公開の内容に合わせる
+- [ ] T007 `public/robots.txt` を削除し、`src/pages/robots.txt.ts` で生成する：test は `User-agent: *` / `Disallow: /`、production は `User-agent: *` / `Allow: /` / `Sitemap: <url>/sitemap-index.xml`。既存の `tests/seo/sitemap.spec.ts` の robots.txt の確認をテスト公開の内容に合わせる。同じファイルの「noindex のページはサイトマップの対象外」の判定は、ページ個別の `content="noindex"` だけを見て、テスト公開の `noindex, nofollow` では除外しないままにする
 - [ ] T008 [P] `tests/seo/noindex.spec.ts` を作る：全公開ページに `noindex, nofollow` があり、robots.txt が `Disallow: /` であること
 - [ ] T009 [P] `scripts/check-site-config.ts` を作る：`--expect production --url <url>` で `dist/` を読み、全 HTML に noindex がない・canonical が `<url>/` で始まる・robots.txt が `Allow: /` を確かめ、違反があれば一覧を出して終了コード 1。`.github/workflows/ci.yml` の `build` ジョブの最後に、`SITE_ENV=production SITE_URL=https://example.com npm run build` と このスクリプトを実行するステップを足し、そのあとで既定の設定で `npm run build` し直して artifact に上げる
 - [ ] T010 [P] `src/data/categories.ts` を作る（data-model.md §2：`news` お知らせ・`folk_craft` 民芸品について・`column` 店主のコラム・`exhibit` 出展について・`etc` その他、この並び順）
@@ -94,7 +94,8 @@ description: "Task list for 002-top-blog"
 - [ ] T032 [P] [US2] `src/components/ThoughtIntro.astro` を作る：現行トップページの「わくやの想い」の縦書きの文章と写真3枚（`thought01`〜`03`）、「もっと見る」で `/thought/`。文章は現行トップページから取得して書く
 - [ ] T033 [US2] `src/pages/index.astro` を仮ページからトップページに置き換える（FR-001〜FR-007）：TopHero → RecommendedProducts → お知らせ（生成り色の背景、最新4件の PostGrid、「もっと見る」で `/blogs/`、4件未満ならある分だけ）→ ThoughtIntro → ShopBanner（BaseLayout が出すもの）。構造化データに WebSite を加える
 - [ ] T034 [US2] `tests/top/top.spec.ts` を作る：5つの部分の順序、おすすめ商品のリンク先が `https://waku-8.shop-pro.jp/?pid=`、お知らせが新しい順に4件で各記事へリンク、「もっと見る」3つのリンク先、h1 が1つ
-- [ ] T035 [US2] `npm run build` と `npm run test:local` を実行し、トップページが 360・768・1280px で横スクロールなし、axe 違反なしであることを確かめる
+- [ ] T035 [US2] `scripts/check-shop-links.ts` を作る：`src/data/recommended.ts` とナビ・フッターのカラーミーショップの URL に `politeFetch` で GET し、200 でないもの（販売終了など）を一覧にして終了コード 1。CI では外部サイトに依存させず、`docs/updating.md` の「おすすめ商品の入れ替え」の確認手順に載せる（開発原則VII、spec の Edge Cases）
+- [ ] T036 [US2] `npm run build` と `npm run test:local` を実行し、トップページが 360・768・1280px で横スクロールなし、axe 違反なしであることを確かめる
 
 **Checkpoint**: トップページが現行と同じ構成で動く
 
@@ -106,12 +107,12 @@ description: "Task list for 002-top-blog"
 
 **Independent Test**: 一覧・各ページ・各カテゴリで、件数・並び順・ページ送りが正しい
 
-- [ ] T036 [P] [US3] `src/components/Pagination.astro` を作る：`<nav aria-label="ページ送り">`、ページ番号のリンク、現在のページは `aria-current="page"`、次へ（`»`、読み上げは「次のページ」）。1ページしかなければ出さない
-- [ ] T037 [US3] `src/pages/blogs/index.astro` と `src/pages/blogs/page/[page].astro` を作る（FR-016）：BlogLayout（`blogs_hero.jpg`、h1「ブログ一覧」）、PostGrid（3列）、Pagination。title は1ページ目「ブログ一覧」、2ページ目以降「ブログ一覧（2ページ目）」。description も同様にページ番号を含める。構造化データに BreadcrumbList
-- [ ] T038 [US3] `src/pages/category/[category]/index.astro` と `src/pages/category/[category]/page/[page].astro` を作る（FR-017）：記事が1件以上あるカテゴリだけ。h1 はカテゴリの表示名、title・description にカテゴリ名とページ番号
-- [ ] T039 [US3] `tests/links/pending-pages.ts` から `/blogs/` を削除する（FR-025）
-- [ ] T040 [US3] `tests/blog/blog.spec.ts` に一覧の確認を足す：`/blogs/` が12件・新しい順、`/blogs/page/3/` が5件、ページ送りのリンクと `aria-current`、`/category/news/` に news の記事だけ、`/category/news/page/2/` がある、`/71/` が news と column の両方に出る
-- [ ] T041 [US3] `npm run build` と `npm run test:local` を実行して確かめる
+- [ ] T037 [P] [US3] `src/components/Pagination.astro` を作る：`<nav aria-label="ページ送り">`、ページ番号のリンク、現在のページは `aria-current="page"`、次へ（`»`、読み上げは「次のページ」）。1ページしかなければ出さない
+- [ ] T038 [US3] `src/pages/blogs/index.astro` と `src/pages/blogs/page/[page].astro` を作る（FR-016）：BlogLayout（`blogs_hero.jpg`、h1「ブログ一覧」）、PostGrid（3列）、Pagination。title は1ページ目「ブログ一覧」、2ページ目以降「ブログ一覧（2ページ目）」。description も同様にページ番号を含める。構造化データに BreadcrumbList
+- [ ] T039 [US3] `src/pages/category/[category]/index.astro` と `src/pages/category/[category]/page/[page].astro` を作る（FR-017）：記事が1件以上あるカテゴリだけ。h1 はカテゴリの表示名、title・description にカテゴリ名とページ番号
+- [ ] T040 [US3] `tests/links/pending-pages.ts` から `/blogs/` を削除する（FR-025）
+- [ ] T041 [US3] `tests/blog/blog.spec.ts` に一覧の確認を足す：`/blogs/` が12件・新しい順、`/blogs/page/3/` が5件、ページ送りのリンクと `aria-current`、`/category/news/` に news の記事だけ、`/category/news/page/2/` がある、`/71/` が news と column の両方に出る
+- [ ] T042 [US3] `npm run build` と `npm run test:local` を実行して確かめる
 
 **Checkpoint**: 旧URLの39件すべてに新しいページがある（T015 が通る）
 
@@ -123,9 +124,9 @@ description: "Task list for 002-top-blog"
 
 **Independent Test**: 手順書に従って見本の記事を追加し、5か所に反映される
 
-- [ ] T042 [P] [US4] `scripts/blog-next-id.ts` を作る：`src/content/blog/` の最大の番号＋1を表示する
-- [ ] T043 [US4] `docs/updating.md` を書く（FR-026）：記事の追加（番号の決め方、ディレクトリと index.md の書き方、写真の置き方と代替テキスト、カテゴリの一覧、下書き、確認のしかた、ビルドが失敗したときのエラーの読み方）と、おすすめ商品の入れ替え（`src/data/recommended.ts` と画像）。contracts/blog-content.md を元に、更新担当者向けの言葉で書く。README の手書き部分からリンクする
-- [ ] T044 [US4] 手順書どおりに見本の記事を1件追加し、記事ページ・ブログ一覧の先頭・カテゴリ一覧・トップのお知らせの先頭・サイトマップに出ることを確かめる。`categories` を存在しない値にしてビルドが失敗し、ファイル名と項目名が出ることを確かめる。確認後に見本の記事を消す（SC-004）
+- [ ] T043 [P] [US4] `scripts/blog-next-id.ts` を作る：`src/content/blog/` の最大の番号＋1を表示する
+- [ ] T044 [US4] `docs/updating.md` を書く（FR-026）：記事の追加（番号の決め方、ディレクトリと index.md の書き方、写真の置き方と代替テキスト、カテゴリの一覧、下書き、確認のしかた、ビルドが失敗したときのエラーの読み方）と、おすすめ商品の入れ替え（`src/data/recommended.ts` と画像）。contracts/blog-content.md を元に、更新担当者向けの言葉で書く。README の手書き部分からリンクする
+- [ ] T045 [US4] 手順書どおりに見本の記事を1件追加し、記事ページ・ブログ一覧の先頭・カテゴリ一覧・トップのお知らせの先頭・サイトマップに出ることを確かめる。`categories` を存在しない値にしてビルドが失敗し、ファイル名と項目名が出ることを確かめる。確認後に見本の記事を消す（SC-004）
 
 **Checkpoint**: 更新担当者が記事とおすすめ商品を入れ替えられる
 
@@ -133,16 +134,16 @@ description: "Task list for 002-top-blog"
 
 ## Phase 7: Polish & Cross-Cutting Concerns
 
-- [ ] T045 [P] `src/dev/styleguide.astro` に新しい部品を追加する：PageHero・BlogSidebar・PostNav・ProductCard／RecommendedProducts・TopHero・PostCard／PostGrid・ThoughtIntro・Pagination（FR-023）
-- [ ] T046 [P] `tests/helpers/pages.ts` に `VISUAL_PATHS`（`/`・`/blogs/`・`/blogs/page/3/`・`/category/column/`・`/257/`・`/251/`（アイキャッチなし）・`/219/`（YouTube））を定義し、`tests/visual/screenshot.spec.ts` をこれだけに絞る（research.md §8）
-- [ ] T047 [P] `docs/current-site/url-mapping.md` のトップ・記事29件・ブログ一覧3ページ・カテゴリ一覧7ページの行の「新URL」を同じパス、「対応方法」を「同じURL」にする。別表記（末尾のスラッシュなし）は「公開先が `/` 付きに転送」と備考に書く（FR-020・FR-021）
-- [ ] T048 [P] `public/_redirects` を作る：転送が必要なものがないことを先頭のコメントに書き、書式の例をコメントで残す（Cloudflare Pages の形式）
-- [ ] T049 [P] `docs/deploy.md` を書く（FR-029）：Cloudflare Pages のアカウント作成とリポジトリの接続（本番ブランチ `main`、ビルドコマンド `npm run build`、出力 `dist`、環境変数 `SITE_ENV=test`・`NODE_VERSION=24`）、テスト公開の確認（noindex・robots.txt）、ドメインの切り替え（カスタムドメインの追加、`SITE_ENV=production`・`SITE_URL` の設定、再デプロイ、確認すること：`check-site-config.ts`・Search Console）。README の手書き部分からリンクする
-- [ ] T050 `docs/development-log.md` に 002 で決めたこと（記事の取り込み方法、URL を現行と同じにしたこと、テスト公開と `SITE_ENV`・`SITE_URL`、Cloudflare Pages、画面比較を代表ページに絞ったこと）を追記する
-- [ ] T051 `src/` で色・余白・文字サイズを直接書いている箇所を検索し、トークンに置き換えるか理由をコメントに書く（001 の T071 と同じ）
-- [ ] T052 作業ブランチを push し、Actions の `update-snapshots` を `branch: 002-top-blog` で実行して基準画像の PR を作り、画像を目で確認してマージする。その後の `ci` が成功し、10分以内に終わることを確かめる
-- [ ] T053 Lighthouse（モバイル）でトップページと記事ページ（`/82/`・`/257/`）を測り、4項目の点数を `docs/development-log.md` に記録する。90点未満の項目は原因と対応方針を書く（SC-007）。テスト公開の noindex による SEO の減点は、原因として記録する
-- [ ] T054 quickstart.md の手順（6 の所有者の作業を除く）を順に実行し、すべての「確認すること」を満たすことを確かめる
+- [ ] T046 [P] `src/dev/styleguide.astro` に新しい部品を追加する：PageHero・BlogSidebar・PostNav・ProductCard／RecommendedProducts・TopHero・PostCard／PostGrid・ThoughtIntro・Pagination（FR-023）
+- [ ] T047 [P] `tests/helpers/pages.ts` に `VISUAL_PATHS`（`/`・`/blogs/`・`/blogs/page/3/`・`/category/column/`・`/257/`・`/251/`（アイキャッチなし）・`/219/`（YouTube））を定義し、`tests/visual/screenshot.spec.ts` をこれだけに絞る（research.md §8）
+- [ ] T048 [P] `docs/current-site/url-mapping.md` のトップ・記事29件・ブログ一覧3ページ・カテゴリ一覧7ページの行の「新URL」を同じパス、「対応方法」を「同じURL」にする。別表記（末尾のスラッシュなし）は「公開先が `/` 付きに転送」と備考に書く（FR-020・FR-021）
+- [ ] T049 [P] `public/_redirects` を作る：転送が必要なものがないことを先頭のコメントに書き、書式の例をコメントで残す（Cloudflare Pages の形式）
+- [ ] T050 [P] `docs/deploy.md` を書く（FR-029）：Cloudflare Pages のアカウント作成とリポジトリの接続（本番ブランチ `main`、ビルドコマンド `npm run build`、出力 `dist`、環境変数 `SITE_ENV=test`・`NODE_VERSION=24`）、テスト公開の確認（noindex・robots.txt）、ドメインの切り替え（カスタムドメインの追加、`SITE_ENV=production`・`SITE_URL` の設定、再デプロイ、確認すること：`check-site-config.ts`・Search Console）。README の手書き部分からリンクする
+- [ ] T051 `docs/development-log.md` に 002 で決めたこと（記事の取り込み方法、URL を現行と同じにしたこと、テスト公開と `SITE_ENV`・`SITE_URL`、Cloudflare Pages、画面比較を代表ページに絞ったこと）を追記する
+- [ ] T052 `src/` で色・余白・文字サイズを直接書いている箇所を検索し、トークンに置き換えるか理由をコメントに書く（001 の T072 と同じ）
+- [ ] T053 作業ブランチを push し、Actions の `update-snapshots` を `branch: 002-top-blog` で実行して基準画像の PR を作り、画像を目で確認してマージする。その後の `ci` が成功し、10分以内に終わることを確かめる
+- [ ] T054 Lighthouse（モバイル）でトップページと記事ページ（`/82/`・`/257/`）を測り、4項目の点数を `docs/development-log.md` に記録する。90点未満の項目は原因と対応方針を書く（SC-007）。テスト公開の noindex による SEO の減点は、原因として記録する
+- [ ] T055 quickstart.md の手順（6 の所有者の作業を除く）を順に実行し、すべての「確認すること」を満たすことを確かめる
 
 ---
 
@@ -167,15 +168,15 @@ Setup → Foundational → US1 → US2 → US3 → US4 → Polish
 ### Within Each User Story
 
 - US1：テスト（T014・T015）→ 変換（T016）→ 取り込み（T017・T018）→ 仕上げ（T019）→ 部品（T020〜T023）→ レイアウト（T024）→ 構造化データ（T025）→ ページ（T026・T027）→ 確認（T028・T029）
-- US2：部品（T030〜T032）→ ページ（T033）→ 確認（T034・T035）
-- US3：部品（T036）→ ページ（T037・T038）→ 後片付け（T039）→ 確認（T040・T041）
+- US2：部品（T030〜T032）→ ページ（T033）→ 確認（T034〜T036）
+- US3：部品（T037）→ ページ（T038・T039）→ 後片付け（T040）→ 確認（T041・T042）
 
 ### Parallel Opportunities
 
 - Phase 2：T003・T008・T009・T010・T012 は並行可
 - US1：T014・T015 は並行可。T020〜T023 は並行可
 - US2：T030〜T032 は並行可
-- Polish：T045〜T049 は並行可
+- Polish：T046〜T050 は並行可
 
 ---
 
@@ -208,4 +209,4 @@ Task: "src/components/RecommendedProducts.astro を作る（T023）"
 - 現行サイトへのアクセスは `politeFetch` を使い、直列・1.2秒間隔を守る
 - 素材（写真）の権利は、main へのマージ（= テスト公開。noindex でも URL を知っていれば誰でも見られる）の前に
   店に確認する（spec の Assumptions）。develop までは確認前でも進めてよい
-- Cloudflare Pages への接続（quickstart.md の 6）は所有者の作業で、本機能のタスクには含めない
+- Cloudflare Pages への接続（quickstart.md の 6）は所有者の作業で、本機能のタスクには含めない。FR-027 の「テスト用 URL での公開」は、所有者の接続をもって満たされる。002 のタスクは、接続すればそのまま公開できる状態（設定・手順書）まで
