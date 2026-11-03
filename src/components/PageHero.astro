@@ -70,7 +70,7 @@ const Tag = heading ? 'h1' : 'p';
     }
 
     .page-hero :global(.page-hero__photo) {
-      width: 65%; /* 現行 .subhero_svg の幅 */
+      width: min(65%, 100% - 290px); /* 現行 .subhero_svg の幅。768px 付近では6〜7文字のページ名に重ならないよう狭める */
     }
 
     .page-hero__title {

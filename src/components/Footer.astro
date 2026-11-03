@@ -1,6 +1,6 @@
 ---
 // フッター。現行と同じく、写真の帯とロゴ → アーチ → SNS・フッターナビ・著作権表示。
-// 店舗情報（店名・住所・電話・営業時間）は現行にはないが、構造化データと表示を一致させるため追加した
+// 店舗情報（店名・住所・電話）は現行にはないが、構造化データと表示を一致させるため追加した
 // （開発原則VIII。変更の記録は docs/current-site/design.md「現行から変える点」）。
 import { Image, getImage } from 'astro:assets';
 import SocialLinks from './SocialLinks.astro';
@@ -70,6 +70,7 @@ const bg = await getImage({ src: footerBg, width: 1600, format: 'webp' });
   }
 
   .footer__bottom {
+    margin-top: -1px; /* 位置が小数になるとアーチとの継ぎ目に細い線が出るため（WebKit）、1px 重ねる */
     padding-bottom: var(--space-lg);
     background: var(--color-footer-bg);
   }

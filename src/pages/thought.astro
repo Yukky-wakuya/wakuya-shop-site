@@ -186,10 +186,12 @@ const path = '/thought/';
     }
 
     .chapter {
+      position: relative; /* 本文幅の中央を基準に、模様を画面の端へ置く */
       grid-template-columns: 40% 1fr;
       gap: var(--space-lg);
       align-items: center;
       margin-bottom: var(--space-2xl);
+      isolation: isolate;
     }
 
     .chapter--reverse {
@@ -210,19 +212,28 @@ const path = '/thought/';
     }
 
     .chapter__body--tint {
+      position: static;
       padding: var(--space-lg);
       border-radius: 0;
       background: none;
+      isolation: auto;
     }
 
+    /* bg_gray の素材は片側がまっすぐ切れているため、現行と同じく、切れた辺を画面の端に合わせて隠す */
     .chapter__body--tint :global(.chapter__tint) {
       position: absolute;
-      inset: -15%; /* 現行と同じく、本文より一回り大きく広げる */
+      top: 0;
+      right: calc(50% - 50vw);
       z-index: -1;
       display: block;
-      width: 130%;
+      width: 60vw; /* 現行 .thought01 .thought_bg03 の幅 */
       max-width: none;
-      height: 130%;
+    }
+
+    .chapter--reverse .chapter__body--tint :global(.chapter__tint) {
+      right: auto;
+      left: calc(50% - 50vw);
+      width: 54vw; /* 現行 .thought03 .thought_bg01 の 46% では本文が模様の外に出るため広げる */
     }
   }
 </style>
