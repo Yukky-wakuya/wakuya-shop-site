@@ -1,0 +1,123 @@
+---
+// フッター。現行と同じく、写真の帯とロゴ → アーチ → SNS・フッターナビ・著作権表示。
+// 店舗情報（店名・住所・電話・営業時間）は現行にはないが、構造化データと表示を一致させるため追加した
+// （開発原則VIII。変更の記録は docs/current-site/design.md「現行から変える点」）。
+import { Image, getImage } from 'astro:assets';
+import SocialLinks from './SocialLinks.astro';
+import footerLogo from '../assets/brand/footer_logo.svg';
+import footerBg from '../assets/brand/footer_bg.jpg';
+import { footerNav, store, storeAddressText } from '../data/site';
+
+const bg = await getImage({ src: footerBg, width: 1600, format: 'webp' });
+---
+
+<footer class="footer">
+  <div class="footer__top" style={`--footer-bg: url(${bg.src})`}>
+    <Image class="footer__logo" src={footerLogo} alt="" />
+  </div>
+  <div class="footer__arch" aria-hidden="true"></div>
+  <div class="footer__bottom">
+    <div class="content-inner">
+      <div class="footer__social">
+        <SocialLinks variant="light" size={30} />
+      </div>
+      <ul class="footer__nav">
+        {
+          footerNav.map((item) => (
+            <li>
+              <a href={item.href} {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}>
+                {item.label}
+                {item.external && <span class="visually-hidden">（外部サイト・新しいタブで開きます）</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <address class="footer__store">
+        <p class="footer__store-name">{store.name}（{store.legalName}）</p>
+        <p>{storeAddressText}</p>
+        <p>TEL <a href={`tel:${store.telephone}`}>{store.telephone}</a></p>
+        <p>営業時間 {store.openingHoursText}</p>
+      </address>
+      <p class="footer__copy"><small>©2023 wakuya.</small></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    overflow: hidden;
+    color: var(--color-on-footer);
+  }
+
+  .footer__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 510px; /* 現行 .footer_top の高さ */
+    background: var(--footer-bg) center / cover no-repeat;
+  }
+
+  .footer__top :global(.footer__logo) {
+    width: 108px; /* 現行 .footer_logo の幅 */
+  }
+
+  .footer__arch {
+    height: 80px; /* 現行 .footer_arch の高さ（アーチの半径と同じ） */
+    margin: -80px -80px 0; /* 高さと同じだけ上へ重ね、左右は半径分はみ出させて弧を作る */
+    background: var(--color-footer-bg);
+    border-top-left-radius: var(--radius-arch);
+    border-top-right-radius: var(--radius-arch);
+  }
+
+  .footer__bottom {
+    padding-bottom: var(--space-lg);
+    background: var(--color-footer-bg);
+  }
+
+  .footer__social {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__nav {
+    display: grid;
+    justify-content: center;
+    gap: var(--space-2xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__nav a,
+  .footer__store a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--size-tap-min);
+    padding-inline: var(--space-2xs);
+    color: var(--color-on-footer);
+  }
+
+  .footer__store {
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+    text-align: center;
+  }
+
+  .footer__store-name {
+    font-size: var(--font-size-base);
+  }
+
+  .footer__copy {
+    text-align: center;
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+  }
+</style>

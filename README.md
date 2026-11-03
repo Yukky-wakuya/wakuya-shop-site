@@ -2,6 +2,26 @@
 
 Webサイト制作用リポジトリです。要件・計画・作業項目を整理するため、GitHub Spec Kit v1.2.1を導入しています。
 
+## 開発の始め方
+
+Node.js 24 が必要です。
+
+```text
+npm ci                                   # 依存のインストール（初回）
+npx playwright install chromium webkit   # テスト用ブラウザ（初回）
+npm run dev                              # 開発サーバー http://localhost:4321/ （スタイルガイドは /styleguide/）
+npm run build                            # 本番用の出力（dist/）
+npm run test:local                       # 画面テスト（スクリーンショット比較以外）
+npm run test:docker                      # スクリーンショット比較も含めた画面テスト（Docker Desktop が必要）
+npm run test:unit                        # スクリプトの単体テスト
+npm run survey                           # 現行サイトの調査（docs/current-site/ を作り直す）
+npm run readme:generate                  # このREADMEの「開発の進捗」以下を specs/ から作り直す
+```
+
+- 現行サイトの調査資料：[docs/current-site/](docs/current-site/README.md)
+- 画面テストと基準画像の更新：[docs/testing.md](docs/testing.md)
+- ブランチの保護の設定：[docs/branch-protection.md](docs/branch-protection.md)
+
 ## Spec Kitの使い方
 
 Claude Codeでこのリポジトリを開き、スラッシュコマンドとして利用します。追加したスキルが表示されない場合は、新しいセッションで開き直してください。
@@ -16,7 +36,7 @@ Claude Codeでこのリポジトリを開き、スラッシュコマンドとし
 
 例：`/speckit-specify 店舗紹介、商品紹介、営業時間、アクセス、問い合わせ導線を備えたスマートフォン対応サイトを作りたい`
 
-この例は入力例であり、サイトの要件や技術構成はまだ決定していません。開発原則も初期テンプレートの状態です。
+開発原則は `.specify/memory/constitution.md`、各機能の仕様・計画・作業項目は `specs/` にあります。
 
 ページ追加や問い合わせ機能など、まとまった変更に使います。文言や余白だけの小さな修正では、毎回すべての手順を実行する必要はありません。
 
@@ -24,7 +44,8 @@ Claude Codeでこのリポジトリを開き、スラッシュコマンドとし
 
 - `.claude/skills/`：Claude Code用のSpec Kitスキル。
 - `.specify/`：開発原則、テンプレート、PowerShellスクリプト、ワークフロー設定。
-- `specs/`：今後の仕様作成で生成される機能ごとの仕様・計画・作業項目。
+- `specs/`：機能ごとの仕様・計画・作業項目。進捗はこのREADMEの末尾に自動でまとめられます。
+- `src/`：サイト本体（Astro）。`tests/`：画面テスト（Playwright）。`scripts/`：調査・README生成などのスクリプト。
 - `.tools/`：ローカル実行環境（Git管理対象外）。
 
 ## CLI
@@ -41,3 +62,31 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 `.tools/`は別環境へのcloneには含まれません。別環境でCLIが必要な場合は、[公式インストール手順](https://github.github.io/spec-kit/installation.html)に従ってください。プロジェクト用のスキルとテンプレートはリポジトリに含めて共有します。
 
 参考：[GitHub Spec Kit](https://github.com/github/spec-kit)、[エージェント連携](https://github.github.io/spec-kit/reference/integrations)
+
+<!-- speckit-readme:start -->
+<!-- このブロックは自動生成されます。手で編集しないでください（scripts/readme/generate.ts） -->
+
+## 開発の進捗
+
+開発原則：v1.0.0（最終改定 2026-10-18）
+
+| 機能 | 工程 | 作業項目 | 完了率 |
+|------|------|----------|--------|
+| [001 開発基盤の整備（現行サイト調査・デザイン基盤・画面テスト・README自動更新）](specs/001-dev-foundation/spec.md) | 実装中 | 71 / 73 | 97% |
+
+### 001 開発基盤の整備（現行サイト調査・デザイン基盤・画面テスト・README自動更新）：未完了の作業
+
+<details><summary>2 件</summary>
+
+- **Phase 6: User Story 4**
+  - T069 リポジトリの所有者が `docs/branch-protection.md` の手順でデプロイキーと Secrets を登録した後、この機能ブランチを develop にマージし、tasks.md のチェックを1つ変えて develop に push する。5分以内に README の自動更新コミットができること（SC-008）、そのコミットで `readme`・`ci` が再実行されないこと（FR-030）を確かめる
+- **Phase 7: Polish & Cross-Cutting Concerns**
+  - T073 quickstart.md の手順を最初から順に実行し、すべての「確認すること」を満たすことを確かめる。満たさない項目は該当のタスクに戻って直す
+
+</details>
+
+## 仕様一覧（完成した機能）
+
+まだありません
+
+<!-- speckit-readme:end -->

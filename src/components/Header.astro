@@ -1,0 +1,70 @@
+---
+// ヘッダー。現行サイトと同じく、左にロゴ、右に縦書きのナビとSNSアイコン（docs/current-site/design.md）
+import { Image } from 'astro:assets';
+import GlobalNav from './GlobalNav.astro';
+import SocialLinks from './SocialLinks.astro';
+import logo from '../assets/brand/header_logo.svg';
+import { siteName } from '../data/site';
+---
+
+<header class="header">
+  <div class="header__inner">
+    <a class="header__logo" href="/">
+      <Image src={logo} alt={`民芸クラフト${siteName} トップページへ`} />
+    </a>
+    <div class="header__nav">
+      <GlobalNav />
+    </div>
+    <div class="header__social">
+      <SocialLinks variant="dark" size={27} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    padding-block: var(--space-sm);
+  }
+
+  .header__inner {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: var(--size-content-ratio);
+    max-width: var(--size-content-max);
+    margin-inline: auto;
+  }
+
+  .header__logo {
+    display: block;
+    width: var(--size-logo-sp);
+  }
+
+  .header__logo img {
+    width: 100%;
+  }
+
+  .header__social {
+    position: absolute;
+    right: calc(var(--size-tap-min) + var(--space-xs));
+    top: 0;
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md） */
+  @media (min-width: 768px) {
+    .header {
+      padding-block: var(--space-lg) var(--space-xl);
+    }
+
+    .header__logo {
+      width: var(--size-logo-pc);
+    }
+
+    .header__social {
+      right: 0;
+      top: auto;
+      bottom: calc(-1 * var(--space-lg));
+    }
+  }
+</style>

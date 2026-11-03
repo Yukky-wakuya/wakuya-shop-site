@@ -1,0 +1,90 @@
+# 基準画像の更新（contracts/ci-workflows.md、docs/testing.md）
+# 撮影は Playwright 公式イメージで行い、PR の作成は gh が入っている通常のランナーで行う
+name: update-snapshots
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 基準画像を更新するブランチ
+        required: true
+      grep:
+        description: 対象テストの絞り込み（任意。--grep に渡す）
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+    env:
+      CI: 'true'
+      HOME: /root
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - run: npm ci
+      - run: npm run build
+      - name: 基準画像を撮り直す
+        run: npx playwright test tests/visual --update-snapshots=all ${{ inputs.grep != '' && format('--grep "{0}"', inputs.grep) || '' }}
+      - name: 比較以外のテスト
+        id: others
+        continue-on-error: true
+        run: npx playwright test --grep-invert "見た目が基準画像と一致する" --reporter=line 2>&1 | tail -n 40 > other-tests.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: snapshots
+          path: |
+            tests/visual/__screenshots__/
+            other-tests.txt
+          retention-days: 3
+
+  pull-request:
+    needs: capture
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: snapshots
+          path: .snapshots/
+      - name: 更新があれば PR を作る
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE: ${{ inputs.branch }}
+          HEAD: snapshots/${{ inputs.branch }}-${{ github.run_number }}
+        run: |
+          rm -rf tests/visual/__screenshots__
+          mkdir -p tests/visual
+          cp -r .snapshots/tests/visual/__screenshots__ tests/visual/
+          if git diff --quiet && [ -z "$(git status --porcelain tests/visual)" ]; then
+            echo "基準画像に変更はありません" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$HEAD"
+          git add tests/visual/__screenshots__
+          git commit -m "test: 基準画像を更新（${BASE}）"
+          git push origin "$HEAD"
+          {
+            echo "Playwright 公式イメージで撮り直した基準画像です。**Files changed で画像の差分を目で確認してからマージしてください。**"
+            echo
+            echo "### 更新された画像"
+            git diff --name-status HEAD~1 HEAD | sed 's/^/- /'
+            echo
+            echo "### 比較以外のテストの結果"
+            echo '```'
+            cat .snapshots/other-tests.txt
+            echo '```'
+          } > pr-body.md
+          gh pr create --base "$BASE" --head "$HEAD" --title "test: 基準画像を更新（${BASE}）" --body-file pr-body.md
