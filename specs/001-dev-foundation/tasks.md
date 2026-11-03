@@ -175,7 +175,7 @@ description: "Task list for 001-dev-foundation"
 - [X] T070 [P] `docs/development-log.md` に本機能で決めたこと（技術構成、基準画像の運用、README 自動更新の仕組み、PowerShell の実行ポリシーにより Spec Kit のスクリプトを `-ExecutionPolicy Bypass` 付きで実行していること）を追記する
 - [X] T071 [P] `src/` 全体で、色・余白・文字サイズを直接書いている箇所がないか検索し（例：`#[0-9a-fA-F]{3,6}`、`\d+px` を `src/components/`・`src/layouts/`・`src/pages/` で）、あれば `var(--…)` に置き換えるか理由をコメントに書く（開発原則VII）
 - [X] T072 `docs/current-site/design.md` の「現行から変える点」と、共通レイアウトの実際の差分が一致しているかを見直す（開発原則I）
-- [ ] T073 quickstart.md の手順を最初から順に実行し、すべての「確認すること」を満たすことを確かめる。満たさない項目は該当のタスクに戻って直す
+- [X] T073 quickstart.md の手順を最初から順に実行し、すべての「確認すること」を満たすことを確かめる。満たさない項目は該当のタスクに戻って直す
 
 ---
 
