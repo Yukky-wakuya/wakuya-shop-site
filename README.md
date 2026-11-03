@@ -76,15 +76,14 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 
 | 機能 | 工程 | 作業項目 | 完了率 |
 |------|------|----------|--------|
-| [002 トップページとブログ](specs/002-top-blog/spec.md) | 実装中 | 52 / 55 | 94% |
+| [002 トップページとブログ](specs/002-top-blog/spec.md) | 実装中 | 53 / 55 | 96% |
 
 ### 002 トップページとブログ：未完了の作業
 
-<details><summary>3 件</summary>
+<details><summary>2 件</summary>
 
 - **Phase 7: Polish & Cross-Cutting Concerns**
   - T053 作業ブランチを push し、Actions の `update-snapshots` を `branch: 002-top-blog` で実行して基準画像の PR を作り、画像を目で確認してマージする。その後の `ci` が成功し、10分以内に終わることを確かめる
-  - T054 Lighthouse（モバイル）でトップページと記事ページ（`/82/`・`/257/`）を測り、4項目の点数を `docs/development-log.md` に記録する。90点未満の項目は原因と対応方針を書く（SC-007）。テスト公開の noindex による SEO の減点は、原因として記録する
   - T055 quickstart.md の手順（6 の所有者の作業を除く）を順に実行し、すべての「確認すること」を満たすことを確かめる
 
 </details>
