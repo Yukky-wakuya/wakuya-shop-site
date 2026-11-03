@@ -1,5 +1,6 @@
 # README の進捗表・仕様一覧の自動更新（contracts/ci-workflows.md、docs/branch-protection.md §2）
-# develop・main はルールセットで保護しているため、バイパスに登録したデプロイキーで push する
+# develop・main をルールセットで保護している場合は、バイパスに登録したデプロイキーで push する。
+# デプロイキーが未登録なら、ワークフローのトークンで push する（保護がない場合だけ通る）
 name: readme
 
 on:
@@ -11,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   update:

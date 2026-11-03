@@ -2,6 +2,11 @@
 
 FR-022・開発原則VII のための設定手順。設定はリポジトリの所有者が GitHub の画面で行う。
 
+> **前提**：ルールセット（とブランチ保護）は、非公開リポジトリでは GitHub Pro 以上のプランでないと使えない
+> （GitHub Free のままでは API が「Upgrade to GitHub Pro or make this repository public」を返す。2026-11-03 確認）。
+> Free の非公開リポジトリのままにする場合、失敗した PR のマージを機械的に止めることはできないため、
+> CI が成功していることを目で確かめてからマージする。README の自動更新は、デプロイキーがなくてもワークフローのトークンで動く。
+
 ## 1. develop と main のルールセット
 
 Settings → Rules → Rulesets → New ruleset → New branch ruleset

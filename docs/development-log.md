@@ -23,7 +23,8 @@
 
 - `scripts/readme/generate.ts` が `specs/` の仕様・作業項目から、README の目印（`<!-- speckit-readme:start -->`〜`end`）の間に進捗表と仕様一覧を書く。目印の外は変えない。
 - develop・main への push で `.github/workflows/readme.yml` が動き、変更があれば `chore(readme):` で始まるコミットを積む。このコミットでは `readme`・`ci` とも再実行しない。
-- develop・main はルールセットで保護しているので、バイパスに登録したデプロイキー（`README_BOT_DEPLOY_KEY`）で push する（[branch-protection.md](branch-protection.md) §2）。
+- develop・main をルールセットで保護する場合は、バイパスに登録したデプロイキー（`README_BOT_DEPLOY_KEY`）で push する（[branch-protection.md](branch-protection.md) §2）。デプロイキーがなければワークフローのトークンで push する。
+- ルールセットは非公開リポジトリでは GitHub Pro 以上が必要（2026-11-03 に確認）。
 
 ### 作業環境
 
