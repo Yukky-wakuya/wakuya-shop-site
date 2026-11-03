@@ -10,3 +10,6 @@ dist/
 test-results/
 playwright-report/
 blob-report/
+
+# Claude Code の個人設定
+.claude/settings.local.json

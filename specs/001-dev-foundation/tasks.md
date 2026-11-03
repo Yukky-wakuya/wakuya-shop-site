@@ -162,7 +162,7 @@ description: "Task list for 001-dev-foundation"
 - [X] T066 [US4] `npm run test:readme` を実行し、T058 のテストがすべて成功することを確かめる
 - [X] T067 [US4] `README.md` を手書き部分と自動生成部分に分ける：既存の Spec Kit の説明は残し、古くなった記述（「開発原則も初期テンプレートの状態です」など）を直す。開発の始め方（`npm ci`・`npm run dev`・テスト・調査）と、`docs/testing.md`・`docs/branch-protection.md`・`docs/current-site/` へのリンクを手書き部分に追加する。末尾に目印の2行を入れて `npm run readme:generate` を実行し、2回目の実行で差分が出ないことを確かめる（FR-024・FR-029・FR-033）
 - [X] T068 [US4] `.github/workflows/readme.yml` を作る（contracts/ci-workflows.md）：`push`（`branches: [develop, main]`）、`if: ${{ !startsWith(github.event.head_commit.message, 'chore(readme):') }}`、`concurrency: readme-${{ github.ref }}`・`cancel-in-progress: false`、`actions/checkout` を `ssh-key: ${{ secrets.README_BOT_DEPLOY_KEY }}` で、setup-node（`.nvmrc`）。依存のインストールは不要（Node 標準機能のみ）。`npm run readme:generate` → `git diff --quiet README.md` なら終了 → コミットの作成者を `github-actions[bot]` にして `chore(readme): 進捗表を自動更新` でコミット → push。拒否されたら `git fetch` → `git reset --hard origin/<branch>` → 生成からやり直す（最大3回）。終了コード 1 ならジョブを失敗させ、原因をジョブサマリーに書く
-- [ ] T069 [US4] リポジトリの所有者が `docs/branch-protection.md` の手順でデプロイキーと Secrets を登録した後、この機能ブランチを develop にマージし、tasks.md のチェックを1つ変えて develop に push する。5分以内に README の自動更新コミットができること（SC-008）、そのコミットで `readme`・`ci` が再実行されないこと（FR-030）を確かめる
+- [X] T069 [US4] リポジトリの所有者が `docs/branch-protection.md` の手順でデプロイキーと Secrets を登録した後、この機能ブランチを develop にマージし、tasks.md のチェックを1つ変えて develop に push する。5分以内に README の自動更新コミットができること（SC-008）、そのコミットで `readme`・`ci` が再実行されないこと（FR-030）を確かめる
 
 **Checkpoint**: US4 の Independent Test を満たす。ここでフェーズのコミットを作る
 
