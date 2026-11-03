@@ -72,14 +72,12 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 
 | 機能 | 工程 | 作業項目 | 完了率 |
 |------|------|----------|--------|
-| [001 開発基盤の整備（現行サイト調査・デザイン基盤・画面テスト・README自動更新）](specs/001-dev-foundation/spec.md) | 実装中 | 70 / 73 | 95% |
+| [001 開発基盤の整備（現行サイト調査・デザイン基盤・画面テスト・README自動更新）](specs/001-dev-foundation/spec.md) | 実装中 | 71 / 73 | 97% |
 
 ### 001 開発基盤の整備（現行サイト調査・デザイン基盤・画面テスト・README自動更新）：未完了の作業
 
-<details><summary>3 件</summary>
+<details><summary>2 件</summary>
 
-- **Phase 5: User Story 3**
-  - T056 安定性の確認（SC-007）：変更のない状態で `ci` を10回再実行し、10回とも成功することを確かめる。不安定なテストがあれば原因（フォント・アニメーション・遅延読み込みなど）を直す
 - **Phase 6: User Story 4**
   - T069 リポジトリの所有者が `docs/branch-protection.md` の手順でデプロイキーと Secrets を登録した後、この機能ブランチを develop にマージし、tasks.md のチェックを1つ変えて develop に push する。5分以内に README の自動更新コミットができること（SC-008）、そのコミットで `readme`・`ci` が再実行されないこと（FR-030）を確かめる
 - **Phase 7: Polish & Cross-Cutting Concerns**
