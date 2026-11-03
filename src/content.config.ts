@@ -26,7 +26,7 @@ const blog = defineCollection({
         heroAlt: z.string().optional(),
         description: z.string().optional(),
         draft: z.boolean().optional(),
-        migratedFrom: z.string().url().optional(),
+        migratedFrom: z.url().optional(),
       })
       .refine((d) => !d.hero || (d.heroAlt ?? '').trim() !== '', {
         message: 'hero を指定したときは heroAlt（写真の説明）も書いてください',

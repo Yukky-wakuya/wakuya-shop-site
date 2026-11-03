@@ -1,0 +1,42 @@
+---
+// ブログ一覧・カテゴリ一覧の1ページ分（FR-016・FR-017・FR-019）
+import BlogLayout from '../layouts/BlogLayout.astro';
+import PostCards from './PostCards.astro';
+import Pagination from './Pagination.astro';
+import heroPhoto from '../assets/blog/blogs_hero.jpg';
+import type { Post } from '../lib/blog';
+import { pageUrl } from '../lib/blog-core';
+import { breadcrumbJsonLd } from '../lib/structured-data';
+
+interface Props {
+  /** 見出し（「ブログ一覧」やカテゴリ名） */
+  heading: string;
+  /** 1ページ目の URL */
+  base: string;
+  posts: Post[];
+  current: number;
+  last: number;
+  description: string;
+  currentCategory?: string;
+  breadcrumb: { name: string; path: string }[];
+}
+
+const { heading, base, posts, current, last, description, currentCategory, breadcrumb } = Astro.props;
+const path = pageUrl(base, current);
+const suffix = current > 1 ? `（${current}ページ目）` : '';
+---
+
+<BlogLayout
+  title={`${heading}${suffix}`}
+  description={`${description}${suffix}`}
+  path={path}
+  heroTitle={heading}
+  heroPhoto={heroPhoto}
+  heroPhotoAlt=""
+  currentCategory={currentCategory}
+  jsonLd={[breadcrumbJsonLd([...breadcrumb, ...(current > 1 ? [{ name: `${current}ページ目`, path }] : [])])]}
+>
+  {current > 1 && <p class="visually-hidden">{current}ページ目（全{last}ページ）</p>}
+  <PostCards posts={posts} columns={3} />
+  <Pagination base={base} current={current} last={last} />
+</BlogLayout>

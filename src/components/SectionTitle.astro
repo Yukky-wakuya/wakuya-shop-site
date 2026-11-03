@@ -5,14 +5,16 @@ import icon from '../assets/brand/h_icon.svg';
 
 interface Props {
   level?: 'h1' | 'h2';
+  /** 見出しの id（セクションの aria-labelledby から参照する） */
+  id?: string;
 }
 
-const { level: Tag = 'h2' } = Astro.props;
+const { level: Tag = 'h2', id } = Astro.props;
 ---
 
 <div class="section-title">
   <Image class="section-title__icon" src={icon} alt="" />
-  <Tag class="section-title__text"><slot /></Tag>
+  <Tag class="section-title__text" id={id}><slot /></Tag>
 </div>
 
 <style>

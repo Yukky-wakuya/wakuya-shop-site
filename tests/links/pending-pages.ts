@@ -7,6 +7,5 @@ export const PENDING_PAGES: Record<string, string> = {
   '/summary/': 'わくや概要（002 以降で作成）',
   '/thought/': 'わくやの想い（002 以降で作成）',
   '/deliver/': '出張わくや（002 以降で作成）',
-  '/blogs/': 'ブログ（002 以降で作成）',
   '/contact/': 'お問い合わせ（002 以降で作成）',
 };

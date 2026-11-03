@@ -1,0 +1,104 @@
+---
+// ブログのサイドバー（現行 aside .side_nav）：カテゴリーの一覧とオンラインショップへの帯（FR-019a）
+import { Image } from 'astro:assets';
+import icon from '../assets/brand/h_icon.svg';
+import logo from '../assets/brand/logo_w.svg';
+import { categoryPath } from '../data/categories';
+import { shopUrl } from '../data/site';
+import { getPublishedPosts, usedCategories } from '../lib/blog';
+
+interface Props {
+  /** 今見ているカテゴリ（aria-current を付ける） */
+  current?: string;
+}
+
+const { current } = Astro.props;
+const list = usedCategories(await getPublishedPosts());
+---
+
+<aside class="blog-sidebar" aria-labelledby="blog-sidebar-title">
+  <div class="blog-sidebar__title">
+    <Image class="blog-sidebar__icon" src={icon} alt="" />
+    <h2 id="blog-sidebar-title">カテゴリー</h2>
+  </div>
+  <ul class="blog-sidebar__list">
+    {
+      list.map((c) => (
+        <li>
+          <a href={categoryPath(c.slug)} aria-current={c.slug === current ? 'page' : undefined}>
+            {c.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <a class="blog-sidebar__shop" href={shopUrl} target="_blank" rel="noopener">
+    <Image class="blog-sidebar__shop-logo" src={logo} alt="" />
+    <span class="blog-sidebar__shop-label">オンライン<wbr />ショップ<span class="visually-hidden">（外部サイト・新しいタブで開きます）</span></span>
+  </a>
+</aside>
+
+<style>
+  .blog-sidebar__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-sidebar__title h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .blog-sidebar :global(.blog-sidebar__icon) {
+    width: 30px; /* 現行 .side_icon（SP）の幅 */
+  }
+
+  .blog-sidebar__list {
+    margin: 0 0 var(--space-md) var(--space-md);
+  }
+
+  .blog-sidebar__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--size-tap-min);
+    text-decoration: none;
+  }
+
+  .blog-sidebar__list a:hover,
+  .blog-sidebar__list a[aria-current='page'] {
+    text-decoration: underline;
+  }
+
+  .blog-sidebar__shop {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-xl);
+    text-decoration: none;
+  }
+
+  .blog-sidebar :global(.blog-sidebar__shop-logo) {
+    width: 60%;
+  }
+
+  /* 現行と同じく「オンライン／ショップ」の位置でだけ折り返す */
+  .blog-sidebar__shop-label {
+    word-break: keep-all;
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    .blog-sidebar :global(.blog-sidebar__icon) {
+      width: 38px; /* 現行 .side_icon の幅 */
+    }
+
+    .blog-sidebar :global(.blog-sidebar__shop-logo) {
+      width: 100%;
+    }
+  }
+</style>

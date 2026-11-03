@@ -1,0 +1,21 @@
+---
+// カテゴリ一覧の2ページ目以降（現行と同じ /category/<slug>/page/<n>/、FR-017）
+import PostList from '../../../../components/PostList.astro';
+import { getPublishedPosts, usedCategories, type Post } from '../../../../lib/blog';
+import { paginate, type ListPage } from '../../../../lib/blog-core';
+import { categoryList } from '../../../../lib/blog-lists';
+import type { CategorySlug } from '../../../../data/categories';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return usedCategories(posts).flatMap((c) =>
+    paginate(posts.filter((p) => p.data.categories.includes(c.slug)))
+      .slice(1)
+      .map((page) => ({ params: { category: c.slug, page: String(page.current) }, props: { slug: c.slug, page } })),
+  );
+}
+
+const { slug, page } = Astro.props as { slug: CategorySlug; page: ListPage<Post> };
+---
+
+<PostList {...categoryList(slug)} posts={page.items} current={page.current} last={page.last} />

@@ -17,9 +17,11 @@ interface Props {
   ogType?: 'website' | 'article';
   jsonLd?: JsonLdObject[];
   noindex?: boolean;
+  /** ページ下のオンラインショップの帯。ブログはサイドバーに帯があるため出さない（現行と同じ） */
+  shopBanner?: boolean;
 }
 
-const { jsonLd = [], ...seo } = Astro.props;
+const { jsonLd = [], shopBanner = true, ...seo } = Astro.props;
 ---
 
 <!doctype html>
@@ -38,7 +40,7 @@ const { jsonLd = [], ...seo } = Astro.props;
     <main id="main">
       <slot />
     </main>
-    <ShopBanner />
+    {shopBanner && <ShopBanner />}
     <Footer />
   </body>
 </html>

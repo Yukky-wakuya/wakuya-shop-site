@@ -1,0 +1,70 @@
+---
+// トップページのメインビジュアル（現行 .topHero）。キャッチコピーは画像ではなく文字で出す（FR-002）
+import { Image } from 'astro:assets';
+import ClippedPhoto from './ClippedPhoto.astro';
+import photo from '../assets/top/top_hero.jpg';
+import logo from '../assets/brand/logo_w.svg';
+---
+
+<section class="top-hero" aria-label="わくやの紹介">
+  <ClippedPhoto class="top-hero__photo" src={photo} alt="" shape="top" />
+  <div class="top-hero__text">
+    <h1 class="top-hero__catch">
+      ふくしまで、<br />長く愛されてきた民芸品、<br />めんこい和雑貨たち、<br />心の琴線にふれるお気に入りに<br />めぐり会う「わくや」です。
+    </h1>
+    <Image class="top-hero__logo" src={logo} alt="" />
+  </div>
+</section>
+
+<style>
+  .top-hero {
+    position: relative;
+    margin-bottom: var(--space-xl);
+  }
+
+  .top-hero :global(.top-hero__photo) {
+    display: block;
+    width: 90%; /* 現行 .tophero_svg の幅 */
+    max-width: calc((100vw - var(--size-content-max)) / 2 + 900px); /* 現行と同じく、本文の右端から画面の右端まで広げる */
+    height: auto;
+    margin-left: auto;
+  }
+
+  .top-hero__text {
+    position: absolute;
+    top: 50%;
+    left: 20%; /* 現行 .topHero_text の位置 */
+    transform: translateY(-50%);
+    color: var(--color-on-accent);
+    /* 写真の上でも読めるよう、文字の周りをわずかに暗くする（現行にはない。原則IV のコントラスト） */
+    text-shadow: 0 0 6px rgb(0 0 0 / 60%);
+  }
+
+  .top-hero__catch {
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-base);
+  }
+
+  .top-hero__text :global(.top-hero__logo) {
+    width: 100px; /* 現行 .topHero_logo（SP）の幅 */
+    margin-left: auto;
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    .top-hero {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .top-hero__catch {
+      margin-bottom: var(--space-md);
+      font-size: var(--font-size-hero);
+    }
+
+    .top-hero__text :global(.top-hero__logo) {
+      width: 200px; /* 現行 .topHero_logo の幅 */
+    }
+  }
+</style>

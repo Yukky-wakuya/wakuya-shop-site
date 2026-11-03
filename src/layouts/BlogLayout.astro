@@ -1,0 +1,53 @@
+---
+// ブログの一覧・カテゴリ・記事の共通レイアウト（現行 .subHero ＋ .archive_wrap）：見出し部分、本文、サイドバー（FR-019a）
+import type { ImageMetadata } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import BlogSidebar from '../components/BlogSidebar.astro';
+import type { JsonLdObject } from '../lib/structured-data';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heroTitle: string;
+  heroPhoto: ImageMetadata;
+  heroPhotoAlt: string;
+  /** false なら見出し部分のページ名を h1 にしない（記事ページ） */
+  heroHeading?: boolean;
+  currentCategory?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: JsonLdObject[];
+}
+
+const { heroTitle, heroPhoto, heroPhotoAlt, heroHeading = true, currentCategory, ...base } = Astro.props;
+---
+
+<BaseLayout {...base} shopBanner={false}>
+  <PageHero title={heroTitle} photo={heroPhoto} photoAlt={heroPhotoAlt} heading={heroHeading} />
+  <div class="blog-layout content-inner">
+    <div class="blog-layout__main">
+      <slot />
+    </div>
+    <BlogSidebar current={currentCategory} />
+  </div>
+  <slot name="after" />
+</BaseLayout>
+
+<style>
+  .blog-layout {
+    display: grid;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    .blog-layout {
+      grid-template-columns: 73% 1fr; /* 現行 .archive_wrap .main の幅 73% */
+      gap: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
+  }
+</style>

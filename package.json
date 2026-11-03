@@ -19,7 +19,8 @@
     "readme:check": "node scripts/readme/generate.ts --check",
     "survey": "node scripts/survey/run.ts",
     "migrate:blog": "node scripts/migrate-blog/run.ts",
-    "blog:next-id": "node scripts/blog-next-id.ts"
+    "blog:next-id": "node scripts/blog-next-id.ts",
+    "check:shop-links": "node scripts/check-shop-links.ts"
   },
   "dependencies": {
     "@astrojs/check": "0.9.12",

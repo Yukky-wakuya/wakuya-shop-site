@@ -48,6 +48,10 @@
   --font-size-2xl: 1.625rem;
   /* 用途: オンラインショップの帯の文字（PC） / 出典: 現行 .shop_link p の 40px */
   --font-size-display: 2.5rem;
+  /* 用途: トップのキャッチコピー（PC） / 出典: 現行 .topHero_text の 22px */
+  --font-size-hero: 1.375rem;
+  /* 用途: 下層ページの見出し部分のページ名（PC） / 出典: 現行 .subHero_text h2 の 38px（docs/current-site/design.md） */
+  --font-size-3xl: 2.375rem;
 
   /* ===== 行間・字間 ===== */
 
@@ -74,6 +78,8 @@
   --space-xl: 3.75rem;
   /* 用途: セクション間（PC） / 出典: 現行 .shop_link の margin-bottom 120px */
   --space-2xl: 7.5rem;
+  /* 用途: 商品・記事のカードの間隔（PC） / 出典: 現行 .recommend_list・.news_list・.blog_archive_list の gap 70px */
+  --space-grid: 4.375rem;
 
   /* ===== 幅 ===== */
 
