@@ -1,0 +1,8 @@
+# Cloudflare Pages の転送の設定（docs/deploy.md、specs/002-top-blog/research.md §7）
+#
+# 002 の時点では、旧サイトと同じ URL で公開しているため、転送が必要な URL はない。
+# 末尾の / がない URL（/blogs など）は、Cloudflare Pages が自動で / 付きに転送する。
+#
+# URL を変えるときは、旧 URL を1行ずつ書く（docs/current-site/url-mapping.md の「対応方法」も「リダイレクト」に直す）
+# 書式：旧URL 新URL 301
+#   /old-page/  /new-page/  301

@@ -28,8 +28,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
-      - run: npm run build
       - run: npm run test:unit
+      # ドメインを切り替えたときに全ページが本番の設定になることを確かめる（002 FR-028）
+      - name: 本番の設定でのビルドを確認
+        env:
+          SITE_ENV: production
+          SITE_URL: https://example.com
+        run: |
+          npm run build
+          node scripts/check-site-config.ts --expect production --url https://example.com
+      # 画面テストには既定（テスト公開）の設定でビルドしたものを使う
+      - run: npm run build
       - uses: actions/upload-artifact@v4
         with:
           name: dist

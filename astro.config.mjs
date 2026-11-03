@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { siteConfig } from './site.config.ts';
 
 /**
  * 開発サーバー（astro dev）のときだけ開発用ページを追加する。
@@ -20,7 +21,7 @@ function devPages() {
 }
 
 export default defineConfig({
-  site: 'https://waku-8.com',
+  site: siteConfig.url,
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },

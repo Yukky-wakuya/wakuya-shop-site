@@ -1,6 +1,7 @@
 ---
 // title・description・canonical・OGP を出力する（contracts/layout-props.md、開発原則VIII）
 import { siteName, siteUrl } from '../data/site';
+import { siteConfig } from '../../site.config.ts';
 
 interface Props {
   title: string;
@@ -25,7 +26,8 @@ const image = new URL(ogImage, siteUrl).href;
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-{noindex && <meta name="robots" content="noindex" />}
+{/* テスト公開中は全ページを検索に登録させない（contracts/site-config.md）。ページ個別の noindex とは書き分ける */}
+{!siteConfig.indexable ? <meta name="robots" content="noindex, nofollow" /> : noindex && <meta name="robots" content="noindex" />}
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />

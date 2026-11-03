@@ -1,9 +1,10 @@
 // テスト対象のページを、ビルド結果（dist/）から列挙する（T041）
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
+import { siteConfig } from '../../site.config.ts';
 
 export const DIST = resolve(import.meta.dirname, '../../dist');
-export const SITE_URL = 'https://waku-8.com';
+export const SITE_URL = siteConfig.url;
 
 function locs(xml: string): string[] {
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]!.trim());
@@ -39,3 +40,9 @@ export function readBuiltHtml(path: string): string {
   const file = path.endsWith('/') ? join(DIST, path, 'index.html') : join(DIST, path);
   return readFileSync(file, 'utf8');
 }
+
+/**
+ * スクリーンショット比較の対象（代表のページ。specs/002-top-blog/research.md §8）。
+ * 記事は同じ部品の繰り返しのため、写真あり・アイキャッチなし・YouTube ありの3件で代表させる。
+ */
+export const VISUAL_PATHS = ['/', '/blogs/', '/blogs/page/3/', '/category/column/', '/257/', '/251/', '/219/'];

@@ -1,4 +1,5 @@
 // サイト共通データ（data-model.md §6）。ナビ・店舗情報はここだけを直す（開発原則VI）
+import { siteConfig } from '../../site.config.ts';
 
 export interface NavItem {
   label: string;
@@ -7,7 +8,7 @@ export interface NavItem {
 }
 
 export const siteName = 'わくや';
-export const siteUrl = 'https://waku-8.com';
+export const siteUrl = siteConfig.url;
 export const shopUrl = 'https://waku-8.shop-pro.jp/';
 
 /**

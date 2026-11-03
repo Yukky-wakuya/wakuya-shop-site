@@ -1,0 +1,63 @@
+---
+// 正方形の写真と文字のカード（現行 .list_box）。商品カードと記事カードで共通に使う
+// 写真もリンクにするが、読み上げはタイトルの1回だけにする（写真のリンクはタブ移動と読み上げから外す）
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  href: string;
+  image: ImageMetadata;
+  /** カードの写真は、すぐ横に同じリンク先の文字があるため既定は装飾（research.md §10） */
+  alt?: string;
+  external?: boolean;
+}
+
+const { href, image, alt = '', external = false } = Astro.props;
+const target = external ? { target: '_blank', rel: 'noopener' } : {};
+---
+
+<li class="card">
+  <a class="card__image" href={href} tabindex="-1" aria-hidden="true" {...target}>
+    <Image src={image} alt={alt} widths={[240, 480]} sizes="(min-width: 768px) 230px, 45vw" />
+  </a>
+  <h3 class="card__title">
+    <a href={href} {...target}>
+      <slot />
+      {external && <span class="visually-hidden">（外部サイト・新しいタブで開きます）</span>}
+    </a>
+  </h3>
+  <slot name="meta" />
+</li>
+
+<style>
+  .card__image {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .card__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card__title {
+    margin-top: var(--space-xs);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-base);
+  }
+
+  .card__title a {
+    text-decoration: none;
+  }
+
+  .card__title a:hover {
+    text-decoration: underline;
+  }
+
+  .card :global(time) {
+    font-size: var(--font-size-xs);
+  }
+</style>

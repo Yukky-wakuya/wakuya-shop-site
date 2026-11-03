@@ -1,0 +1,35 @@
+---
+// 「＞もっと見る」（現行 .more_text）。何を見るのかを読み上げで補う
+interface Props {
+  href: string;
+  /** 読み上げ用の補足（例：「おすすめ商品を」） */
+  what: string;
+  external?: boolean;
+  align?: 'end' | 'start';
+}
+
+const { href, what, external = false, align = 'end' } = Astro.props;
+---
+
+<p class:list={['more-link', `more-link--${align}`]}>
+  <a href={href} {...external ? { target: '_blank', rel: 'noopener' } : {}}>
+    <span aria-hidden="true">&gt;</span><span class="visually-hidden">{what}</span>もっと見る{external && <span class="visually-hidden">（外部サイト・新しいタブで開きます）</span>}
+  </a>
+</p>
+
+<style>
+  .more-link--end {
+    text-align: end;
+  }
+
+  .more-link a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--size-tap-min);
+    text-decoration: none;
+  }
+
+  .more-link a:hover {
+    text-decoration: underline;
+  }
+</style>

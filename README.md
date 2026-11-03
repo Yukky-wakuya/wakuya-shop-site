@@ -16,11 +16,15 @@ npm run test:docker                      # スクリーンショット比較も�
 npm run test:unit                        # スクリプトの単体テスト
 npm run survey                           # 現行サイトの調査（docs/current-site/ を作り直す）
 npm run readme:generate                  # このREADMEの「開発の進捗」以下を specs/ から作り直す
+npm run migrate:blog                     # 現行サイトのブログ記事を src/content/blog/ に取り込む（再実行しても同じ結果）
+npm run check:shop-links                 # カラーミーショップへのリンク切れを確認（外部にアクセスする）
 ```
 
 - 現行サイトの調査資料：[docs/current-site/](docs/current-site/README.md)
 - 画面テストと基準画像の更新：[docs/testing.md](docs/testing.md)
 - ブランチの保護の設定：[docs/branch-protection.md](docs/branch-protection.md)
+- ブログの記事の追加・おすすめ商品の入れ替え：[docs/updating.md](docs/updating.md)
+- テスト公開（Cloudflare Pages）とドメインの切り替え：[docs/deploy.md](docs/deploy.md)
 
 ## Spec Kitの使い方
 
@@ -82,5 +86,14 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 - US2（P1）：デザイントークン・共通レイアウト・スタイルガイドを用意する
 - US3（P2）：画面の自動テストをpushのたびに実行する
 - US4（P3）：READMEを進捗表・仕様書として自動更新する
+
+### [002 トップページとブログ](specs/002-top-blog/spec.md)
+
+トップページとブログを新しいサイトに作る。トップページは現行(https://waku-8.com/)と同じ構成で、メインビジュアルとキャッチコピー、おすすめ商品4点（商品名・画像・カラーミーショップの商品URLをデータファイルで手で管理し、「もっと見る」でオンラインショップへ）、お知らせ（ブログの新しい記事4件をサムネイル・タイトル・日付で表示し、「もっと見る」でブログ一覧へ）、わくやの想いの紹介（/thought/ へのリンク）、オンラインショップの帯を置き、001 の仮ページを置き換える。ブログは現行の記事（docs/current-site/pages.json の投稿）を本文・画像・公開日・カテゴリ（店主のコラム・その他など）ごと移し、ブログ一覧（ページ送りあり）、カテゴリ別一覧、記事ページを作る。記事は Markdown ファイルで管理し、新しい記事も同じ形で追加できるようにする。現行の URL（/blogs/、/blogs/page/N/、/category/xxx/、各記事の URL）は url-mapping.md に新しい URL を記録し、変わる場合は転送できるようにする。各ページに固有の title・description・構造化データ（記事は BlogPosting）を付ける
+
+- US1（P1）：現行のブログ記事を新しいサイトで読める
+- US2（P1）：トップページで店の雰囲気と最新情報が分かる
+- US3（P2）：ブログの一覧とカテゴリから記事を探せる
+- US4（P3）：更新担当者が記事とおすすめ商品を入れ替えられる
 
 <!-- speckit-readme:end -->

@@ -1,0 +1,11 @@
+---
+// ブログ一覧の1ページ目（FR-016）。2ページ目以降は blogs/page/[page].astro
+import PostList from '../../components/PostList.astro';
+import { getPublishedPosts } from '../../lib/blog';
+import { paginate } from '../../lib/blog-core';
+import { BLOG } from '../../lib/blog-lists';
+
+const [first] = paginate(await getPublishedPosts());
+---
+
+<PostList {...BLOG} posts={first!.items} current={1} last={first!.last} />
