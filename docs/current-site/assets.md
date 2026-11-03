@@ -15,7 +15,7 @@ SNS のアイコン（X・Facebook・Instagram）は各サービスのブラン�
 | [bg_red01.svg](https://waku-8.com/wp-content/themes/wakuya/images/bg_red01.svg) | わくやの想い | img | 未確認 | |
 | [bg_red02.svg](https://waku-8.com/wp-content/themes/wakuya/images/bg_red02.svg) | わくやの想い | img | 未確認 | |
 | [bg_red04.svg](https://waku-8.com/wp-content/themes/wakuya/images/bg_red04.svg) | わくや概要、わくやの想い | img | 未確認 | |
-| [blogs_hero.jpg](https://waku-8.com/wp-content/themes/wakuya/images/blogs_hero.jpg) | ブログ、ブログ、ブログ ほか7ページ | img | 未確認 | |
+| [blogs_hero.jpg](https://waku-8.com/wp-content/themes/wakuya/images/blogs_hero.jpg) | ブログ、ブログ、ブログ ほか7ページ | img | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
 | [deliver_img.png](https://waku-8.com/wp-content/themes/wakuya/images/deliver_img.png) | 出張わくや | img | 未確認 | |
 | [facebook_w.svg](https://waku-8.com/wp-content/themes/wakuya/images/facebook_w.svg) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: facebook） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
 | [facebook.png](https://waku-8.com/wp-content/themes/wakuya/images/facebook.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: facebook） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
@@ -24,20 +24,20 @@ SNS のアイコン（X・Facebook・Instagram）は各サービスのブラン�
 | [h_icon.svg](https://waku-8.com/wp-content/themes/wakuya/images/h_icon.svg) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか40ページ | img（alt: タイトルアイコン） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
 | [header_logo.svg](https://waku-8.com/wp-content/themes/wakuya/images/header_logo.svg) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: 民芸クラフトわくや） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
 | [history.png](https://waku-8.com/wp-content/themes/wakuya/images/history.png) | わくや概要 | img | 未確認 | |
-| [icon_green.png](https://waku-8.com/wp-content/themes/wakuya/images/icon_green.png) | ホームページをリニューアルしました。、はじめましてのごあいさつ、もうしわけありません。 ほか36ページ | img（alt: タイトルアイコン） | 未確認 | |
+| [icon_green.png](https://waku-8.com/wp-content/themes/wakuya/images/icon_green.png) | ホームページをリニューアルしました。、はじめましてのごあいさつ、もうしわけありません。 ほか36ページ | img（alt: タイトルアイコン） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
 | [insta_w.svg](https://waku-8.com/wp-content/themes/wakuya/images/insta_w.svg) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: insta） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
 | [insta.png](https://waku-8.com/wp-content/themes/wakuya/images/insta.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: insta） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
 | [logo_w.svg](https://waku-8.com/wp-content/themes/wakuya/images/logo_w.svg) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: 民芸クラフトわくや） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
-| [recommend01.png](https://waku-8.com/wp-content/themes/wakuya/images/recommend01.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか28ページ | img（alt: 会津張り子 赤べこ） | 未確認 | |
-| [recommend02.png](https://waku-8.com/wp-content/themes/wakuya/images/recommend02.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか28ページ | img（alt: 会津張り子 招福干支 卯） | 未確認 | |
-| [recommend03.png](https://waku-8.com/wp-content/themes/wakuya/images/recommend03.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか28ページ | img（alt: 伝統玩具 やさいごま） | 未確認 | |
-| [recommend04.png](https://waku-8.com/wp-content/themes/wakuya/images/recommend04.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか28ページ | img（alt: 江戸千代紙） | 未確認 | |
-| [sample.png](https://waku-8.com/wp-content/themes/wakuya/images/sample.png) | わくや、開成マルシェ 出店のお知らせ、ノウパンがぶらりって。 ほか7ページ | img（alt: ブログアイキャッチ画像） | 未確認 | |
-| [thought01.png](https://waku-8.com/wp-content/themes/wakuya/images/thought01.png) | わくや、わくやの想い | img（alt: わくやの想いイメージ01） | 未確認 | |
-| [thought02.png](https://waku-8.com/wp-content/themes/wakuya/images/thought02.png) | わくや、わくやの想い | img（alt: わくやの想いイメージ02） | 未確認 | |
-| [thought03.png](https://waku-8.com/wp-content/themes/wakuya/images/thought03.png) | わくや、わくやの想い | img（alt: わくやの想いイメージ03） | 未確認 | |
+| [recommend01.png](https://waku-8.com/wp-content/themes/wakuya/images/recommend01.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか28ページ | img（alt: 会津張り子 赤べこ） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
+| [recommend02.png](https://waku-8.com/wp-content/themes/wakuya/images/recommend02.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか28ページ | img（alt: 会津張り子 招福干支 卯） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
+| [recommend03.png](https://waku-8.com/wp-content/themes/wakuya/images/recommend03.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか28ページ | img（alt: 伝統玩具 やさいごま） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
+| [recommend04.png](https://waku-8.com/wp-content/themes/wakuya/images/recommend04.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか28ページ | img（alt: 江戸千代紙） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
+| [sample.png](https://waku-8.com/wp-content/themes/wakuya/images/sample.png) | わくや、開成マルシェ 出店のお知らせ、ノウパンがぶらりって。 ほか7ページ | img（alt: ブログアイキャッチ画像） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
+| [thought01.png](https://waku-8.com/wp-content/themes/wakuya/images/thought01.png) | わくや、わくやの想い | img（alt: わくやの想いイメージ01） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
+| [thought02.png](https://waku-8.com/wp-content/themes/wakuya/images/thought02.png) | わくや、わくやの想い | img（alt: わくやの想いイメージ02） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
+| [thought03.png](https://waku-8.com/wp-content/themes/wakuya/images/thought03.png) | わくや、わくやの想い | img（alt: わくやの想いイメージ03） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
 | [to_top.svg](https://waku-8.com/wp-content/themes/wakuya/images/to_top.svg) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: 上へ戻る） | 未確認 | |
-| [wakuya.svg](https://waku-8.com/wp-content/themes/wakuya/images/wakuya.svg) | わくや | img（alt: わくや） | 未確認 | |
+| [wakuya.svg](https://waku-8.com/wp-content/themes/wakuya/images/wakuya.svg) | わくや | img（alt: わくや） | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
 | [x-white.png](https://waku-8.com/wp-content/themes/wakuya/images/x-white.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: twitter） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
 | [xicon.png](https://waku-8.com/wp-content/themes/wakuya/images/xicon.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | img（alt: x） | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
 | [screenshot.png](https://waku-8.com/wp-content/themes/wakuya/screenshot.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | icon | 未確認 | |
@@ -47,7 +47,7 @@ SNS のアイコン（X・Facebook・Instagram）は各サービスのブラン�
 | [icon_red.png](https://waku-8.com/wp-content/uploads/2023/09/icon_red.png) | お問い合わせ、わくやの想い | img（alt: タイトルアイコン） | 未確認 | |
 | [summary_hero.jpg](https://waku-8.com/wp-content/uploads/2023/09/summary_hero.jpg) | わくや概要 | img | 未確認 | |
 | [thought_hero.jpg](https://waku-8.com/wp-content/uploads/2023/09/thought_hero.jpg) | わくやの想い | img | 未確認 | |
-| [top_hero.jpg](https://waku-8.com/wp-content/uploads/2023/09/top_hero.jpg) | わくや | img | 未確認 | |
+| [top_hero.jpg](https://waku-8.com/wp-content/uploads/2023/09/top_hero.jpg) | わくや | img | 未確認 | 002 で仮使用（src/assets/）。権利確認後に正式採用 |
 | [cropped-fav-180x180.png](https://waku-8.com/wp-content/uploads/2023/10/cropped-fav-180x180.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | icon | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |
 | [cropped-fav-192x192.png](https://waku-8.com/wp-content/uploads/2023/10/cropped-fav-192x192.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | icon | 未確認 | |
 | [cropped-fav-32x32.png](https://waku-8.com/wp-content/uploads/2023/10/cropped-fav-32x32.png) | わくや、ホームページをリニューアルしました。、はじめましてのごあいさつ ほか42ページ | icon | 未確認 | 001 の共通レイアウトで仮使用（src/assets/brand/、public/）。権利確認後に正式採用 |

@@ -2,7 +2,8 @@
 import { test, expect } from '@playwright/test';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { DIST, getBuiltHtmlPaths, getPublicPaths, readBuiltHtml } from '../helpers/pages.ts';
+import { DIST, SITE_URL, getBuiltHtmlPaths, getPublicPaths, readBuiltHtml } from '../helpers/pages.ts';
+import { siteConfig } from '../../site.config.ts';
 
 test.beforeEach(({}, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium-pc', 'ビルド結果の確認のため chromium-pc でのみ実行');
@@ -16,12 +17,16 @@ test('公開ページがすべてサイトマップに載っている', () => {
   expect(missing, `サイトマップにないページ:\n${missing.join('\n')}`).toEqual([]);
 });
 
-test('robots.txt がクローラーを許可し、サイトマップを示している', async ({ request }) => {
+test('robots.txt がテスト公開ならすべて拒否し、本番なら許可してサイトマップを示す', async ({ request }) => {
   const res = await request.get('/robots.txt');
   expect(res.status()).toBe(200);
   const body = await res.text();
-  expect(body).toMatch(/^Sitemap:\s*https:\/\/waku-8\.com\/sitemap-index\.xml/m);
-  expect(body).not.toMatch(/^Disallow:\s*\/\s*$/m);
+  if (siteConfig.indexable) {
+    expect(body).toContain(`Sitemap: ${SITE_URL}/sitemap-index.xml`);
+    expect(body).not.toMatch(/^Disallow:\s*\/\s*$/m);
+  } else {
+    expect(body).toMatch(/^Disallow:\s*\/\s*$/m);
+  }
 });
 
 test('スタイルガイドが本番ビルドに含まれない', () => {

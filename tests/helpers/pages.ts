@@ -1,9 +1,10 @@
 // テスト対象のページを、ビルド結果（dist/）から列挙する（T041）
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
+import { siteConfig } from '../../site.config.ts';
 
 export const DIST = resolve(import.meta.dirname, '../../dist');
-export const SITE_URL = 'https://waku-8.com';
+export const SITE_URL = siteConfig.url;
 
 function locs(xml: string): string[] {
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]!.trim());

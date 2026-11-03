@@ -13,11 +13,13 @@
     "test": "playwright test",
     "test:local": "playwright test --ignore-snapshots",
     "test:docker": "node scripts/test-docker.ts",
-    "test:unit": "node --test \"scripts/**/*.test.ts\"",
+    "test:unit": "node --test \"scripts/**/*.test.ts\" \"src/**/*.test.ts\" \"*.test.ts\"",
     "test:readme": "node --test \"scripts/readme/**/*.test.ts\"",
     "readme:generate": "node scripts/readme/generate.ts",
     "readme:check": "node scripts/readme/generate.ts --check",
-    "survey": "node scripts/survey/run.ts"
+    "survey": "node scripts/survey/run.ts",
+    "migrate:blog": "node scripts/migrate-blog/run.ts",
+    "blog:next-id": "node scripts/blog-next-id.ts"
   },
   "dependencies": {
     "@astrojs/check": "0.9.12",

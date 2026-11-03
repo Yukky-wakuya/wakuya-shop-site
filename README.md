@@ -72,27 +72,12 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 
 | 機能 | 工程 | 作業項目 | 完了率 |
 |------|------|----------|--------|
-| [002 トップページとブログ](specs/002-top-blog/spec.md) | 作業分解済み | 0 / 55 | 0% |
+| [002 トップページとブログ](specs/002-top-blog/spec.md) | 実装中 | 13 / 55 | 23% |
 
 ### 002 トップページとブログ：未完了の作業
 
-<details><summary>55 件</summary>
+<details><summary>42 件</summary>
 
-- **Phase 1: Setup**
-  - T001 現行サイトから素材を取得して置く（`politeFetch` で直列・1.2秒間隔）：`top_hero.jpg`・`thought01.png`〜`thought03.png` を `src/assets/top/`、`recommend01.png`〜`recommend04.png` を `src/assets/recommend/`、`blogs_hero.jpg` を `src/assets/blog/`、`sample.png` を `src/assets/brand/no-image.png`、`icon_green.png`・`wakuya.svg` を `src/assets/brand/` へ。`docs/current-site/assets.md` の該当行の備考に「002 で仮使用。権利確認後に正式採用」と書く
-  - T002 `package.json` の scripts に `migrate:blog`（`node scripts/migrate-blog/run.ts`）と `blog:next-id`（`node scripts/blog-next-id.ts`）を追加する
-- **Phase 2: Foundational**
-  - T003 `site.config.test.ts` に `node:test` の単体テストを書く：既定値（`env: 'test'`、`url: 'https://wakuya-shop-site.pages.dev'`、`indexable: false`）、`SITE_ENV=production` で `SITE_URL` 未指定ならエラー、`https://` で始まらない・パスを含む URL はエラー、末尾の `/` を除く、`production` 以外の値は `test` 扱い。`package.json` の `test:unit` の対象にこのファイルを含める
-  - T004 `site.config.ts` に `resolveSiteConfig(env)` と `siteConfig`（`resolveSiteConfig(process.env)`）を作り、T003 を通す
-  - T005 `astro.config.mjs` の `site` を `siteConfig.url` に、`src/data/site.ts` の `siteUrl` を `siteConfig.url` に、`tests/helpers/pages.ts` の `SITE_URL` を `siteConfig.url` に変える。ほかに URL を直接書いている箇所がないことを `waku-8.com` の検索で確かめる（店のメールアドレス・カラーミーショップ・調査スクリプトは除く）
-  - T006 `src/components/Seo.astro` で、`siteConfig.indexable` が false のときは全ページに `<meta name="robots" content="noindex, nofollow">` を出す（ページ個別の `noindex` とは重複させない）
-  - T007 `public/robots.txt` を削除し、`src/pages/robots.txt.ts` で生成する：test は `User-agent: *` / `Disallow: /`、production は `User-agent: *` / `Allow: /` / `Sitemap: <url>/sitemap-index.xml`。既存の `tests/seo/sitemap.spec.ts` の robots.txt の確認をテスト公開の内容に合わせる。同じファイルの「noindex のページはサイトマップの対象外」の判定は、ページ個別の `content="noindex"` だけを見て、テスト公開の `noindex, nofollow` では除外しないままにする
-  - T008 `tests/seo/noindex.spec.ts` を作る：全公開ページに `noindex, nofollow` があり、robots.txt が `Disallow: /` であること
-  - T009 `scripts/check-site-config.ts` を作る：`--expect production --url <url>` で `dist/` を読み、全 HTML に noindex がない・canonical が `<url>/` で始まる・robots.txt が `Allow: /` を確かめ、違反があれば一覧を出して終了コード 1。`.github/workflows/ci.yml` の `build` ジョブの最後に、`SITE_ENV=production SITE_URL=https://example.com npm run build` と このスクリプトを実行するステップを足し、そのあとで既定の設定で `npm run build` し直して artifact に上げる
-  - T010 `src/data/categories.ts` を作る（data-model.md §2：`news` お知らせ・`folk_craft` 民芸品について・`column` 店主のコラム・`exhibit` 出展について・`etc` その他、この並び順）
-  - T011 `src/content.config.ts` に blog コレクションを定義する（data-model.md §1）：`glob({ pattern: '*/index.md', base: './src/content/blog' })`、id はディレクトリ名で `^\d+$`、`title` 1文字以上・`date`・`categories`（categories.ts の slug の enum、1つ以上）必須、`hero`（`image()`）と `heroAlt`（`hero` があるとき必須）、`description`・`draft`・`migratedFrom` は任意
-  - T012 `src/lib/blog.test.ts` に単体テストを書く：公開の判定（`draft`・未来の `date`）、並び順（`date` の新しい順、同じなら `id` の数値の大きい順）、前後の記事、一覧の分割（12件ずつ、`url(n)` は1なら基底、2以上は `page/<n>/`）、description（frontmatter 優先、なければ本文から Markdown 記号を除いた120文字、句点で切れるならそこまで）
-  - T013 `src/lib/blog.ts` を作り、T012 を通す。content collections に依存しない純粋な関数（並べ替え・分割・description）と、`getCollection('blog')` を呼ぶ薄い関数に分ける
 - **Phase 3: User Story 1**
   - T014 `scripts/migrate-blog/html-to-markdown.test.ts` に単体テストを書く（contracts/migrate-blog.md の変換の規則の表すべて）：段落・`<br>`・`<strong>`・`https://waku-8.com/NNN/` のリンクを `/NNN/` に、中身のない `<a>` の削除、リスト、`<img>`、YouTube の埋め込み（`youtube-nocookie.com`・`data-visual-mask`・下にリンク）、HTML 実体参照、全角空白を残す
   - T015 `tests/blog/legacy-urls.spec.ts` を作る：`docs/current-site/pages.json` の `kind` が `post`・`blog-index`・`category` の39件を開き、HTTP 200 で、記事はタイトルが現行と一致することを確かめる（タイトルが空の `/99/` は除く）（FR-022）
@@ -103,7 +88,7 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
   - T020 `src/components/PageHero.astro` を作る：曲線に切り抜いた写真（入力：画像・代替テキスト）とページ名、緑の模様（`icon_green.png`）。ページ名は見出しにするかを入力で選べる（記事ページでは h1 は記事タイトルなので見出しにしない）。トークンを参照する
   - T021 `src/components/BlogSidebar.astro` を作る：「カテゴリー」の見出しと、記事が1件以上あるカテゴリの一覧（`/category/<slug>/` へのリンク、並び順は categories.ts）、オンラインショップへの帯（外部リンクの読み上げ付き）。スマートフォン幅では本文の下に回る
   - T022 `src/components/PostNav.astro` を作る：前の記事・次の記事へのリンク（ないほうは出さない）
-  - T023 `src/components/RecommendedProducts.astro` と `src/components/ProductCard.astro`、`src/data/recommended.ts` を作る（data-model.md §3）：見出し「おすすめ商品」、商品カード（画像・商品名、カラーミーショップの商品ページへの外部リンク）、「もっと見る」でオンラインショップのトップへ。初期値は現行の4点（会津張り子 赤べこ、会津張り子 招福玉うさぎ、蔵王木地玩具 野菜こま5種セット、江戸千代紙 ぽち袋）で、商品URLは現行トップページのリンク先（`?pid=`）を取得して書く
+  - T023 `src/components/RecommendedProducts.astro` と `src/components/ProductCard.astro`、`src/data/recommended.ts` を作る（data-model.md §3）：見出し「おすすめ商品」、商品カード（画像・商品名、カラーミーショップの商品ページへの外部リンク）、「もっと見る」は現行と同じおすすめのグループページ（`https://waku-8.shop-pro.jp/?mode=grp&gid=2935801`、データファイルで管理）へ。初期値は現行の4点（会津張り子 赤べこ、会津張り子 招福玉うさぎ、蔵王木地玩具 野菜こま5種セット、江戸千代紙 ぽち袋）で、商品URLは現行トップページのリンク先（`?pid=` または `?mode=grp&gid=`）を書く
   - T024 `src/layouts/BlogLayout.astro` を作る：BaseLayout ＋ PageHero ＋ 本文とサイドバー（BlogSidebar）の2列（PC）／1列（スマートフォン）
   - T025 `src/lib/structured-data.ts` に `blogPostingJsonLd()`（headline・datePublished・dateModified・author と publisher は和久屋・image・url）と `breadcrumbJsonLd()` を追加する
   - T026 `src/pages/[post].astro` を作る（FR-009〜FR-012）：公開記事ごとに `/<id>/`。PageHero（アイキャッチ画像、なければ no-image.png、ページ名「ブログ」は見出しにしない）、見出しアイコン付きのタイトル（h1）・公開日（`2026.04.24` 表記、`<time datetime>`）・カテゴリのリンク・本文（画像は `astro:assets` で最適化）、PostNav、RecommendedProducts。title・description・canonical・OGP（`ogType: 'article'`、アイキャッチ画像）、BlogPosting と BreadcrumbList（トップ → ブログ → 記事）
@@ -115,7 +100,7 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
   - T031 `src/components/PostCard.astro` と `src/components/PostGrid.astro` を作る：サムネイル（`alt=""`、なければ no-image.png）・タイトル・日付、カード全体ではなくタイトルをリンクにし、サムネイルもクリックできる（同じリンク先で、読み上げは1回）。PC は4列（トップ）／3列（一覧）を入力で選べる、スマートフォンは2列
   - T032 `src/components/ThoughtIntro.astro` を作る：現行トップページの「わくやの想い」の縦書きの文章と写真3枚（`thought01`〜`03`）、「もっと見る」で `/thought/`。文章は現行トップページから取得して書く
   - T033 `src/pages/index.astro` を仮ページからトップページに置き換える（FR-001〜FR-007）：TopHero → RecommendedProducts → お知らせ（生成り色の背景、最新4件の PostGrid、「もっと見る」で `/blogs/`、4件未満ならある分だけ）→ ThoughtIntro → ShopBanner（BaseLayout が出すもの）。構造化データに WebSite を加える
-  - T034 `tests/top/top.spec.ts` を作る：5つの部分の順序、おすすめ商品のリンク先が `https://waku-8.shop-pro.jp/?pid=`、お知らせが新しい順に4件で各記事へリンク、「もっと見る」3つのリンク先、h1 が1つ
+  - T034 `tests/top/top.spec.ts` を作る：5つの部分の順序、おすすめ商品のリンク先が `https://waku-8.shop-pro.jp/` の商品または商品グループのページ、お知らせが新しい順に4件で各記事へリンク、「もっと見る」3つのリンク先、h1 が1つ
   - T035 `scripts/check-shop-links.ts` を作る：`src/data/recommended.ts` とナビ・フッターのカラーミーショップの URL に `politeFetch` で GET し、200 でないもの（販売終了など）を一覧にして終了コード 1。CI では外部サイトに依存させず、`docs/updating.md` の「おすすめ商品の入れ替え」の確認手順に載せる（開発原則VII、spec の Edge Cases）
   - T036 `npm run build` と `npm run test:local` を実行し、トップページが 360・768・1280px で横スクロールなし、axe 違反なしであることを確かめる
 - **Phase 5: User Story 3**

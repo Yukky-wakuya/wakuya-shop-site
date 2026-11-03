@@ -1,5 +1,0 @@
-# 検索エンジンと AI 検索サービスのクローラーを原則として許可する（開発原則VIII）
-User-agent: *
-Allow: /
-
-Sitemap: https://waku-8.com/sitemap-index.xml
