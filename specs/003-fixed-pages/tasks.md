@@ -86,8 +86,8 @@ description: "Task list for 003-fixed-pages"
 - [X] T015 `src/` で直接書いている値を検索し、トークンに置き換えるか理由をコメントに書く
 - [X] T016 `npm run build`・`npm run test:unit`・`npx astro check`・`npm run test:local` を実行し、PC とスマートフォンの画面を現行と見比べる
 - [X] T017 Lighthouse（モバイル）で4ページを測り、結果を `docs/development-log.md` に記録する（SC-006）
-- [ ] T018 作業ブランチを push し、`update-snapshots` で基準画像の PR を作り、画像を目で確認してマージする。その後の `ci` が成功することを確かめる
-- [ ] T019 quickstart.md を順に確かめ、develop への PR を作る。チェックが成功したらマージする
+- [X] T018 作業ブランチを push し、`update-snapshots` で基準画像の PR を作り、画像を目で確認してマージする。その後の `ci` が成功することを確かめる
+- [X] T019 quickstart.md を順に確かめ、develop への PR を作る。チェックが成功したらマージする
 
 ---
 
