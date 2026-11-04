@@ -35,7 +35,7 @@ description: "Task list for 004-not-found"
 - [X] T004 [P] `tests/helpers/pages.ts` の `VISUAL_PATHS` に存在しない URL を足す
 - [X] T005 [P] `docs/development-log.md` に、404 ページがないとトップページが 200 で返ったことと、公開後の確認を追記する
 - [X] T006 `npm run build`・`npm run test:unit`・`npx astro check`・`npm run test:local` を実行する。本番の設定でも `scripts/check-site-config.ts` が成功することを確かめる
-- [ ] T007 `update-snapshots` で基準画像の PR を作り、画像を目で確認してマージする。develop への PR を作り、チェックが成功したらマージする
+- [X] T007 `update-snapshots` で基準画像の PR を作り、画像を目で確認してマージする。develop への PR を作り、チェックが成功したらマージする
 - [ ] T008 main へ反映し、テスト公開の URL で存在しない URL のステータスが 404 になることを確かめる（SC-001）
 
 ## Dependencies & Execution Order
