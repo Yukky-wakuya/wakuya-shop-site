@@ -15,6 +15,7 @@ import BlogSidebar from '../components/BlogSidebar.astro';
 import TopHero from '../components/TopHero.astro';
 import PageHero from '../components/PageHero.astro';
 import ThoughtIntro from '../components/ThoughtIntro.astro';
+import CategoryPosts from '../components/CategoryPosts.astro';
 import blogsHero from '../assets/blog/blogs_hero.jpg';
 import { getPublishedPosts } from '../lib/blog';
 
@@ -103,6 +104,9 @@ for (const t of tokens) groups.set(t.category, [...(groups.get(t.category) ?? []
     <h3>記事のカード（PostCards）・もっと見る（MoreLink）</h3>
     <PostCards posts={samplePosts} columns={4} />
     <MoreLink href="/blogs/" what="お知らせを" />
+  </div>
+  <CategoryPosts title="カテゴリの記事（CategoryPosts）" category="column" />
+  <div class="content-inner sg">
     <h3>ページ送り（Pagination）</h3>
     <Pagination base="/blogs/" current={2} last={3} />
     <h3>前後の記事（PostNav）</h3>

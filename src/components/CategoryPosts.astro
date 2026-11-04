@@ -1,0 +1,34 @@
+---
+// カテゴリの最新の記事（わくや概要の「店主のコラム」、出張わくやの「今までの出張風景」）。記事が0件なら何も出さない
+import SectionTitle from './SectionTitle.astro';
+import PostCards from './PostCards.astro';
+import MoreLink from './MoreLink.astro';
+import { categoryPath, type CategorySlug } from '../data/categories';
+import { getPublishedPosts } from '../lib/blog';
+
+const COUNT = 4;
+
+interface Props {
+  title: string;
+  category: CategorySlug;
+}
+
+const { title, category } = Astro.props;
+const posts = (await getPublishedPosts()).filter((p) => p.data.categories.includes(category)).slice(0, COUNT);
+---
+
+{
+  posts.length > 0 && (
+    <section class="category-posts content-inner" aria-label={title}>
+      <SectionTitle>{title}</SectionTitle>
+      <PostCards posts={posts} columns={4} />
+      <MoreLink href={categoryPath(category)} what={`${title}を`} />
+    </section>
+  )
+}
+
+<style>
+  .category-posts {
+    margin-bottom: var(--space-xl);
+  }
+</style>
