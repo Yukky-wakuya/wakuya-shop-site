@@ -1,0 +1,89 @@
+---
+// 出張わくや（FR-017）。依頼のリンクは現行では行き先が空だったため、お問い合わせへつなぐ
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CategoryPosts from '../components/CategoryPosts.astro';
+import photo from '../assets/pages/deliver_hero.jpg';
+import montage from '../assets/pages/deliver_img.png';
+import icon from '../assets/brand/icon_orange.png';
+import { breadcrumbJsonLd } from '../lib/structured-data';
+
+const path = '/deliver/';
+---
+
+<BaseLayout
+  title="出張わくや"
+  description="わくや（有限会社和久屋）は、福島の民芸品を荷台に詰め込んで全国へお伺いします。マルシェやイベントへの出張のご依頼と、これまでの出張の様子をご案内します。"
+  path={path}
+  shopBanner={false}
+  jsonLd={[
+    breadcrumbJsonLd([
+      { name: 'トップ', path: '/' },
+      { name: '出張わくや', path },
+    ]),
+  ]}
+>
+  <PageHero title="出張わくや" photo={photo} photoAlt="屋外の木の台に並べた民芸品と、「わくや」の案内の紙" icon={icon} />
+
+  <div class="content-inner deliver-text">
+    <p>
+      わたしたちがふくしまを、そして屋号をしょって「行く。」「でかける。」「とどける。」も肝心ではないでしょうか？もし会えるなら、どこへいけばよいですか？さがしているもの、手に取って確かめたいものありますか？あなたのおうちのちかくまで、あるいはおでかけ先までいきましょうか？たくさんはありませんが、荷台にギュッとつめこんででかけていきましょう！
+    </p>
+  </div>
+
+  <div class="deliver-photos">
+    <div class="content-inner">
+      <Image src={montage} alt="出張先の様子の写真。棚いっぱいの民芸品、「和久屋」と書かれた半纏の背中、古いトランク、かごに入ったこま" widths={[360, 720, 1000]} sizes="(min-width: 1112px) 1000px, 90vw" />
+    </div>
+  </div>
+
+  <div class="content-inner deliver-text">
+    <p>
+      「わくや」は、全国どこへでも、福島の民芸品を荷台にぎゅっと詰め込んでお伺いいたします！あなたの街へ、あなたのおうちへ、あなたの近くのお店にも。お気軽にお声かけくださいね！
+    </p>
+    <a class="deliver-link" href="/contact/">マルシェ・イベントなどの出張依頼はこちら</a>
+  </div>
+
+  <CategoryPosts title="今までの出張風景" category="exhibit" />
+</BaseLayout>
+
+<style>
+  .deliver-text {
+    margin-bottom: var(--space-lg);
+  }
+
+  .deliver-text p {
+    margin-bottom: var(--space-md);
+  }
+
+  .deliver-photos {
+    margin-bottom: var(--space-lg);
+    padding-block: var(--space-lg);
+    background: var(--color-bg-subtle);
+  }
+
+  /* 白い文字ではコントラストが足りないため、文字は黒にする（spec の「現行サイトからの変更」） */
+  .deliver-link {
+    display: block;
+    padding: var(--space-sm) var(--space-xs);
+    border-radius: var(--radius-pill);
+    background: var(--color-deliver);
+    color: var(--color-text);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-md);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .deliver-link:hover {
+    text-decoration: underline;
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    .deliver-link {
+      font-size: var(--font-size-xl);
+    }
+  }
+</style>

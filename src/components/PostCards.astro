@@ -1,0 +1,27 @@
+---
+// 記事のカードの一覧（現行 .news_list・.blog_archive_list）：サムネイル・タイトル・日付
+import CardGrid from './CardGrid.astro';
+import Card from './Card.astro';
+import noImage from '../assets/brand/no-image.png';
+import { formatDate, postPath, type Post } from '../lib/blog';
+
+interface Props {
+  posts: Post[];
+  columns?: 3 | 4;
+}
+
+const { posts, columns = 3 } = Astro.props;
+---
+
+<CardGrid columns={columns}>
+  {
+    posts.map((post) => (
+      <Card href={postPath(post)} image={post.data.hero ?? noImage}>
+        {post.data.title}
+        <time slot="meta" datetime={post.data.date.toISOString()}>
+          {formatDate(post.data.date)}
+        </time>
+      </Card>
+    ))
+  }
+</CardGrid>

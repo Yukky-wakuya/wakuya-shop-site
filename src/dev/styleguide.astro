@@ -1,0 +1,192 @@
+---
+// スタイルガイド（開発サーバーのときだけ /styleguide/ に表示。本番には含めない。FR-010）
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Button from '../components/Button.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { readTokens, type Token } from './tokens';
+import { shopUrl } from '../data/site';
+import RecommendedProducts from '../components/RecommendedProducts.astro';
+import PostCards from '../components/PostCards.astro';
+import MoreLink from '../components/MoreLink.astro';
+import Pagination from '../components/Pagination.astro';
+import PostNav from '../components/PostNav.astro';
+import BlogSidebar from '../components/BlogSidebar.astro';
+import TopHero from '../components/TopHero.astro';
+import PageHero from '../components/PageHero.astro';
+import ThoughtIntro from '../components/ThoughtIntro.astro';
+import CategoryPosts from '../components/CategoryPosts.astro';
+import blogsHero from '../assets/blog/blogs_hero.jpg';
+import { getPublishedPosts } from '../lib/blog';
+
+const tokens = readTokens();
+const samplePosts = (await getPublishedPosts()).slice(0, 4);
+const CATEGORY_LABEL: Record<string, string> = {
+  color: '色',
+  font: 'フォント・文字サイズ',
+  line: '行間',
+  letter: '字間',
+  space: '余白',
+  size: '幅・大きさ',
+  radius: '角丸',
+  shadow: '影',
+  breakpoint: 'ブレークポイント',
+};
+const groups = new Map<string, Token[]>();
+for (const t of tokens) groups.set(t.category, [...(groups.get(t.category) ?? []), t]);
+---
+
+<BaseLayout title="スタイルガイド" description="デザイントークンと共通部品の一覧（開発用）" path="/styleguide/" noindex>
+  <div class="content-inner sg">
+    <h1>スタイルガイド</h1>
+    <p>
+      デザイントークンは <code>src/styles/tokens.css</code>、出典の詳細は <code>docs/current-site/design.md</code>。このページは開発サーバーでのみ表示されます。
+    </p>
+
+    {
+      [...groups].map(([category, list]) => (
+        <section>
+          <h2>{CATEGORY_LABEL[category] ?? category}</h2>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">見本</th>
+                <th scope="col">名前・値</th>
+                <th scope="col">用途</th>
+                <th scope="col">出典</th>
+              </tr>
+            </thead>
+            <tbody>
+              {list.map((t) => (
+                <tr>
+                  <td>
+                    {t.category === 'color' && <span class="swatch" style={`background: var(${t.name})`} />}
+                    {t.name.startsWith('--font-size') && <span style={`font-size: var(${t.name})`}>和久屋 Aa</span>}
+                    {t.name.startsWith('--font-family') && <span style={`font-family: var(${t.name})`}>民芸クラフトわくや</span>}
+                    {t.category === 'space' && <span class="bar" style={`width: var(${t.name})`} />}
+                    {t.category === 'radius' && <span class="box" style={`border-radius: var(${t.name})`} />}
+                  </td>
+                  <td>
+                    <code>{t.name}</code>
+                    <br />
+                    <code class="value">{t.value}</code>
+                  </td>
+                  <td>{t.usage}</td>
+                  <td>{t.source}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      ))
+    }
+
+    <section>
+      <h2>部品</h2>
+      <h3>セクション見出し（SectionTitle）</h3>
+      <SectionTitle>おすすめ商品</SectionTitle>
+      <h3>ボタン（Button）</h3>
+      <p class="row">
+        <Button href="/">もっと見る</Button>
+        <Button href={shopUrl} variant="primary" external>オンラインショップを見る</Button>
+      </p>
+      <h3>SNSリンク（SocialLinks）</h3>
+      <SocialLinks variant="dark" size={27} />
+      <div class="dark-bg"><SocialLinks variant="light" size={30} /></div>
+      <h3>ヘッダー・ナビ・オンラインショップの帯・フッター</h3>
+      <p>このページの上下に表示されているものが共通レイアウトです（BaseLayout）。</p>
+
+      <h3>カード（Card・CardGrid）／おすすめ商品（RecommendedProducts）</h3>
+    </section>
+  </div>
+  <RecommendedProducts />
+  <div class="content-inner sg">
+    <h3>記事のカード（PostCards）・もっと見る（MoreLink）</h3>
+    <PostCards posts={samplePosts} columns={4} />
+    <MoreLink href="/blogs/" what="お知らせを" />
+  </div>
+  <CategoryPosts title="カテゴリの記事（CategoryPosts）" category="column" />
+  <div class="content-inner sg">
+    <h3>ページ送り（Pagination）</h3>
+    <Pagination base="/blogs/" current={2} last={3} />
+    <h3>前後の記事（PostNav）</h3>
+    <PostNav older={samplePosts[1]} newer={samplePosts[0]} />
+    <h3>ブログのサイドバー（BlogSidebar）</h3>
+    <div class="narrow"><BlogSidebar current="news" /></div>
+    <h3>トップのメインビジュアル（TopHero）・下層ページの見出し部分（PageHero）・わくやの想い（ThoughtIntro）</h3>
+    <p>幅いっぱいに広がる部品のため、下に並べています。PageHero は記事ページではページ名を見出しにしません（heading=false）。</p>
+  </div>
+  <TopHero />
+  <PageHero title="ブログ一覧" photo={blogsHero} photoAlt="" />
+  <ThoughtIntro />
+</BaseLayout>
+
+<style>
+  .narrow {
+    max-width: 260px;
+  }
+
+  .sg h1 {
+    margin-block: var(--space-md);
+    font-size: var(--font-size-2xl);
+  }
+
+  .sg h2 {
+    margin-block: var(--space-xl) var(--space-sm);
+    font-size: var(--font-size-xl);
+  }
+
+  .sg h3 {
+    margin-block: var(--space-md) var(--space-xs);
+    font-size: var(--font-size-md);
+  }
+
+  .sg table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-xs);
+  }
+
+  .sg th,
+  .sg td {
+    padding: var(--space-xs);
+    border-bottom: 1px solid var(--color-bg-subtle);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .sg .value {
+    color: var(--color-text-muted);
+  }
+
+  .swatch,
+  .box {
+    display: block;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--color-text-muted);
+  }
+
+  .box {
+    background: var(--color-bg-subtle);
+  }
+
+  .bar {
+    display: block;
+    height: 12px;
+    background: var(--color-accent);
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .dark-bg {
+    margin-top: var(--space-xs);
+    padding: var(--space-xs);
+    background: var(--color-footer-bg);
+  }
+</style>

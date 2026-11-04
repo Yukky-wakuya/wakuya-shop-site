@@ -1,0 +1,17 @@
+---
+// ブログ一覧の2ページ目以降（現行と同じ /blogs/page/<n>/、FR-016）
+import PostList from '../../../components/PostList.astro';
+import { getPublishedPosts, type Post } from '../../../lib/blog';
+import { paginate, type ListPage } from '../../../lib/blog-core';
+import { BLOG } from '../../../lib/blog-lists';
+
+export async function getStaticPaths() {
+  return paginate(await getPublishedPosts())
+    .slice(1)
+    .map((page) => ({ params: { page: String(page.current) }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: ListPage<Post> };
+---
+
+<PostList {...BLOG} posts={page.items} current={page.current} last={page.last} />

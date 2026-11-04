@@ -1,0 +1,80 @@
+---
+// 一覧のページ送り（現行 .wp-pagenavi）：ページ番号と「次へ」。1ページしかなければ出さない（FR-018）
+import { pageUrl } from '../lib/blog-core';
+
+interface Props {
+  /** 1ページ目の URL（/blogs/ や /category/news/） */
+  base: string;
+  current: number;
+  last: number;
+}
+
+const { base, current, last } = Astro.props;
+const pages = Array.from({ length: last }, (_, i) => i + 1);
+---
+
+{
+  last > 1 && (
+    <nav class="pagination" aria-label="ページ送り">
+      <ul>
+        {current > 1 && (
+          <li>
+            <a href={pageUrl(base, current - 1)} rel="prev" aria-label="前のページ">
+              «
+            </a>
+          </li>
+        )}
+        {pages.map((n) => (
+          <li>
+            {n === current ? (
+              <span aria-current="page">
+                <span class="visually-hidden">ページ</span>
+                {n}
+              </span>
+            ) : (
+              <a href={pageUrl(base, n)}>
+                <span class="visually-hidden">ページ</span>
+                {n}
+              </a>
+            )}
+          </li>
+        ))}
+        {current < last && (
+          <li>
+            <a href={pageUrl(base, current + 1)} rel="next" aria-label="次のページ">
+              »
+            </a>
+          </li>
+        )}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .pagination ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2xs);
+    margin-block: var(--space-lg);
+  }
+
+  .pagination a,
+  .pagination [aria-current] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--size-tap-min);
+    min-height: var(--size-tap-min);
+    text-decoration: none;
+  }
+
+  .pagination a:hover {
+    text-decoration: underline;
+  }
+
+  .pagination [aria-current] {
+    font-weight: bold;
+  }
+</style>

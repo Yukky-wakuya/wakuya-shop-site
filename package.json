@@ -1,0 +1,36 @@
+{
+  "name": "wakuya-shop-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --port 4321",
+    "check": "astro check",
+    "test": "playwright test",
+    "test:local": "playwright test --ignore-snapshots",
+    "test:docker": "node scripts/test-docker.ts",
+    "test:unit": "node --test \"scripts/**/*.test.ts\" \"src/**/*.test.ts\" \"*.test.ts\"",
+    "test:readme": "node --test \"scripts/readme/**/*.test.ts\"",
+    "readme:generate": "node scripts/readme/generate.ts",
+    "readme:check": "node scripts/readme/generate.ts --check",
+    "survey": "node scripts/survey/run.ts",
+    "migrate:blog": "node scripts/migrate-blog/run.ts",
+    "blog:next-id": "node scripts/blog-next-id.ts",
+    "check:shop-links": "node scripts/check-shop-links.ts"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.9.12",
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.4.4",
+    "typescript": "6.0.3"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2"
+  }
+}

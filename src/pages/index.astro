@@ -1,0 +1,61 @@
+---
+// トップページ。現行と同じ構成：メインビジュアル → おすすめ商品 → お知らせ → わくやの想い → オンラインショップの帯（FR-001〜FR-007）
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopHero from '../components/TopHero.astro';
+import RecommendedProducts from '../components/RecommendedProducts.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import PostCards from '../components/PostCards.astro';
+import MoreLink from '../components/MoreLink.astro';
+import ThoughtIntro from '../components/ThoughtIntro.astro';
+import { getPublishedPosts } from '../lib/blog';
+import { websiteJsonLd } from '../lib/structured-data';
+
+const NEWS_COUNT = 4;
+const latest = (await getPublishedPosts()).slice(0, NEWS_COUNT);
+---
+
+<BaseLayout
+  title="福島県民芸雑貨 有限会社和久屋"
+  description="福島で長く愛されてきた郷土民芸品や和雑貨を扱う「わくや」（有限会社和久屋）の公式サイトです。赤べこなどの商品はオンラインショップでお求めいただけます。"
+  path="/"
+  jsonLd={[websiteJsonLd()]}
+>
+  <TopHero />
+  <RecommendedProducts />
+  {
+    latest.length > 0 && (
+      <section class="news" aria-labelledby="news-title">
+        <div class="news__inner content-inner">
+          <SectionTitle id="news-title">お知らせ</SectionTitle>
+          <PostCards posts={latest} columns={4} />
+          <MoreLink href="/blogs/" what="お知らせを" />
+        </div>
+      </section>
+    )
+  }
+  <ThoughtIntro />
+</BaseLayout>
+
+<style>
+  /* 生成り色の帯と上端のアーチ（現行 .news・.news_arch） */
+  .news {
+    overflow: hidden;
+    margin-bottom: var(--space-xl);
+    padding-top: var(--space-lg);
+    background: var(--color-bg-subtle);
+    border-top-left-radius: var(--radius-arch);
+    border-top-right-radius: var(--radius-arch);
+  }
+
+  .news__inner {
+    padding-bottom: var(--space-md);
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    .news {
+      margin-bottom: 0;
+      padding-top: var(--space-2xl);
+    }
+  }
+</style>

@@ -1,0 +1,1006 @@
+[
+  {
+    "url": "https://waku-8.com/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋",
+    "name": "わくや",
+    "kind": "page",
+    "parent": null,
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/index-sp.jpg",
+      "pc": "screenshots/index-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/71/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » ホームページをリニューアルしました。",
+    "name": "ホームページをリニューアルしました。",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/71-sp.jpg",
+      "pc": "screenshots/71-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/82/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » はじめましてのごあいさつ",
+    "name": "はじめましてのごあいさつ",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/82-sp.jpg",
+      "pc": "screenshots/82-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/89/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » もうしわけありません。",
+    "name": "もうしわけありません。",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/89-sp.jpg",
+      "pc": "screenshots/89-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/95/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » メリークリスマス！",
+    "name": "メリークリスマス！",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/95-sp.jpg",
+      "pc": "screenshots/95-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/99/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋",
+    "name": "わくや",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/99-sp.jpg",
+      "pc": "screenshots/99-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/104/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 新年のはじまりは！",
+    "name": "新年のはじまりは！",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/104-sp.jpg",
+      "pc": "screenshots/104-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/107/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 年のはじまりに",
+    "name": "年のはじまりに",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/107-sp.jpg",
+      "pc": "screenshots/107-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/113/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » こけしのおひなさま",
+    "name": "こけしのおひなさま",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/113-sp.jpg",
+      "pc": "screenshots/113-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/129/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » さくらさくら ひとあし早くに。",
+    "name": "さくらさくら ひとあし早くに。",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/129-sp.jpg",
+      "pc": "screenshots/129-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/140/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 開成マルシェ 出店のお知らせ",
+    "name": "開成マルシェ 出店のお知らせ",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/140-sp.jpg",
+      "pc": "screenshots/140-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/148/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 春のまんじゅう祭りに出店しました！",
+    "name": "春のまんじゅう祭りに出店しました！",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/148-sp.jpg",
+      "pc": "screenshots/148-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/155/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 朝陽と夕陽が通る道",
+    "name": "朝陽と夕陽が通る道",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/155-sp.jpg",
+      "pc": "screenshots/155-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/160/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 東京ディ・トリッパ―",
+    "name": "東京ディ・トリッパ―",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/160-sp.jpg",
+      "pc": "screenshots/160-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/165/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » ベコ太郎さん",
+    "name": "ベコ太郎さん",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/165-sp.jpg",
+      "pc": "screenshots/165-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/174/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 巳（身）をあらたに！",
+    "name": "巳（身）をあらたに！",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/174-sp.jpg",
+      "pc": "screenshots/174-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/179/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » なかうつくしま通信６号 発刊しました！",
+    "name": "なかうつくしま通信６号 発刊しました！",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/179-sp.jpg",
+      "pc": "screenshots/179-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/184/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » I agree!",
+    "name": "I agree!",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/184-sp.jpg",
+      "pc": "screenshots/184-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/191/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 巳（実）を結ぶよき一年となりますように。",
+    "name": "巳（実）を結ぶよき一年となりますように。",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/191-sp.jpg",
+      "pc": "screenshots/191-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/195/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 鬼が笑ったとしても",
+    "name": "鬼が笑ったとしても",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/195-sp.jpg",
+      "pc": "screenshots/195-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/200/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 春ちかし 伸び育つ身と めぐりあう",
+    "name": "春ちかし 伸び育つ身と めぐりあう",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/200-sp.jpg",
+      "pc": "screenshots/200-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/208/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » まんじゅう祭り＆開成マルシェ",
+    "name": "まんじゅう祭り＆開成マルシェ",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/208-sp.jpg",
+      "pc": "screenshots/208-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/213/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 民芸くらふと和久屋 ５０年の感謝と、心からのご挨拶",
+    "name": "民芸くらふと和久屋 ５０年の感謝と、心からのご挨拶",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/213-sp.jpg",
+      "pc": "screenshots/213-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/219/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » ノウパンがぶらりって。",
+    "name": "ノウパンがぶらりって。",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/219-sp.jpg",
+      "pc": "screenshots/219-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/224/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » ヤフーニュースに、紹介記事を掲載頂きました！",
+    "name": "ヤフーニュースに、紹介記事を掲載頂きました！",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/224-sp.jpg",
+      "pc": "screenshots/224-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/229/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 今、この人に会えたなら",
+    "name": "今、この人に会えたなら",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/229-sp.jpg",
+      "pc": "screenshots/229-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/233/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 実店舗閉店まで、あと〇〇日 店頭でお出迎えを続けてきた赤べこと三春駒に暇を出しました",
+    "name": "実店舗閉店まで、あと〇〇日 店頭でお出迎えを続けてきた赤べこと三春駒に暇を出しました",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/233-sp.jpg",
+      "pc": "screenshots/233-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/243/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 午年（うまどし）の人気商品 オンラインにて限定販売します！",
+    "name": "午年（うまどし）の人気商品 オンラインにて限定販売します！",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/243-sp.jpg",
+      "pc": "screenshots/243-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/251/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 【公式案内】4月1日以降の運営体制およびお問い合わせ先変更",
+    "name": "【公式案内】4月1日以降の運営体制およびお問い合わせ先変更",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/251-sp.jpg",
+      "pc": "screenshots/251-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/257/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 初陣！",
+    "name": "初陣！",
+    "kind": "post",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/257-sp.jpg",
+      "pc": "screenshots/257-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/blogs/",
+    "aliases": [
+      "https://waku-8.com//blogs",
+      "https://waku-8.com/blogs"
+    ],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » ブログ",
+    "name": "ブログ",
+    "kind": "blog-index",
+    "parent": "https://waku-8.com/",
+    "navPosition": {
+      "area": "header",
+      "order": 5
+    },
+    "foundBy": [
+      "nav",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/blogs-sp.jpg",
+      "pc": "screenshots/blogs-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/blogs/page/2/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » ブログ",
+    "name": "ブログ",
+    "kind": "blog-index",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/blogs-page-2-sp.jpg",
+      "pc": "screenshots/blogs-page-2-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/blogs/page/3/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » ブログ",
+    "name": "ブログ",
+    "kind": "blog-index",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/blogs-page-3-sp.jpg",
+      "pc": "screenshots/blogs-page-3-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/category/column/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 店主のコラム",
+    "name": "店主のコラム",
+    "kind": "category",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/category-column-sp.jpg",
+      "pc": "screenshots/category-column-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/category/etc/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » その他",
+    "name": "その他",
+    "kind": "category",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/category-etc-sp.jpg",
+      "pc": "screenshots/category-etc-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/category/exhibit/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 出展について",
+    "name": "出展について",
+    "kind": "category",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/category-exhibit-sp.jpg",
+      "pc": "screenshots/category-exhibit-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/category/folk_craft/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 民芸品について",
+    "name": "民芸品について",
+    "kind": "category",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/category-folk_craft-sp.jpg",
+      "pc": "screenshots/category-folk_craft-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/category/news/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » お知らせ",
+    "name": "お知らせ",
+    "kind": "category",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/category-news-sp.jpg",
+      "pc": "screenshots/category-news-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/category/news/page/2/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » お知らせ",
+    "name": "お知らせ",
+    "kind": "category",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/category-news-page-2-sp.jpg",
+      "pc": "screenshots/category-news-page-2-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/category/news/page/3/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » お知らせ",
+    "name": "お知らせ",
+    "kind": "category",
+    "parent": "https://waku-8.com/blogs/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/category-news-page-3-sp.jpg",
+      "pc": "screenshots/category-news-page-3-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/contact/",
+    "aliases": [
+      "https://waku-8.com//contact",
+      "https://waku-8.com/contact"
+    ],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » お問合せ",
+    "name": "お問い合わせ",
+    "kind": "page",
+    "parent": "https://waku-8.com/",
+    "navPosition": {
+      "area": "header",
+      "order": 6
+    },
+    "foundBy": [
+      "sitemap",
+      "nav",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/contact-sp.jpg",
+      "pc": "screenshots/contact-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/deliver/",
+    "aliases": [
+      "https://waku-8.com//deliver",
+      "https://waku-8.com/deliver"
+    ],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » 出張わくや",
+    "name": "出張わくや",
+    "kind": "page",
+    "parent": "https://waku-8.com/",
+    "navPosition": {
+      "area": "header",
+      "order": 4
+    },
+    "foundBy": [
+      "sitemap",
+      "nav",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/deliver-sp.jpg",
+      "pc": "screenshots/deliver-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/privacy/",
+    "aliases": [],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » プライバシーポリシー",
+    "name": "プライバシーポリシー",
+    "kind": "page",
+    "parent": "https://waku-8.com/",
+    "navPosition": {
+      "area": "none",
+      "order": null
+    },
+    "foundBy": [
+      "sitemap"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/privacy-sp.jpg",
+      "pc": "screenshots/privacy-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/summary/",
+    "aliases": [
+      "https://waku-8.com//summary",
+      "https://waku-8.com/summary"
+    ],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » わくや概要",
+    "name": "わくや概要",
+    "kind": "page",
+    "parent": "https://waku-8.com/",
+    "navPosition": {
+      "area": "header",
+      "order": 1
+    },
+    "foundBy": [
+      "sitemap",
+      "nav",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/summary-sp.jpg",
+      "pc": "screenshots/summary-pc.jpg"
+    },
+    "notes": []
+  },
+  {
+    "url": "https://waku-8.com/thought/",
+    "aliases": [
+      "https://waku-8.com//thought",
+      "https://waku-8.com/thought"
+    ],
+    "title": "わくや | 福島県民芸雑貨 | 有限会社和久屋 » わくやの想い",
+    "name": "わくやの想い",
+    "kind": "page",
+    "parent": "https://waku-8.com/",
+    "navPosition": {
+      "area": "header",
+      "order": 2
+    },
+    "foundBy": [
+      "sitemap",
+      "nav",
+      "link"
+    ],
+    "status": 200,
+    "screenshots": {
+      "sp": "screenshots/thought-sp.jpg",
+      "pc": "screenshots/thought-pc.jpg"
+    },
+    "notes": []
+  }
+]

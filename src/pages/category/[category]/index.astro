@@ -1,0 +1,20 @@
+---
+// カテゴリ一覧の1ページ目（現行と同じ /category/<slug>/、FR-017）。記事が1件以上あるカテゴリだけ作る
+import PostList from '../../../components/PostList.astro';
+import { getPublishedPosts, usedCategories, type Post } from '../../../lib/blog';
+import { paginate, type ListPage } from '../../../lib/blog-core';
+import { categoryList } from '../../../lib/blog-lists';
+import type { CategorySlug } from '../../../data/categories';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return usedCategories(posts).map((c) => ({
+    params: { category: c.slug },
+    props: { slug: c.slug, page: paginate(posts.filter((p) => p.data.categories.includes(c.slug)))[0]! },
+  }));
+}
+
+const { slug, page } = Astro.props as { slug: CategorySlug; page: ListPage<Post> };
+---
+
+<PostList {...categoryList(slug)} posts={page.items} current={1} last={page.last} />

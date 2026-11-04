@@ -1,0 +1,85 @@
+---
+// 下層ページの見出し部分（現行 .subHero）：曲線に切り抜いた写真、ページ名、緑の模様（FR-019a）
+// 後の機能（わくや概要など）でも使う。記事ページではページ名を見出しにしない（h1 は記事のタイトル）
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import ClippedPhoto from './ClippedPhoto.astro';
+import green from '../assets/brand/icon_green.png';
+
+interface Props {
+  title: string;
+  photo: ImageMetadata;
+  photoAlt: string;
+  /** true ならページ名を h1 にする */
+  heading?: boolean;
+  /** 緑以外の模様（ページごとの色。現行 .subHero_icon） */
+  icon?: ImageMetadata;
+}
+
+const { title, photo, photoAlt, heading = true, icon = green } = Astro.props;
+const Tag = heading ? 'h1' : 'p';
+---
+
+<div class="page-hero">
+  <ClippedPhoto class="page-hero__photo" src={photo} alt={photoAlt} shape="sub" />
+  <div class="page-hero__text">
+    <Tag class="page-hero__title">{title}</Tag>
+    <Image class="page-hero__icon" src={icon} alt="" />
+  </div>
+</div>
+
+<style>
+  .page-hero {
+    position: relative;
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-hero :global(.page-hero__photo) {
+    display: block;
+    width: 60%; /* スマートフォンでは6〜7文字のページ名と重ならない幅。PC は現行の 65% */
+    max-width: calc((100vw - var(--size-content-max)) / 2 + 650px); /* 現行と同じく、本文の右端から画面の右端まで広げる */
+    height: auto;
+    margin-left: auto;
+  }
+
+  .page-hero__text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: var(--size-content-ratio);
+    max-width: var(--size-content-max);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .page-hero__title {
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-tight);
+  }
+
+  .page-hero__text :global(.page-hero__icon) {
+    width: 28%; /* 現行 .subHero_icon（SP）の幅 */
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    .page-hero {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .page-hero :global(.page-hero__photo) {
+      width: min(65%, 100% - 290px); /* 現行 .subhero_svg の幅。768px 付近では6〜7文字のページ名に重ならないよう狭める */
+    }
+
+    .page-hero__title {
+      margin-bottom: var(--space-sm);
+      font-size: var(--font-size-3xl);
+    }
+
+    .page-hero__text :global(.page-hero__icon) {
+      width: 25%; /* 現行 .subHero_icon の幅（緑の模様が写真に重ならない大きさ） */
+    }
+  }
+</style>

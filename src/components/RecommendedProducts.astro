@@ -1,0 +1,28 @@
+---
+// おすすめ商品（現行 .recommend）。商品はカラーミーショップへのリンクだけ（開発原則III、FR-003）
+import SectionTitle from './SectionTitle.astro';
+import CardGrid from './CardGrid.astro';
+import Card from './Card.astro';
+import MoreLink from './MoreLink.astro';
+import { recommended, recommendedMoreUrl } from '../data/recommended';
+---
+
+<section class="recommended content-inner" aria-labelledby="recommended-title">
+  <SectionTitle id="recommended-title">おすすめ商品</SectionTitle>
+  <CardGrid columns={4}>
+    {
+      recommended.map((p) => (
+        <Card href={p.url} image={p.image} alt={p.alt} external>
+          {p.name}
+        </Card>
+      ))
+    }
+  </CardGrid>
+  <MoreLink href={recommendedMoreUrl} what="おすすめ商品を" external />
+</section>
+
+<style>
+  .recommended {
+    margin-bottom: var(--space-xl);
+  }
+</style>

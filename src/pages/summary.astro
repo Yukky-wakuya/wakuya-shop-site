@@ -1,0 +1,190 @@
+---
+// わくや概要（FR-014・FR-015）。営業時間と定休日は出さない（2026年3月30日で実店舗の営業を終えたため。spec の Clarifications）
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ShopBanner from '../components/ShopBanner.astro';
+import CategoryPosts from '../components/CategoryPosts.astro';
+import photo from '../assets/pages/summary_hero.jpg';
+import historyPhoto from '../assets/pages/history.png';
+import icon from '../assets/brand/icon_purple.png';
+import logo from '../assets/brand/logo_w.svg';
+import blob from '../assets/brand/bg_red04.svg';
+import { shopUrl, store, storeAddressText } from '../data/site';
+import { aboutPageJsonLd, breadcrumbJsonLd } from '../lib/structured-data';
+
+const path = '/summary/';
+const description = 'わくや（有限会社和久屋）の紹介と会社情報、沿革。1975年（昭和50年）に生まれた福島県郡山市の郷土民芸品・和雑貨の店です。';
+---
+
+<BaseLayout
+  title="わくや概要"
+  description={description}
+  path={path}
+  shopBanner={false}
+  jsonLd={[
+    aboutPageJsonLd({ name: 'わくや概要', path, description }),
+    breadcrumbJsonLd([
+      { name: 'トップ', path: '/' },
+      { name: 'わくや概要', path },
+    ]),
+  ]}
+>
+  <PageHero title="わくや概要" photo={photo} photoAlt="暖簾の掛かった和久屋の店先と、着物姿の女性を描いた絵" icon={icon} />
+
+  <div class="content-inner intro">
+    <p>
+      「わくや」は、1975年（昭和50年）生まれの卯年。これからも只々「和」にこだわっていきます。創業から四半世紀を超えて、今もなお「愛される逸品」を、半世紀そして次の世紀へと繋げていきます。お客様が、「つくり手」のもとに「旅」をしたような気持ちになれる店づくりを心がけていきます。郷土民芸品が生まれた土地を訪ね、「手仕事」の様子を眺め、「つくり手」の話を聴き、ともに過ごす尊い時間を大切にしていきます。
+    </p>
+  </div>
+
+  <section class="company" aria-labelledby="company-title">
+    <div class="content-inner">
+      <h2 id="company-title" class="visually-hidden">会社情報</h2>
+      <Image class="company__logo" src={logo} alt="" />
+      <table class="company__table">
+        <tbody>
+          <tr><th scope="row">屋号</th><td>{store.name}</td></tr>
+          <tr><th scope="row">会社名</th><td>{store.legalName}</td></tr>
+          <tr><th scope="row">代表</th><td>{store.representative}</td></tr>
+          <tr><th scope="row">住所</th><td>{storeAddressText}</td></tr>
+          <tr><th scope="row">TEL／FAX</th><td><a href={`tel:${store.telephone}`}>{store.telephone}</a></td></tr>
+          <tr><th scope="row">メール</th><td><a href={`mailto:${store.email}`}>{store.email}</a></td></tr>
+          <tr>
+            <th scope="row">ウェブショップ</th>
+            <td><a href={shopUrl} target="_blank" rel="noopener">{shopUrl}<span class="visually-hidden">（外部サイト・新しいタブで開きます）</span></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="history content-inner" aria-labelledby="history-title">
+    <div class="history__head">
+      <Image class="history__photo" src={historyPhoto} alt="表参道の鳥居の前を行き交う着物姿の人々と、和久屋の店を描いた絵" widths={[360, 720]} sizes="(min-width: 768px) 500px, 90vw" />
+      <h2 id="history-title" class="history__title">わくや沿革</h2>
+      <Image class="history__blob" src={blob} alt="" />
+    </div>
+    <p>
+      今年2023年は、<br />有限会社設立（昭和３２年）から６６期。<br />有限会社和久屋旅館から、有限会社和久屋（昭和４７年）となって５１年。<br />和久屋ビル建立（平成３年）から、３２年。<br />おかみがはじめた民芸くらふと和久屋（昭和５０年）から、４８年目。
+    </p>
+    <p>
+      自分たちが本当に欲しいと思えるもの、家族や友達に喜んでもらえるものを手元まで届けるプロセスと、私が会った人がつくっているものを、つくっている人たちの顔が見えるように語り伝えること、商売の関りが新たな出逢いや気付きをもたらす瞬間に立ち会うことを愉しんでいきたいのです。
+    </p>
+    <p>
+      じいちゃん、とうちゃん、私の三代で「つくって」「つないで」「つたえていく」<br />ワクワクする源泉（商いのタネ）をいつでも湧かし続け、いつしか百年つづいていきますように。
+    </p>
+  </section>
+
+  <ShopBanner />
+  <CategoryPosts title="店主のコラム" category="column" />
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: var(--space-lg);
+  }
+
+  .company {
+    margin-bottom: var(--space-xl);
+    padding-block: var(--space-sm) var(--space-lg);
+    background: var(--color-bg-subtle);
+  }
+
+  .company :global(.company__logo) {
+    width: 100px; /* スマートフォンでの白抜きロゴの幅 */
+    margin: 0 0 var(--space-xs) auto;
+  }
+
+  .company__table {
+    width: 100%;
+    margin-inline: auto;
+    border-spacing: 0 var(--space-xs);
+    border-collapse: separate;
+    letter-spacing: normal;
+  }
+
+  .company__table th,
+  .company__table td {
+    display: block;
+    padding: var(--space-xs);
+    background: var(--color-bg);
+    font-weight: normal;
+    text-align: left;
+  }
+
+  .company__table td {
+    margin-bottom: var(--space-xs);
+  }
+
+  .company__table a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--size-tap-min);
+  }
+
+  .history {
+    margin-bottom: var(--space-xl);
+  }
+
+  .history__head {
+    margin-bottom: var(--space-md);
+  }
+
+  .history__title {
+    margin-block: var(--space-sm);
+    font-size: var(--font-size-xl);
+  }
+
+  .history :global(.history__blob) {
+    display: none;
+  }
+
+  .history p {
+    margin-bottom: var(--space-md);
+  }
+
+  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  @media (min-width: 768px) {
+    .company :global(.company__logo) {
+      width: 16%; /* 現行 .summary_co_logo の幅 */
+    }
+
+    .company__table {
+      width: auto;
+      border-spacing: var(--space-xs);
+    }
+
+    .company__table th,
+    .company__table td {
+      display: table-cell;
+      margin: 0;
+    }
+
+    .company__table th {
+      text-align: right;
+    }
+
+    .history__head {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .history :global(.history__photo) {
+      width: 51%; /* 現行 .history_img01 の幅 */
+    }
+
+    .history__title {
+      margin-block: var(--space-xl) 0;
+      font-size: var(--font-size-3xl);
+      white-space: nowrap;
+    }
+
+    .history :global(.history__blob) {
+      display: block;
+      width: 12%; /* 現行 .history_img02 の幅 */
+      margin-top: auto;
+    }
+  }
+</style>
