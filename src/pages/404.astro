@@ -1,0 +1,44 @@
+---
+// 存在しない URL の案内（specs/004-not-found）。dist/404.html があると、Cloudflare Pages は存在しない URL にステータス 404 でこのページを返す
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="ページが見つかりません"
+  description="お探しのページは見つかりませんでした。わくやのトップページまたはブログ一覧からお探しください。"
+  path="/404.html"
+  noindex
+>
+  <div class="content-inner not-found">
+    <h1 class="not-found__title">ページが見つかりません</h1>
+    <p>お探しのページは、移動または削除されたか、URL が間違っている可能性があります。</p>
+    <ul class="not-found__links">
+      <li><a href="/">トップページへ</a></li>
+      <li><a href="/blogs/">ブログ一覧へ</a></li>
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: var(--space-xl);
+  }
+
+  .not-found__title {
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-lg);
+  }
+
+  .not-found__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .not-found__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--size-tap-min);
+  }
+</style>
