@@ -45,7 +45,7 @@ GitHub 側に Cloudflare の API キーなどの秘密情報を置く必要は�
 
 ## 3. ドメインの切り替え（本番で公開するとき）
 
-> 切り替えの前に、写真の権利と写っている人の掲載の了承を店に確認し終えていること（`docs/current-site/assets.md`）。
+> 写真の権利と写っている人の掲載の了承は、2026-11-04 に所有者の確認を受けている（`docs/development-log.md`）。その後に写真を足したときは、切り替えの前に確認する。
 
 1. Cloudflare Pages のプロジェクト →「Custom domains」→「Set up a custom domain」で、取得したドメイン（例：`waku-8.com`）を追加し、画面の案内どおりに DNS を設定する
 2. 「Settings」→「Environment variables」の **Production** を次のように変える
