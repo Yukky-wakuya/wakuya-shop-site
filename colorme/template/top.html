@@ -1,0 +1,166 @@
+<{* トップページ。文章は公開中のショップと同じ。画像は colorme/README.md を参照 *}>
+<div class="p-main-slider">
+  <{if $slideshow_html}>
+  <div class="slider">
+    <{$slideshow_html}>
+    <style>
+      .bx-wrapper .bx-pager {
+        padding-top: 10px;
+        bottom: -20px;
+      }
+      .bx-wrapper {
+        margin-bottom: 30px;
+      }
+    </style>
+  </div>
+  <script type="text/javascript">
+    $(function() {
+      $('#slider').bxSlider({
+        auto: true,
+        pause: 2000,
+        speed: 1000,
+        controls: false,
+        captions: true,
+        pager: true,
+        mode: 'fade',
+        responsive: true,
+        easing: 'ease'
+      });
+    });
+  </script>
+  <{/if}>
+</div>
+
+<div class="p-concept">
+  <div class="p-concept__img fadeIn fromLeft"></div>
+  <div class="p-concept__txt fadeIn fromRight">
+    <h2 class="p-concept__ttl">福島の民芸品を、みなさまに。</h2>
+    <div class="p-concept__body">
+      ふくしまで、長く愛されてきた民芸品、めんこい和雑貨たち、心の琴線にふれるお気に入りにめぐり会う「わくや」です。<br><br>
+      どうぞ店内ごゆるりとお楽しみくださいませ。
+    </div>
+  </div>
+</div>
+
+<{if $recommend_num != 0}>
+<div class="p-recommend">
+  <div class="u-container">
+    <h2 class="c-ttl-main">おすすめ商品</h2>
+    <div class="p-recommend-list">
+      <ul class="p-recommend-item-list u-opa">
+        <{section name=num loop=$recommend}>
+        <li class="p-recommend-item-list__item fadeIn fromBottom">
+          <div class="c-item-list__img u-square-img">
+            <a href="<{$recommend[num].link_url}>">
+              <{if $recommend[num].img_url != ""}>
+              <img src="<{$recommend[num].img_url}>" alt="<{$recommend[num].name|escape:'html'}>" />
+              <{else}>
+              <img src="https://img.shop-pro.jp/tmpl_img/86/no-image.jpg" alt="<{$recommend[num].name|escape:'html'}>" />
+              <{/if}>
+            </a>
+            <button class="c-item-list__btn" type="button" data-favorite-button-selector="DOMSelector" data-product-id="<{$recommend[num].id}>" data-added-class="is-added">
+              <svg role="img" aria-hidden="true"><use xlink:href="#heart"></use></svg>
+            </button>
+          </div>
+          <div class="c-item-list__txt">
+            <div class="c-item-list__ttl"><a href="<{$recommend[num].link_url}>"><{$recommend[num].name}></a></div>
+            <{if !$recommend[num].soldout_flg}>
+            <div class="c-item-list__price"><{$recommend[num].price}></div>
+            <{else}>
+            <div class="c-item-list__price is-soldout">売り切れ</div>
+            <{/if}>
+          </div>
+        </li>
+        <{/section}>
+      </ul>
+    </div>
+  </div>
+</div>
+<{/if}>
+
+<div class="p-gallery">
+  <div class="u-container">
+    <div class="p-gallery__wrap">
+      <div class="p-gallery__img">
+        <div class="p-gallery-slider js-top-gallery-slider">
+          <div class="p-gallery-slider__item p-gallery-slider__item01"></div>
+          <div class="p-gallery-slider__item p-gallery-slider__item02"></div>
+          <div class="p-gallery-slider__item p-gallery-slider__item03"></div>
+        </div>
+      </div>
+      <div class="p-gallery__txt fadeIn fromBottom">
+        <h2 class="p-gallery__ttl">わくやの想い</h2>
+        <div class="p-gallery__body">
+          <p>はじまりは「来て。」から、<br>
+          こんどは「かなえる。」ために。</p>
+          <p>つながった交流をより豊かに持続可能に、<br>
+          深く確かなものとするために、<br>
+          はじめます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<{if $seller_num != 0}>
+<div class="p-ranking">
+  <h2 class="c-ttl-main">人気商品</h2>
+  <div class="u-container">
+    <div class="p-ranking-list js-ranking-slider u-opa">
+      <{section name=num loop=$seller}>
+      <div class="p-ranking-list__item">
+        <div class="p-ranking-list__img u-square-img">
+          <a href="<{$seller[num].link_url}>">
+            <{if $seller[num].img_url != ""}>
+            <img src="<{$seller[num].img_url}>" alt="<{$seller[num].name|escape:'html'}>" />
+            <{else}>
+            <img src="https://img.shop-pro.jp/tmpl_img/86/no-image.jpg" alt="<{$seller[num].name|escape:'html'}>" />
+            <{/if}>
+          </a>
+          <button class="c-item-list__btn" type="button" data-favorite-button-selector="DOMSelector" data-product-id="<{$seller[num].id}>" data-added-class="is-added">
+            <svg role="img" aria-hidden="true"><use xlink:href="#heart"></use></svg>
+          </button>
+        </div>
+        <div class="p-ranking-list__txt">
+          <div class="c-item-list__ttl"><a href="<{$seller[num].link_url}>"><{$seller[num].name}></a></div>
+          <{if !$seller[num].soldout_flg}>
+          <div class="c-item-list__price"><{$seller[num].price}></div>
+          <{else}>
+          <div class="c-item-list__price is-soldout">売り切れ</div>
+          <{/if}>
+        </div>
+      </div>
+      <{/section}>
+    </div>
+  </div>
+</div>
+<{/if}>
+
+<script type="text/javascript">
+  $(function() {
+    $(".js-top-gallery-slider").slick({
+      autoplay: true,
+      autoplaySpeed: 3000,
+      fade: true,
+      speed: 1500,
+      arrows: false,
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    });
+    $(".js-ranking-slider").slick({
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows: false,
+      dots: false,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [
+        { breakpoint: 1030, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+        { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+      ]
+    });
+  });
+</script>

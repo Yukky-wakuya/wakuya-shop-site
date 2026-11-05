@@ -1,0 +1,11 @@
+<{* プライバシーポリシー。見出しの文字は公開中のショップのまま *}>
+<div class="p-privacy">
+  <h2 class="c-ttl-main">プライバイシーポリシー</h2>
+  <p><{$shop_name}>(以下当ショップ)は、<a href="<{$paperboy_url}>" target="_blank">GMOペパボ株式会社</a>が提供するカラーミーショップを利用しています。</p>
+  <{section name=num loop=$privacy}>
+  <div class="p-privacy-box">
+    <h3 class="c-ttl-second"><{$privacy[num].title}></h3>
+    <p><{$privacy[num].note}></p>
+  </div>
+  <{/section}>
+</div>

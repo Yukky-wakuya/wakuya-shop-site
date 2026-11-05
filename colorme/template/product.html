@@ -1,0 +1,265 @@
+<{* 商品ページ。カートのフォームは公式テンプレート DISCOVER と同じタグを使う（ここを変えると購入できなくなるおそれがある） *}>
+<div class="c-breadcrumbs">
+  <ul class="c-breadcrumbs-list">
+    <li class="c-breadcrumbs-list__item"><a class="c-breadcrumbs-list__link" href="<{$home_url}>">TOP</a></li>
+    <{if $bid_name != ""}><li class="c-breadcrumbs-list__item"><a href="<{$bid_link}>"><{$bid_name}></a></li><{/if}>
+    <{if $sid_name != ""}><li class="c-breadcrumbs-list__item"><a href="<{$sid_link}>"><{$sid_name}></a></li><{/if}>
+  </ul>
+</div>
+<{if $product.id != ""}>
+<div class="p-product">
+  <form name="product_form" method="post" action="<{$cart_url}>">
+    <div class="p-product-main">
+      <div class="p-product-img">
+        <div class="p-product-img__main js-images-slider">
+          <div class="p-product-img__main-item u-square-img">
+            <{if $product.img_url != ""}>
+            <a href="<{$product.img_url}>" class="js-popup-item"><img src="<{$product.img_url}>" alt="<{$product_name|escape:'html'}>" /></a>
+            <{else}>
+            <img src="https://img.shop-pro.jp/tmpl_img/86/no-image.jpg" alt="<{$product_name|escape:'html'}>" />
+            <{/if}>
+          </div>
+          <{if $otherimg_num != 0}>
+          <{section name=num loop=$otherimg}>
+          <{if $otherimg[num].url != ""}>
+          <div class="p-product-img__main-item u-square-img">
+            <a href="<{$otherimg[num].url}>" class="js-popup-item"><img src="<{$otherimg[num].url}>" alt="<{$product_name|escape:'html'}>" /></a>
+          </div>
+          <{/if}>
+          <{/section}>
+          <{/if}>
+        </div>
+        <{if $otherimg_num != 0}>
+        <div class="p-product-img__thumb">
+          <ul class="p-product-thumb-list">
+            <{if $product.img_url != ""}>
+            <li class="p-product-thumb-list__item"><div class="p-product-thumb-list__img u-square-img"><img src="<{$product.img_url}>" alt="" /></div></li>
+            <{/if}>
+            <{section name=num loop=$otherimg}>
+            <{if $otherimg[num].url != ""}>
+            <li class="p-product-thumb-list__item"><div class="p-product-thumb-list__img u-square-img"><img src="<{$otherimg[num].url}>" alt="" /></div></li>
+            <{/if}>
+            <{/section}>
+          </ul>
+        </div>
+        <{/if}>
+      </div>
+      <div class="p-product-info">
+        <h2 class="p-product-info__ttl"><{$product_name}></h2>
+        <div class="p-product-info__id"><{$product.model}></div>
+        <div class="p-product-info__ex"><{$product.s_expl}></div>
+        <div class="p-product-price">
+          <{if $members_login_flg == true && $product.discount_flg == true}>
+          <div class="p-product-price__sell"><span><{$product.sales}></span> <span><{$product.discount_rate}>OFF</span></div>
+          <div class="p-product-price__normal">通常価格：<{$product.regular_price}></div>
+          <{else}>
+          <div class="p-product-price__sell"><{$product.sales}></div>
+          <{/if}>
+          <{if $product.price_disp}><div class="p-product-price__list-price">定価：<{$product.price}></div><{/if}>
+        </div>
+        <{if $opt_url != ""}>
+        <div class="p-product-option">
+          <{if $option_output_mode}>
+          <div class="p-product-option-tbl" id="prd-opt-table"><{$option_table}></div>
+          <div class="p-product-option-select" id="prd-opt-select">
+            <{section name=num loop=$option}>
+            <div class="p-product-option-select__box">
+              <div class="p-product-option-select__ttl"><{$option[num].name}></div>
+              <select name="<{$option[num].select_name}>" class="product_cart_select">
+                <{html_options values=$option_value[num].id output=$option_value[num].name selected=$key}>
+              </select>
+            </div>
+            <{/section}>
+          </div>
+          <{else}>
+          <div class="p-product-option-select">
+            <{section name=num loop=$option}>
+            <div class="p-product-option-select__box">
+              <div class="p-product-option-select__ttl"><{$option[num].name}></div>
+              <select name="<{$option[num].select_name}>" class="product_cart_select">
+                <{html_options values=$option_value[num].id output=$option_value[num].name selected=$key}>
+              </select>
+            </div>
+            <{/section}>
+          </div>
+          <{/if}>
+        </div>
+        <{/if}>
+        <{if $product.product_text_titles}>
+        <div class="p-product-name">
+          <{foreach from=$product.product_text_titles key=key item=val}>
+          <div class="p-product-name__ttl"><{$val|escape}></div>
+          <div class="p-product-name__body"><input type="text" name="product_text[<{$key|escape}>]" value="" /></div>
+          <{/foreach}>
+        </div>
+        <{/if}>
+        <div class="p-product-form">
+          <{if !$shop_stop_flg && $product.soldout_flg == 0 && !$product.login_sale_flg}>
+          <div class="p-product-form-stock">
+            <div class="p-product-option-select__ttl">購入数</div>
+            <div class="p-product-form-stock__box">
+              <div class="p-product-form-stock__input">
+                <input type="text" name="product_num" value="<{$product.init_num}>" />
+                <span class="p-product-form-stock__unit"><{$product.unit}></span>
+              </div>
+              <{if $product.stock_disp}><div class="p-product-form-stock__stock">在庫：<{$product.stock_str}></div><{/if}>
+            </div>
+          </div>
+          <{/if}>
+          <div class="p-product-form-btn__favorite">
+            <button type="button" class="c-btn-cart is-favorite" data-favorite-button-selector="DOMSelector" data-product-id="<{$product.id}>" data-added-class="is-added">
+              お気に入りに追加 <svg role="img" aria-hidden="true"><use xlink:href="#heart"></use></svg>
+            </button>
+          </div>
+          <div class="p-product-form-btn">
+            <div class="p-product-form-btn__cart">
+              <{if $product.soldout_flg == 0 && !$shop_stop_flg && !$product.login_sale_flg}>
+              <{if $is_enable_async_cart_in_pc}>
+              <button type="submit" class="c-btn-cart">カートに入れる</button>
+              <{else}>
+              <div class="disable_cartin"><button class="c-btn-cart" type="submit">カートに入れる</button></div>
+              <{/if}>
+              <p class="p-product-form__error-message stock_error"></p>
+              <{else}>
+              <{if $product.soldout_flg}>
+              <button class="c-btn-cart is-soldout" type="button" disabled="disabled">売り切れ</button>
+              <{elseif $product.login_sale_flg}>
+              <div class="c-btn-cart is-membersonly">会員のみ購入できます</div>
+              <{/if}>
+              <{/if}>
+              <{if $shop_stop_flg}>
+              <button class="c-btn-cart is-disabled" type="button" disabled="disabled">休止中</button>
+              <{/if}>
+            </div>
+          </div>
+        </div>
+        <ul class="p-product-link-list">
+          <li class="p-product-link-list__item"><a href="<{$sk_url}>#return">返品について</a></li>
+          <li class="p-product-link-list__item"><a href="<{$sk_url}>#info">特定商取引法に基づく表記</a></li>
+          <{if $opt_url != ""}><li class="p-product-link-list__item"><a href="<{$opt_url}>">オプションの値段詳細</a></li><{/if}>
+          <li class="p-product-link-list__item"><a href="<{$prod_inq_url}>">この商品について問い合わせる</a></li>
+          <li class="p-product-link-list__item"><a href="<{$keep_shopping_url}>">買い物を続ける</a></li>
+        </ul>
+        <ul class="p-product-sns-list">
+          <li class="p-product-sns-list__item"><{$line_button}></li>
+          <li class="p-product-sns-list__item"><{twitter_tweet}></li>
+        </ul>
+      </div>
+    </div>
+    <div class="p-product-detail">
+      <div class="p-product-explain">
+        <h3 class="p-product__ttl">商品説明</h3>
+        <div class="p-product-explain__body"><{$product.explain}></div>
+      </div>
+      <div class="p-product-other"></div>
+    </div>
+    <{$product.info}>
+  </form>
+</div>
+<script type="text/javascript">
+  $(function() {
+    var slider = ".js-images-slider";
+    var thumbnailItem = ".p-product-thumb-list__item";
+    $(thumbnailItem).each(function() {
+      var index = $(thumbnailItem).index(this);
+      $(this).attr("data-index",index);
+    });
+    $(slider).on('init',function(slick) {
+      var index = $(".slide-item.slick-slide.slick-current").attr("data-slick-index");
+      $(thumbnailItem+'[data-index="'+index+'"]').addClass("is-current");
+    });
+    $(slider).slick({ autoplay: false, arrows: true, fade: true, infinite: true });
+    $(thumbnailItem).on('click',function() {
+      var index = $(this).attr("data-index");
+      $(slider).slick("slickGoTo",index,false);
+    });
+    $(slider).on('beforeChange',function(event,slick,currentSlide,nextSlide){
+      $(thumbnailItem).each(function() { $(this).removeClass("is-current"); });
+      $(thumbnailItem+'[data-index="'+nextSlide+'"]').addClass("is-current");
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.js-popup-item').magnificPopup({
+      type: 'image',
+      removalDelay: 300,
+      gallery: {
+        enabled:true
+      },
+      closeMarkup: '<button title="%title%" type="button" class="mfp-close"><img src="https://img.shop-pro.jp/tmpl_img/88/icon-close.svg" alt="close" width="15" class="mfp-close" /></button>',
+      callbacks: {
+        open: function() {
+          closeBtn();
+        },
+      }
+    });
+    $('.js-popup').magnificPopup({
+      type: 'image',
+      removalDelay: 300,
+      gallery: {
+        enabled:true
+      },
+      closeMarkup: '<button title="%title%" type="button" class="mfp-close"><img src="https://img.shop-pro.jp/tmpl_img/88/icon-close.svg" alt="close" width="15" class="mfp-close" /></button>',
+      callbacks: {
+        open: function() {
+          closeBtn();
+        },
+      }
+    });
+    $('.js-popup-inline').magnificPopup({
+      type: 'inline',
+      closeMarkup: '<button title="%title%" type="button" class="mfp-close"><img src="https://img.shop-pro.jp/tmpl_img/88/icon-close-black.svg" alt="close" width="15" class="mfp-close" /></button>',
+      callbacks: {
+        open: function() {
+          closeBtn();
+        },
+      }
+    });
+  });
+  function closeBtn(){
+    $('.close-btn').on('click',function(){
+      $('.popup-img').magnificPopup('close');
+    });
+  }
+</script>
+<{if $option_output_mode}>
+<div class="prd-opt-table" style="display: none;"><{$option_table}></div>
+<div class="prd-opt-select" style="display: none;">
+  <{section name=num loop=$option}>
+  <div class="p-product-option-select__box">
+    <div class="p-product-option-select__ttl"><{$option[num].name}></div>
+    <select name="<{$option[num].select_name}>" class="product_cart_select">
+      <{html_options values=$option_value[num].id output=$option_value[num].name selected=$key}>
+    </select>
+  </div>
+  <{/section}>
+</div>
+<script type="text/javascript">
+  $(function () {
+    function window_size_switch_func() {
+      if($(window).width() >= 1008) {
+        $('#prd-opt-table').html($('.prd-opt-table').html());
+        $('#prd-opt-table table').addClass('table table-bordered');
+        $('#prd-opt-select').empty();
+      } else {
+        $('#prd-opt-table').empty();
+        if($('#prd-opt-select > *').length == 0) {
+          $('#prd-opt-select').append($('.prd-opt-select').html());
+        }
+      }
+    }
+    window_size_switch_func();
+    $(window).resize(function () { window_size_switch_func(); });
+  });
+</script>
+<{/if}>
+<{else}>
+<div class="p-product">
+  <{if $product.hide_flg == true}>
+  <p class="c-not-found">この商品を閲覧するにはログインが必要です。</p>
+  <{else}>
+  <p class="c-not-found">現在、この商品は扱っておりません。</p>
+  <{/if}>
+</div>
+<{/if}>

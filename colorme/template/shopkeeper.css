@@ -1,0 +1,8 @@
+.p-info-contents {
+  padding-top: 90px;
+}
+@media screen and (max-width: 767px) {
+  .p-info-contents {
+    padding-top: 45px;
+  }
+}
