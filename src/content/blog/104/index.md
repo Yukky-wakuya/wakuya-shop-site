@@ -12,4 +12,4 @@ migratedFrom: "https://waku-8.com/104/"
 
 皆様にとって、めでたい年でありますように！
 
-**⇒[おめで鯛・昔柄セットの商品はこ](https://waku-8.shop-pro.jp/?pid=177768317)[ちらから](https://waku-8.shop-pro.jp/?pid=177768317)**
+**⇒[おめで鯛・昔柄セットの商品はこ](https://wakuya.shop-pro.jp/?pid=194348759)[ちらから](https://wakuya.shop-pro.jp/?pid=194348759)**

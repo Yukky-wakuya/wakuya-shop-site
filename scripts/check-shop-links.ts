@@ -7,13 +7,13 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { waitTurn } from './survey/fetch-politely.ts';
 
-const SHOP = 'https://waku-8.shop-pro.jp/';
+const SHOP = 'https://wakuya.shop-pro.jp/';
 const root = resolve(import.meta.dirname, '..');
 const blog = resolve(root, 'src/content/blog');
 
 /** TypeScript では '…' の中、Markdown では (…) の中にある URL */
 function shopUrls(file: string): string[] {
-  return [...readFileSync(file, 'utf8').matchAll(/['(](https:\/\/waku-8\.shop-pro\.jp\/[^')\s]*)[')]/g)].map((m) => m[1]!);
+  return [...readFileSync(file, 'utf8').matchAll(/['(](https:\/\/wakuya\.shop-pro\.jp\/[^')\s]*)[')]/g)].map((m) => m[1]!);
 }
 
 const required = new Set(['src/data/recommended.ts', 'src/data/site.ts'].flatMap((f) => shopUrls(resolve(root, f))));

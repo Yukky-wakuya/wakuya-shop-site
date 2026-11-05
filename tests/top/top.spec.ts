@@ -25,9 +25,9 @@ test('おすすめ商品はカラーミーショップの商品・商品グル�
   const links = page.locator('.recommended .card__title a');
   await expect(links).toHaveCount(4);
   for (const href of await links.evaluateAll((as) => as.map((a) => a.getAttribute('href')!))) {
-    expect(href).toMatch(/^https:\/\/waku-8\.shop-pro\.jp\/\?(pid=\d+|mode=grp&gid=\d+)$/);
+    expect(href).toMatch(/^https:\/\/wakuya\.shop-pro\.jp\/\?(pid=\d+|mode=grp&gid=\d+)$/);
   }
-  await expect(page.locator('.recommended .more-link a')).toHaveAttribute('href', 'https://waku-8.shop-pro.jp/?mode=grp&gid=2935801');
+  await expect(page.locator('.recommended .more-link a')).toHaveAttribute('href', 'https://wakuya.shop-pro.jp/?mode=grp&gid=3226045');
 });
 
 test('お知らせは新しい順に4件で、もっと見るはブログ一覧へ', async ({ page }) => {

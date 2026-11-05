@@ -22,6 +22,12 @@ colorme template preview --path colorme/template
 
 `push` は、対象のテンプレートにすぐ反映されます。**公開中のショップに対して実行するときは、先に今のテンプレートを `colorme template pull` で控えてください。**
 
+## ホームページとのリンク
+
+公式サイトへのリンクは `template/index.html` の先頭の `site_url` で決めています。ドメインが決まったら、この値だけを変えます。ホームページ側のショップの URL は `src/data/site.ts` です。
+
+商品の旧 ID と新 ID の対応は [product-map.json](product-map.json) です。
+
 ## 管理画面で設定するもの
 
 テンプレートでは変えられない項目です。
