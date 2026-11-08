@@ -41,5 +41,5 @@ test('お知らせは新しい順に4件で、もっと見るはブログ一覧�
 test('わくやの想いのもっと見るは /thought/ へ', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.thought .more-link a')).toHaveAttribute('href', '/thought/');
-  await expect(page.locator('.thought h2 img')).toHaveAttribute('alt', 'わくやの想い');
+  await expect(page.locator('.thought h2')).toHaveText('わくやの想い');
 });

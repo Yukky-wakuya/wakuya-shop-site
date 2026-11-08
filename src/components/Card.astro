@@ -1,5 +1,5 @@
 ---
-// 正方形の写真と文字のカード（現行 .list_box）。商品カードと記事カードで共通に使う
+// 正方形の写真と文字のカード。商品カードと記事カードで共通に使う。007 の仮のデザインでは、写真を額装の台紙（白と細い線）に収める
 // 写真もリンクにするが、読み上げはタイトルの1回だけにする（写真のリンクはタブ移動と読み上げから外す）
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -30,9 +30,19 @@ const target = external ? { target: '_blank', rel: 'noopener' } : {};
 </li>
 
 <style>
+  .card {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2xs);
+  }
+
+  /* 額装の台紙：白い余白と細い線で写真を囲む */
   .card__image {
     display: block;
     aspect-ratio: 1;
+    padding: var(--space-xs);
+    border: 1px solid var(--color-line);
+    background: var(--color-bg-raised);
     overflow: hidden;
   }
 
@@ -40,12 +50,18 @@ const target = external ? { target: '_blank', rel: 'noopener' } : {};
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .card:hover .card__image :global(img) {
+    transform: scale(1.03); /* 押せることを示す控えめな動き */
   }
 
   .card__title {
     margin-top: var(--space-xs);
-    font-family: var(--font-family-base);
+    font-family: var(--font-family-mincho);
     font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-base);
     line-height: var(--line-height-base);
   }
 
@@ -58,6 +74,15 @@ const target = external ? { target: '_blank', rel: 'noopener' } : {};
   }
 
   .card :global(time) {
+    color: var(--color-text-muted);
+    font-family: var(--font-family-latin);
     font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card__image :global(img) {
+      transition: none;
+    }
   }
 </style>

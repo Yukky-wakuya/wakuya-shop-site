@@ -1,114 +1,128 @@
 /*
  * デザイントークン（唯一の定義元。開発原則VII、data-model.md §4）
- * 各トークンの直前に「用途」と「出典」を書く。出典の詳細は docs/current-site/design.md。
+ * 各トークンの直前に「用途」と「出典」を書く。
+ * 007 で差し替えた仮のデザイン（specs/007-temporary-design/spec.md）。
+ * 元のデザイン（現行サイトの踏襲）の値は、タグ design-original の同じファイルにある（docs/design-original.md）。
  * 部品のCSSでは値を直接書かず var(--…) を参照する。
  */
 :root {
   /* ===== 色 ===== */
 
-  /* 用途: 本文の文字色 / 出典: 現行 body の color #000 */
-  --color-text: #000000;
-  /* 用途: 補助的な文字・区切り線（スマホメニューの罫線） / 出典: 現行 .sp_global_nav ul li の border #555 */
-  --color-text-muted: #555555;
-  /* 用途: ページの背景 / 出典: 現行 body の背景（既定の白） */
-  --color-bg: #ffffff;
-  /* 用途: 生成りの帯の背景（お知らせ・スマホメニュー・概要表） / 出典: 現行 .news・.sp_global_nav・.summary_co の #efeae6 */
-  --color-bg-subtle: #efeae6;
-  /* 用途: アクセント（オンラインショップの帯・ボタン・矢印） / 出典: 現行 .shop_link・.form_submit の #a61f29 */
-  --color-accent: #a61f29;
-  /* 用途: アクセントの上に置く文字 / 出典: 現行 .shop_link p の #fff */
+  /* 用途: 本文の文字色 / 出典: 007 墨色（真っ黒より柔らかく、和紙色の地になじむ） */
+  --color-text: #24211d;
+  /* 用途: 補助的な文字（日付・英字の添え書き・注記） / 出典: 007 薄墨。和紙色の地でコントラスト比 4.5 以上 */
+  --color-text-muted: #635c52;
+  /* 用途: ページの背景 / 出典: 007 和紙・生成り。旅館の障子の明るさ */
+  --color-bg: #f7f3ea;
+  /* 用途: 一段沈んだ帯の背景（お知らせ・会社情報・スマホメニュー） / 出典: 007 生成りを一段濃くした色 */
+  --color-bg-subtle: #ece5d6;
+  /* 用途: カードの台紙・表のセル（展示の額装の白） / 出典: 007 胡粉の白 */
+  --color-bg-raised: #fffdf8;
+  /* 用途: 細い罫線・額縁の線（装飾。文字には使わない） / 出典: 007 生成りに合う砂色 */
+  --color-line: #d6ccb8;
+  /* 用途: アクセント（リンクの強調・現在のページ・あかべこ） / 出典: 007 赤べこの朱。和紙色の地でコントラスト比 7 以上 */
+  --color-accent: #a8322b;
+  /* 用途: アクセントや藍の上に置く文字 / 出典: 007 白 */
   --color-on-accent: #ffffff;
-  /* 用途: フッターの背景 / 出典: 現行 .footer_arch・.footer_bottom の #3e5256 */
-  --color-footer-bg: #3e5256;
-  /* 用途: フッターの文字・リンク / 出典: 現行 .footer_nav li a の #fff */
-  --color-on-footer: #ffffff;
-  /* 用途: キーボード操作時のフォーカス枠 / 出典: 新規（現行にフォーカス表示がないため。アクセントと同色で印象をそろえる） */
-  --color-focus: #a61f29;
-  /* 用途: 出張依頼のボタンの地の色（文字は --color-text） / 出典: 現行 .deliver_link の #f49a2f */
-  --color-deliver: #f49a2f;
+  /* 用途: のれん（オンラインショップの帯）とフッターの背景 / 出典: 007 藍染ののれんの藍 */
+  --color-footer-bg: #1f2d3d;
+  /* 用途: フッターの文字・リンク / 出典: 007 生成り（藍の上でコントラスト比 12 以上） */
+  --color-on-footer: #f7f3ea;
+  /* 用途: 民芸の模様の差し色（こけしの胴の線・三春駒の飾り。装飾だけ） / 出典: 007 山吹・金茶 */
+  --color-ochre: #c99a3e;
+  /* 用途: 民芸の模様の差し色（三春駒の飾り・こけしの花。装飾だけ） / 出典: 007 若草 */
+  --color-green: #4f7a52;
+  /* 用途: キーボード操作時のフォーカス枠 / 出典: 007 アクセントと同じ朱 */
+  --color-focus: #a8322b;
+  /* 用途: 出張依頼のボタンの地の色（文字は --color-text） / 出典: 007 起き上がり小法師の山吹（墨の文字でコントラスト比 7 以上） */
+  --color-deliver: #e3b04b;
 
   /* ===== フォント ===== */
 
-  /* 用途: 本文 / 出典: 現行 body の font-family（游ゴシック系。Webフォントは使っていない） */
+  /* 用途: 本文 / 出典: 元のデザインと同じ游ゴシック系（Webフォントは使わない。開発原則V） */
   --font-family-base: YuGothic, "Yu Gothic", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Noto Sans JP", sans-serif;
-  /* 用途: ナビ・見出し・キャッチコピー（明朝） / 出典: 現行 .global_nav a・.shop_link p の font-family（游明朝系） */
-  --font-family-mincho: "Yu Mincho Light", YuMincho, "Yu Mincho", "游明朝体", "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  /* 用途: 見出し・ナビ・キャッチコピー（明朝） / 出典: 元のデザインと同じ游明朝系 */
+  --font-family-mincho: "Yu Mincho", YuMincho, "游明朝体", "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  /* 用途: 英字の添え書き（展示の解説札のような小さな欧文） / 出典: 007 新規 */
+  --font-family-latin: "Times New Roman", Georgia, serif;
 
   /* ===== 文字サイズ ===== */
 
-  /* 用途: 注記・日付（スマホ） / 出典: 現行 font-size 14px（8か所） */
+  /* 用途: 英字の添え書き・番号 / 出典: 007 新規（読み上げ・意味の補助ではなく飾りの文字） */
+  --font-size-2xs: 0.75rem;
+  /* 用途: 注記・日付・カードのタイトル / 出典: 元のデザインと同じ 14px */
   --font-size-xs: 0.875rem;
-  /* 用途: 本文 / 出典: 現行 font-size 16px（最多 15か所） */
+  /* 用途: 本文 / 出典: 元のデザインと同じ 16px */
   --font-size-base: 1rem;
-  /* 用途: 小見出し・スマホのショップ帯 / 出典: 現行 font-size 18px（10か所） */
+  /* 用途: 小見出し・スマホの見出し / 出典: 18px */
   --font-size-md: 1.125rem;
-  /* 用途: ナビ・スマホのh2 / 出典: 現行 .global_nav a・.h2_title h2（SP）の 20px */
+  /* 用途: 見出し（スマホ）・ナビ / 出典: 20px */
   --font-size-lg: 1.25rem;
-  /* 用途: 大きめの見出し / 出典: 現行 font-size 24px（7か所） */
+  /* 用途: 大きめの見出し / 出典: 24px */
   --font-size-xl: 1.5rem;
-  /* 用途: セクション見出し h2（PC） / 出典: 現行 .h2_title h2 の 26px */
-  --font-size-2xl: 1.625rem;
-  /* 用途: オンラインショップの帯の文字（PC） / 出典: 現行 .shop_link p の 40px */
-  --font-size-display: 2.5rem;
-  /* 用途: トップのキャッチコピー（PC） / 出典: 現行 .topHero_text の 22px */
+  /* 用途: セクション見出し（PC） / 出典: 007 28px */
+  --font-size-2xl: 1.75rem;
+  /* 用途: のれんの文字（PC） / 出典: 007 32px */
+  --font-size-display: 2rem;
+  /* 用途: トップのキャッチコピー（PC） / 出典: 007 22px（縦書きで読みやすい大きさ） */
   --font-size-hero: 1.375rem;
-  /* 用途: 下層ページの見出し部分のページ名（PC） / 出典: 現行 .subHero_text h2 の 38px（docs/current-site/design.md） */
-  --font-size-3xl: 2.375rem;
+  /* 用途: 下層ページのページ名（PC） / 出典: 007 40px */
+  --font-size-3xl: 2.5rem;
 
   /* ===== 行間・字間 ===== */
 
-  /* 用途: 本文の行間 / 出典: 現行 body の line-height 1.5em */
-  --line-height-base: 1.5;
-  /* 用途: 見出しなど詰めた行間 / 出典: 現行 .sp_global_nav ul li a の line-height 1em を読みやすさのため少し広げた値 */
-  --line-height-tight: 1.2;
-  /* 用途: 本文の字間 / 出典: 現行 body の letter-spacing 0.1em */
-  --letter-spacing-base: 0.1em;
+  /* 用途: 本文の行間 / 出典: 007 1.9（余白を多く取る落ち着いた組み） */
+  --line-height-base: 1.9;
+  /* 用途: 見出しなど詰めた行間 / 出典: 1.4 */
+  --line-height-tight: 1.4;
+  /* 用途: 本文の字間 / 出典: 007 0.06em */
+  --letter-spacing-base: 0.06em;
+  /* 用途: 英字の添え書き・見出しの字間 / 出典: 007 0.2em（美術館の表示のように広く取る） */
+  --letter-spacing-wide: 0.2em;
 
   /* ===== 余白 ===== */
 
-  /* 用途: 最小の間隔（アイコン間など） / 出典: 現行 .footer_nav li の padding 0 5px */
+  /* 用途: 最小の間隔 / 出典: 5px */
   --space-2xs: 0.3125rem;
-  /* 用途: 小さな間隔 / 出典: 現行 .sns_nav ul li の margin-left 10px */
+  /* 用途: 小さな間隔 / 出典: 10px */
   --space-xs: 0.625rem;
-  /* 用途: 標準の間隔 / 出典: 現行 .h2_title .title_icon の margin-right 20px、ヘッダー上余白（SP） */
+  /* 用途: 標準の間隔 / 出典: 20px */
   --space-sm: 1.25rem;
-  /* 用途: 見出し下などの間隔 / 出典: 現行 .h2_title の margin-bottom 30px */
+  /* 用途: 見出し下などの間隔 / 出典: 30px */
   --space-md: 1.875rem;
-  /* 用途: ブロックの内側の余白 / 出典: 現行 .shop_link の padding 50px、ヘッダー上余白（PC）40px の中間を 50px に統一 */
+  /* 用途: ブロックの内側の余白 / 出典: 50px */
   --space-lg: 3.125rem;
-  /* 用途: セクション間（SP） / 出典: 現行 .shop_link の margin-bottom 60px（SP） */
-  --space-xl: 3.75rem;
-  /* 用途: セクション間（PC） / 出典: 現行 .shop_link の margin-bottom 120px */
-  --space-2xl: 7.5rem;
-  /* 用途: 商品・記事のカードの間隔（PC） / 出典: 現行 .recommend_list・.news_list・.blog_archive_list の gap 70px */
-  --space-grid: 4.375rem;
+  /* 用途: セクション間（SP） / 出典: 007 72px（余白を多めに） */
+  --space-xl: 4.5rem;
+  /* 用途: セクション間（PC） / 出典: 007 144px（美術館の壁のような広い余白） */
+  --space-2xl: 9rem;
+  /* 用途: 商品・記事のカードの間隔（PC） / 出典: 007 40px */
+  --space-grid: 2.5rem;
 
   /* ===== 幅 ===== */
 
-  /* 用途: 本文エリアの最大幅 / 出典: 現行 .content_inner の max-width 1000px */
-  --size-content-max: 1000px;
-  /* 用途: 本文エリアの幅（画面に対する割合） / 出典: 現行 .content_inner の width 90% */
+  /* 用途: 本文エリアの最大幅 / 出典: 007 1080px */
+  --size-content-max: 1080px;
+  /* 用途: 本文エリアの幅（画面に対する割合） / 出典: 90% */
   --size-content-ratio: 90%;
-  /* 用途: ヘッダーのロゴ幅（PC） / 出典: 現行 .header_logo の width 194px */
-  --size-logo-pc: 194px;
-  /* 用途: ヘッダーのロゴ幅（SP） / 出典: 現行 .header_logo の width 97px（SP） */
-  --size-logo-sp: 97px;
-  /* 用途: タップ・クリックできる部品の最小の大きさ / 出典: 新規（WCAG 2.2 AA 2.5.8 の 24px を満たし、押しやすさのため 44px） */
+  /* 用途: 文章だけの段落の最大幅（1行の文字数を抑えて読みやすくする） / 出典: 007 40字前後 */
+  --size-measure: 42em;
+  /* 用途: タップ・クリックできる部品の最小の大きさ / 出典: WCAG 2.2 AA 2.5.8 の 24px を満たし、押しやすさのため 44px */
   --size-tap-min: 44px;
 
   /* ===== 角丸・影 ===== */
 
-  /* 用途: 丸いボタン / 出典: 現行 border-radius 9999px */
+  /* 用途: 丸いボタン・ふきだし / 出典: 9999px */
   --radius-pill: 9999px;
-  /* 用途: お知らせ・フッター上端のアーチ / 出典: 現行 .footer_arch の border-top-*-radius 50% 80px */
-  --radius-arch: 50% 80px;
-  /* 用途: 影 / 出典: 現行 box-shadow の使用なし（影を使わないデザインのため none） */
+  /* 用途: ふきだし・小さな面の角丸 / 出典: 007 新規 */
+  --radius-soft: 1rem;
+  /* 用途: 影 / 出典: 影を使わないすっきりしたデザインのため none */
   --shadow-none: none;
 
   /* ===== ブレークポイント（記録用。メディアクエリには同じ値を直接書く） ===== */
 
-  /* 用途: タブレット以上 / 出典: 現行 @media (min-width: 768px) */
+  /* 用途: タブレット以上 / 出典: 768px */
   --breakpoint-md: 768px;
-  /* 用途: PC（広い画面） / 出典: 現行 @media (min-width: 1025px) */
+  /* 用途: PC（広い画面） / 出典: 1025px */
   --breakpoint-lg: 1025px;
 }

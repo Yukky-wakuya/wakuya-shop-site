@@ -16,6 +16,9 @@ import TopHero from '../components/TopHero.astro';
 import PageHero from '../components/PageHero.astro';
 import ThoughtIntro from '../components/ThoughtIntro.astro';
 import CategoryPosts from '../components/CategoryPosts.astro';
+import Mingei from '../components/Mingei.astro';
+import Fukidashi from '../components/Fukidashi.astro';
+import ClippedPhoto from '../components/ClippedPhoto.astro';
 import blogsHero from '../assets/blog/blogs_hero.jpg';
 import { getPublishedPosts } from '../lib/blog';
 
@@ -40,7 +43,7 @@ for (const t of tokens) groups.set(t.category, [...(groups.get(t.category) ?? []
   <div class="content-inner sg">
     <h1>スタイルガイド</h1>
     <p>
-      デザイントークンは <code>src/styles/tokens.css</code>、出典の詳細は <code>docs/current-site/design.md</code>。このページは開発サーバーでのみ表示されます。
+      デザイントークンは <code>src/styles/tokens.css</code>。今は 007 の仮のデザイン（<code>specs/007-temporary-design/spec.md</code>）。元のデザインは <code>docs/design-original.md</code>。このページは開発サーバーでのみ表示されます。
     </p>
 
     {
@@ -85,6 +88,21 @@ for (const t of tokens) groups.set(t.category, [...(groups.get(t.category) ?? []
       <h2>部品</h2>
       <h3>セクション見出し（SectionTitle）</h3>
       <SectionTitle>おすすめ商品</SectionTitle>
+      <SectionTitle en="Selection" motif="koma">英字とモチーフ付き</SectionTitle>
+      <h3>民芸のモチーフ（Mingei）</h3>
+      <p class="row">
+        <Mingei kind="akabeko" class="sg-motif" />
+        <Mingei kind="kokeshi" class="sg-motif sg-motif--tall" />
+        <Mingei kind="koma" class="sg-motif" />
+        <Mingei kind="koboshi" class="sg-motif sg-motif--tall" />
+      </p>
+      <h3>ふきだし（Fukidashi）</h3>
+      <Fukidashi speaker="akabeko">ようこそ、わくやへ。</Fukidashi>
+      <Fukidashi speaker="kokeshi" reverse>右に置いたこけし</Fukidashi>
+      <h3>写真の切り抜き（ClippedPhoto）</h3>
+      <p class="row">
+        {(['katomado', 'arch', 'wide-arch', 'kokeshi', 'koboshi', 'circle'] as const).map((shape) => <ClippedPhoto class="sg-photo" src={blogsHero} alt="" shape={shape} />)}
+      </p>
       <h3>ボタン（Button）</h3>
       <p class="row">
         <Button href="/">もっと見る</Button>
@@ -122,6 +140,18 @@ for (const t of tokens) groups.set(t.category, [...(groups.get(t.category) ?? []
 </BaseLayout>
 
 <style>
+  :global(.sg-motif) {
+    width: 80px;
+  }
+
+  :global(.sg-motif--tall) {
+    width: 40px;
+  }
+
+  :global(.sg-photo) {
+    width: 140px;
+  }
+
   .narrow {
     max-width: 260px;
   }

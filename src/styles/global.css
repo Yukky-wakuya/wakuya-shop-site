@@ -41,6 +41,7 @@ h3 {
   font-family: var(--font-family-mincho);
   font-weight: normal;
   line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wide);
 }
 
 ul,
@@ -58,10 +59,16 @@ svg {
 
 a {
   color: inherit;
+  text-decoration-thickness: 1px; /* 細い線で静かに見せる */
+  text-underline-offset: 0.3em; /* 文字の大きさに合わせるため em */
+}
+
+a:hover {
+  color: var(--color-accent);
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-focus); /* 現行にフォーカス表示がないため新規。見落とされない太さ */
+  outline: 3px solid var(--color-focus); /* 見落とされない太さ */
   outline-offset: 2px;
 }
 
@@ -71,7 +78,7 @@ a {
   left: var(--space-xs);
   z-index: 1000;
   padding: var(--space-xs) var(--space-sm);
-  background: var(--color-bg);
+  background: var(--color-bg-raised);
   color: var(--color-text);
   transform: translateY(-200%);
 }
@@ -93,4 +100,24 @@ a {
   width: var(--size-content-ratio);
   max-width: var(--size-content-max);
   margin-inline: auto;
+}
+
+/* 英字の添え書き（展示の解説札のような小さな欧文）。飾りなので aria-hidden を付けて使う */
+.eyebrow {
+  display: block;
+  color: var(--color-text-muted);
+  font-family: var(--font-family-latin);
+  font-size: var(--font-size-2xs);
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: var(--line-height-tight);
+  text-transform: uppercase;
+}
+
+/* 文章だけの段落。1行を短くして読みやすくする */
+.prose {
+  max-width: var(--size-measure);
+}
+
+.prose p + p {
+  margin-top: 1em; /* 段落の間は文字の大きさに合わせて1行分 */
 }

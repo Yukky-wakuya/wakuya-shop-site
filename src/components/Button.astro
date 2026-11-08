@@ -1,5 +1,5 @@
 ---
-// リンクボタン。現行の「>もっと見る」（.more_text）とフォームの送信ボタン（.form_submit）をまとめた部品
+// リンクボタン。「もっと見る」と、塗りのボタンをまとめた部品
 interface Props {
   href: string;
   variant?: 'more' | 'primary';
@@ -23,8 +23,9 @@ const { href, variant = 'more', external = false } = Astro.props;
     text-decoration: none;
   }
 
-  .button--more::before {
-    content: '>';
+  .button--more::after {
+    content: '→';
+    margin-left: var(--space-xs);
   }
 
   .button--more:hover {
@@ -33,8 +34,15 @@ const { href, variant = 'more', external = false } = Astro.props;
 
   .button--primary {
     padding-inline: var(--space-lg);
+    font-family: var(--font-family-mincho);
+    letter-spacing: var(--letter-spacing-wide);
     border-radius: var(--radius-pill);
     background: var(--color-accent);
     color: var(--color-on-accent);
+  }
+
+  .button--primary:hover {
+    color: var(--color-on-accent);
+    text-decoration: underline;
   }
 </style>

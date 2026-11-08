@@ -1,5 +1,5 @@
 ---
-// 「＞もっと見る」（現行 .more_text）。何を見るのかを読み上げで補う
+// 「もっと見る →」。何を見るのかを読み上げで補う。007 の仮のデザインでは、細い線と矢印の静かなリンク
 interface Props {
   href: string;
   /** 読み上げ用の補足（例：「おすすめ商品を」） */
@@ -13,7 +13,7 @@ const { href, what, external = false, align = 'end' } = Astro.props;
 
 <p class:list={['more-link', `more-link--${align}`]}>
   <a href={href} {...external ? { target: '_blank', rel: 'noopener' } : {}}>
-    <span aria-hidden="true">&gt;</span><span class="visually-hidden">{what}</span>もっと見る{external && <span class="visually-hidden">（外部サイト・新しいタブで開きます）</span>}
+    <span class="visually-hidden">{what}</span>もっと見る{external && <span class="visually-hidden">（外部サイト・新しいタブで開きます）</span>}<span class="more-link__arrow" aria-hidden="true"></span>
   </a>
 </p>
 
@@ -25,11 +25,42 @@ const { href, what, external = false, align = 'end' } = Astro.props;
   .more-link a {
     display: inline-flex;
     align-items: center;
+    gap: var(--space-xs);
     min-height: var(--size-tap-min);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
     text-decoration: none;
   }
 
-  .more-link a:hover {
-    text-decoration: underline;
+  /* 細い線の矢印 */
+  .more-link__arrow {
+    position: relative;
+    width: 48px; /* 矢印の長さ */
+    height: 1px;
+    background: currentcolor;
+    transition: width 0.2s;
+  }
+
+  .more-link__arrow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 8px; /* 矢じりの長さ */
+    height: 1px;
+    background: currentcolor;
+    transform: rotate(35deg);
+    transform-origin: right center;
+  }
+
+  .more-link a:hover .more-link__arrow {
+    width: 64px; /* 押せることを示す小さな動き */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .more-link__arrow {
+      transition: none;
+    }
   }
 </style>

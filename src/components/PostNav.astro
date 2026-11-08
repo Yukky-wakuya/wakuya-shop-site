@@ -1,5 +1,5 @@
 ---
-// 前後の記事へのリンク（現行 .previous_link）。ないほうは出さない
+// 前後の記事へのリンク。ないほうは出さない
 import { postPath, type Post } from '../lib/blog';
 
 interface Props {
@@ -15,13 +15,13 @@ const { older, newer } = Astro.props;
     <nav class="post-nav" aria-label="前後の記事">
       {older && (
         <a class="post-nav__older" href={postPath(older)} rel="prev">
-          <span aria-hidden="true">&lt;&lt; </span>前の記事へ<span class="visually-hidden">：{older.data.title}</span>
+          <span aria-hidden="true">← </span>前の記事へ<span class="visually-hidden">：{older.data.title}</span>
         </a>
       )}
       {newer && (
         <a class="post-nav__newer" href={postPath(newer)} rel="next">
           次の記事へ<span class="visually-hidden">：{newer.data.title}</span>
-          <span aria-hidden="true"> &gt;&gt;</span>
+          <span aria-hidden="true"> →</span>
         </a>
       )}
     </nav>
@@ -31,15 +31,24 @@ const { older, newer } = Astro.props;
 <style>
   .post-nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: var(--space-lg);
     margin-block: var(--space-lg);
+    padding-block: var(--space-xs);
+    border-block: 1px solid var(--color-line);
+  }
+
+  .post-nav__newer {
+    margin-left: auto;
   }
 
   .post-nav a {
     display: inline-flex;
     align-items: center;
     min-height: var(--size-tap-min);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
     text-decoration: none;
   }
 
