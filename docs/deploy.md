@@ -56,7 +56,7 @@ GitHub 側に Cloudflare の API キーなどの秘密情報を置く必要は�
    | `SITE_URL` | `https://waku-8.com`（取得したドメイン。末尾の `/` なし） |
 
    Preview の環境変数は `SITE_ENV=test` のままにする（プレビューを検索に出さないため）。
-3. 「Deployments」から最新の公開を「Retry deployment」して作り直す
+3. 「Deployments」から最新の公開を「Retry deployment」して作り直す。あわせて、ショップ側の公式サイトへのリンクを新しいドメインにする（`colorme/template/index.html` の先頭の `site_url` を変えて `colorme template push`）
 4. 次を確かめる
    - ページのソースに `noindex` がない
    - canonical（`<link rel="canonical" href="…">`）が `https://waku-8.com/…` になっている

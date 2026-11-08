@@ -1,8 +1,7 @@
 ---
-// ブログのサイドバー（現行 aside .side_nav）：カテゴリーの一覧とオンラインショップへの帯（FR-019a）
-import { Image } from 'astro:assets';
-import icon from '../assets/brand/h_icon.svg';
-import logo from '../assets/brand/logo_w.svg';
+// ブログのサイドバー：カテゴリーの一覧とオンラインショップへの小さなのれん（FR-019a）。
+// 007 の仮のデザイン。元のデザイン（模様のアイコンと朱の帯）はタグ design-original にある
+import Mingei from './Mingei.astro';
 import { categoryPath } from '../data/categories';
 import { shopUrl } from '../data/site';
 import { getPublishedPosts, usedCategories } from '../lib/blog';
@@ -18,7 +17,7 @@ const list = usedCategories(await getPublishedPosts());
 
 <aside class="blog-sidebar" aria-labelledby="blog-sidebar-title">
   <div class="blog-sidebar__title">
-    <Image class="blog-sidebar__icon" src={icon} alt="" />
+    <span class="eyebrow" aria-hidden="true">Category</span>
     <h2 id="blog-sidebar-title">カテゴリー</h2>
   </div>
   <ul class="blog-sidebar__list">
@@ -33,16 +32,15 @@ const list = usedCategories(await getPublishedPosts());
     }
   </ul>
   <a class="blog-sidebar__shop" href={shopUrl} target="_blank" rel="noopener">
-    <Image class="blog-sidebar__shop-logo" src={logo} alt="" />
+    <span class="blog-sidebar__crest" aria-hidden="true"><Mingei kind="akabeko" class="blog-sidebar__motif" /></span>
     <span class="blog-sidebar__shop-label">オンライン<wbr />ショップ<span class="visually-hidden">（外部サイト・新しいタブで開きます）</span></span>
   </a>
 </aside>
 
 <style>
   .blog-sidebar__title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
+    display: grid;
+    gap: var(--space-2xs);
     margin-bottom: var(--space-sm);
   }
 
@@ -50,55 +48,78 @@ const list = usedCategories(await getPublishedPosts());
     font-size: var(--font-size-lg);
   }
 
-  .blog-sidebar :global(.blog-sidebar__icon) {
-    width: 30px; /* 現行 .side_icon（SP）の幅 */
+  .blog-sidebar__list {
+    margin-bottom: var(--space-md);
+    border-top: 1px solid var(--color-line);
   }
 
-  .blog-sidebar__list {
-    margin: 0 0 var(--space-md) var(--space-md);
+  .blog-sidebar__list li {
+    border-bottom: 1px solid var(--color-line);
   }
 
   .blog-sidebar__list a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    gap: var(--space-xs);
     min-height: var(--size-tap-min);
+    font-family: var(--font-family-mincho);
     text-decoration: none;
   }
 
-  .blog-sidebar__list a:hover,
+  /* 今のカテゴリは朱の小さな点で示す */
   .blog-sidebar__list a[aria-current='page'] {
+    color: var(--color-accent);
+  }
+
+  .blog-sidebar__list a[aria-current='page']::before {
+    content: '';
+    width: 6px; /* 小さな点 */
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .blog-sidebar__list a:hover {
     text-decoration: underline;
   }
 
+  /* 小さなのれん */
   .blog-sidebar__shop {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: var(--space-sm);
-    padding: var(--space-md);
-    background: var(--color-accent);
+    padding: var(--space-md) var(--space-sm);
+    border-top: 4px solid var(--color-text); /* のれんを掛ける竿 */
+    background: var(--color-footer-bg);
     color: var(--color-on-accent);
     font-family: var(--font-family-mincho);
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-md);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
     text-decoration: none;
   }
 
-  .blog-sidebar :global(.blog-sidebar__shop-logo) {
-    width: 60%;
+  .blog-sidebar__shop:hover {
+    color: var(--color-on-accent);
+    text-decoration: underline;
   }
 
-  /* 現行と同じく「オンライン／ショップ」の位置でだけ折り返す */
+  .blog-sidebar__crest {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 52px; /* 染め抜きの丸の紋 */
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-bg-raised);
+  }
+
+  .blog-sidebar__crest :global(.blog-sidebar__motif) {
+    width: 72%;
+  }
+
+  /* 「オンライン／ショップ」の位置でだけ折り返す */
   .blog-sidebar__shop-label {
     word-break: keep-all;
-  }
-
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
-  @media (min-width: 768px) {
-    .blog-sidebar :global(.blog-sidebar__icon) {
-      width: 38px; /* 現行 .side_icon の幅 */
-    }
-
-    .blog-sidebar :global(.blog-sidebar__shop-logo) {
-      width: 100%;
-    }
   }
 </style>

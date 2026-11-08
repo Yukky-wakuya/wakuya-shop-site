@@ -1,5 +1,5 @@
 ---
-// おすすめ商品（現行 .recommend）。商品はカラーミーショップへのリンクだけ（開発原則III、FR-003）
+// おすすめ商品。商品はカラーミーショップへのリンクだけ（開発原則III、FR-003）
 import SectionTitle from './SectionTitle.astro';
 import CardGrid from './CardGrid.astro';
 import Card from './Card.astro';
@@ -8,7 +8,7 @@ import { recommended, recommendedMoreUrl } from '../data/recommended';
 ---
 
 <section class="recommended content-inner" aria-labelledby="recommended-title">
-  <SectionTitle id="recommended-title">おすすめ商品</SectionTitle>
+  <SectionTitle id="recommended-title" en="Selection" motif="koma">おすすめ商品</SectionTitle>
   <CardGrid columns={4}>
     {
       recommended.map((p) => (
@@ -24,5 +24,12 @@ import { recommended, recommendedMoreUrl } from '../data/recommended';
 <style>
   .recommended {
     margin-bottom: var(--space-xl);
+  }
+
+  /* 768px 以上（tokens.css --breakpoint-md） */
+  @media (min-width: 768px) {
+    .recommended {
+      margin-bottom: var(--space-2xl);
+    }
   }
 </style>

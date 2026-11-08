@@ -1,5 +1,5 @@
 ---
-// 一覧のページ送り（現行 .wp-pagenavi）：ページ番号と「次へ」。1ページしかなければ出さない（FR-018）
+// 一覧のページ送り：ページ番号と「次へ」。1ページしかなければ出さない（FR-018）
 import { pageUrl } from '../lib/blog-core';
 
 interface Props {
@@ -56,7 +56,7 @@ const pages = Array.from({ length: last }, (_, i) => i + 1);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: var(--space-2xs);
+    gap: var(--space-xs);
     margin-block: var(--space-lg);
   }
 
@@ -67,14 +67,20 @@ const pages = Array.from({ length: last }, (_, i) => i + 1);
     justify-content: center;
     min-width: var(--size-tap-min);
     min-height: var(--size-tap-min);
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    font-family: var(--font-family-latin);
     text-decoration: none;
   }
 
   .pagination a:hover {
-    text-decoration: underline;
+    border-color: var(--color-accent);
   }
 
+  /* 今のページは朱の丸（あかべこの斑点のような印） */
   .pagination [aria-current] {
-    font-weight: bold;
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
   }
 </style>

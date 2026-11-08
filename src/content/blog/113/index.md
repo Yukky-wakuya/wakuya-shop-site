@@ -18,4 +18,4 @@ migratedFrom: "https://waku-8.com/113/"
 
 商品の詳細情報は、オンラインショップからカテゴリー「ふくまねき」をご覧ください。
 
-**⇒ [ひなこけしの商品はこちらから](https://waku-8.shop-pro.jp/?pid=179065997)**
+**⇒ [ひなこけしの商品はこちらから](https://wakuya.shop-pro.jp/)**

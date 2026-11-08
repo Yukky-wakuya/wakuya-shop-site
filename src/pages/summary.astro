@@ -1,15 +1,14 @@
 ---
-// わくや概要（FR-014・FR-015）。営業時間と定休日は出さない（2026年3月30日で実店舗の営業を終えたため。spec の Clarifications）
-import { Image } from 'astro:assets';
+// わくや概要（FR-014・FR-015）。007 の仮のデザイン（元のデザインはタグ design-original）。営業時間と定休日は出さない（2026年3月30日で実店舗の営業を終えたため。spec の Clarifications）
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import ShopBanner from '../components/ShopBanner.astro';
 import CategoryPosts from '../components/CategoryPosts.astro';
 import photo from '../assets/pages/summary_hero.jpg';
 import historyPhoto from '../assets/pages/history.png';
-import icon from '../assets/brand/icon_purple.png';
-import logo from '../assets/brand/logo_w.svg';
-import blob from '../assets/brand/bg_red04.svg';
+import SectionTitle from '../components/SectionTitle.astro';
+import ClippedPhoto from '../components/ClippedPhoto.astro';
+import Fukidashi from '../components/Fukidashi.astro';
 import { shopUrl, store, storeAddressText } from '../data/site';
 import { aboutPageJsonLd, breadcrumbJsonLd } from '../lib/structured-data';
 
@@ -30,9 +29,9 @@ const description = 'わくや（有限会社和久屋）の紹介と会社情�
     ]),
   ]}
 >
-  <PageHero title="わくや概要" photo={photo} photoAlt="暖簾の掛かった和久屋の店先と、着物姿の女性を描いた絵" icon={icon} />
+  <PageHero title="わくや概要" photo={photo} photoAlt="暖簾の掛かった和久屋の店先と、着物姿の女性を描いた絵" en="About" motif="kokeshi" />
 
-  <div class="content-inner intro">
+  <div class="content-inner intro prose">
     <p>
       「わくや」は、1975年（昭和50年）生まれの卯年。これからも只々「和」にこだわっていきます。創業から四半世紀を超えて、今もなお「愛される逸品」を、半世紀そして次の世紀へと繋げていきます。お客様が、「つくり手」のもとに「旅」をしたような気持ちになれる店づくりを心がけていきます。郷土民芸品が生まれた土地を訪ね、「手仕事」の様子を眺め、「つくり手」の話を聴き、ともに過ごす尊い時間を大切にしていきます。
     </p>
@@ -40,8 +39,7 @@ const description = 'わくや（有限会社和久屋）の紹介と会社情�
 
   <section class="company" aria-labelledby="company-title">
     <div class="content-inner">
-      <h2 id="company-title" class="visually-hidden">会社情報</h2>
-      <Image class="company__logo" src={logo} alt="" />
+      <SectionTitle id="company-title" en="Company">会社情報</SectionTitle>
       <table class="company__table">
         <tbody>
           <tr><th scope="row">屋号</th><td>{store.name}</td></tr>
@@ -61,10 +59,14 @@ const description = 'わくや（有限会社和久屋）の紹介と会社情�
 
   <section class="history content-inner" aria-labelledby="history-title">
     <div class="history__head">
-      <Image class="history__photo" src={historyPhoto} alt="表参道の鳥居の前を行き交う着物姿の人々と、和久屋の店を描いた絵" widths={[360, 720]} sizes="(min-width: 768px) 500px, 90vw" />
-      <h2 id="history-title" class="history__title">わくや沿革</h2>
-      <Image class="history__blob" src={blob} alt="" />
+      <div class="history__heading">
+        <span class="eyebrow" aria-hidden="true">History</span>
+        <h2 id="history-title" class="history__title">わくや沿革</h2>
+        <Fukidashi speaker="koboshi">昭和五十年、卯年の生まれです。</Fukidashi>
+      </div>
+      <ClippedPhoto class="history__photo" src={historyPhoto} alt="表参道の鳥居の前を行き交う着物姿の人々と、和久屋の店を描いた絵" shape="wide-arch" zoom={1.4} />
     </div>
+    <div class="history__text prose">
     <p>
       今年2023年は、<br />有限会社設立（昭和３２年）から６６期。<br />有限会社和久屋旅館から、有限会社和久屋（昭和４７年）となって５１年。<br />和久屋ビル建立（平成３年）から、３２年。<br />おかみがはじめた民芸くらふと和久屋（昭和５０年）から、４８年目。
     </p>
@@ -74,6 +76,7 @@ const description = 'わくや（有限会社和久屋）の紹介と会社情�
     <p>
       じいちゃん、とうちゃん、私の三代で「つくって」「つないで」「つたえていく」<br />ワクワクする源泉（商いのタネ）をいつでも湧かし続け、いつしか百年つづいていきますように。
     </p>
+    </div>
   </section>
 
   <ShopBanner />
@@ -82,39 +85,43 @@ const description = 'わくや（有限会社和久屋）の紹介と会社情�
 
 <style>
   .intro {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-md);
+    line-height: 2.1; /* 冒頭の紹介文は、ゆったりした明朝で読ませる */
   }
 
   .company {
     margin-bottom: var(--space-xl);
-    padding-block: var(--space-sm) var(--space-lg);
+    padding-block: var(--space-xl);
+    border-block: 1px solid var(--color-line);
     background: var(--color-bg-subtle);
-  }
-
-  .company :global(.company__logo) {
-    width: 100px; /* スマートフォンでの白抜きロゴの幅 */
-    margin: 0 0 var(--space-xs) auto;
   }
 
   .company__table {
     width: 100%;
-    margin-inline: auto;
-    border-spacing: 0 var(--space-xs);
-    border-collapse: separate;
+    border-collapse: collapse;
     letter-spacing: normal;
   }
 
   .company__table th,
   .company__table td {
     display: block;
-    padding: var(--space-xs);
-    background: var(--color-bg);
     font-weight: normal;
     text-align: left;
   }
 
+  .company__table th {
+    padding-top: var(--space-sm);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
   .company__table td {
-    margin-bottom: var(--space-xs);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--color-line);
   }
 
   .company__table a {
@@ -128,63 +135,61 @@ const description = 'わくや（有限会社和久屋）の紹介と会社情�
   }
 
   .history__head {
-    margin-bottom: var(--space-md);
+    display: grid;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .history__heading {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-sm);
   }
 
   .history__title {
-    margin-block: var(--space-sm);
     font-size: var(--font-size-xl);
   }
 
-  .history :global(.history__blob) {
-    display: none;
+  .history__text p + p {
+    margin-top: var(--space-md);
   }
 
-  .history p {
-    margin-bottom: var(--space-md);
-  }
-
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  /* 768px 以上（tokens.css --breakpoint-md） */
   @media (min-width: 768px) {
-    .company :global(.company__logo) {
-      width: 16%; /* 現行 .summary_co_logo の幅 */
+    .company {
+      margin-bottom: var(--space-2xl);
+      padding-block: var(--space-2xl);
     }
 
-    .company__table {
-      width: auto;
-      border-spacing: var(--space-xs);
+    .company__table tr {
+      display: grid;
+      grid-template-columns: 10em 1fr;
+      border-bottom: 1px solid var(--color-line);
     }
 
     .company__table th,
     .company__table td {
-      display: table-cell;
-      margin: 0;
+      padding-block: var(--space-sm);
+      border: 0;
     }
 
     .company__table th {
-      text-align: right;
+      align-self: center;
+    }
+
+    .history {
+      margin-bottom: var(--space-2xl);
     }
 
     .history__head {
-      display: flex;
-      justify-content: space-between;
-      gap: var(--space-md);
-    }
-
-    .history :global(.history__photo) {
-      width: 51%; /* 現行 .history_img01 の幅 */
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: end;
+      gap: var(--space-xl);
     }
 
     .history__title {
-      margin-block: var(--space-xl) 0;
       font-size: var(--font-size-3xl);
       white-space: nowrap;
-    }
-
-    .history :global(.history__blob) {
-      display: block;
-      width: 12%; /* 現行 .history_img02 の幅 */
-      margin-top: auto;
     }
   }
 </style>

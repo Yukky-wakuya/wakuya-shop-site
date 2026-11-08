@@ -1,5 +1,5 @@
 ---
-// 商品・記事のカードを並べる格子（現行 .recommend_list・.news_list・.blog_archive_list）
+// 商品・記事のカードを並べる格子
 // スマートフォンは2列、PC は columns 列
 interface Props {
   columns?: 3 | 4;
@@ -21,7 +21,7 @@ const { columns = 4, label } = Astro.props;
     margin-bottom: var(--space-md);
   }
 
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  /* 768px 以上（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
   @media (min-width: 768px) {
     .card-grid {
       gap: var(--space-grid);

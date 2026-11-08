@@ -1,12 +1,12 @@
 ---
-// 出張わくや（FR-017）。依頼のリンクは現行では行き先が空だったため、お問い合わせへつなぐ
+// 出張わくや（FR-017）。007 の仮のデザイン（元のデザインはタグ design-original）。依頼のリンクは現行では行き先が空だったため、お問い合わせへつなぐ
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CategoryPosts from '../components/CategoryPosts.astro';
 import photo from '../assets/pages/deliver_hero.jpg';
 import montage from '../assets/pages/deliver_img.png';
-import icon from '../assets/brand/icon_orange.png';
+import Fukidashi from '../components/Fukidashi.astro';
 import { breadcrumbJsonLd } from '../lib/structured-data';
 
 const path = '/deliver/';
@@ -24,9 +24,9 @@ const path = '/deliver/';
     ]),
   ]}
 >
-  <PageHero title="出張わくや" photo={photo} photoAlt="屋外の木の台に並べた民芸品と、「わくや」の案内の紙" icon={icon} />
+  <PageHero title="出張わくや" photo={photo} photoAlt="屋外の木の台に並べた民芸品と、「わくや」の案内の紙" en="On the Road" motif="akabeko" />
 
-  <div class="content-inner deliver-text">
+  <div class="content-inner deliver-text deliver-text--lead prose">
     <p>
       わたしたちがふくしまを、そして屋号をしょって「行く。」「でかける。」「とどける。」も肝心ではないでしょうか？もし会えるなら、どこへいけばよいですか？さがしているもの、手に取って確かめたいものありますか？あなたのおうちのちかくまで、あるいはおでかけ先までいきましょうか？たくさんはありませんが、荷台にギュッとつめこんででかけていきましょう！
     </p>
@@ -38,8 +38,9 @@ const path = '/deliver/';
     </div>
   </div>
 
-  <div class="content-inner deliver-text">
-    <p>
+  <div class="content-inner deliver-text deliver-cta">
+    <Fukidashi speaker="akabeko">荷台にぎゅっと詰めて、でかけます。</Fukidashi>
+    <p class="prose">
       「わくや」は、全国どこへでも、福島の民芸品を荷台にぎゅっと詰め込んでお伺いいたします！あなたの街へ、あなたのおうちへ、あなたの近くのお店にも。お気軽にお声かけくださいね！
     </p>
     <a class="deliver-link" href="/contact/">マルシェ・イベントなどの出張依頼はこちら</a>
@@ -50,40 +51,63 @@ const path = '/deliver/';
 
 <style>
   .deliver-text {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
   }
 
-  .deliver-text p {
-    margin-bottom: var(--space-md);
+  .deliver-text--lead {
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-md);
+    line-height: 2.1; /* 冒頭の文章は、ゆったりした明朝で読ませる */
   }
 
   .deliver-photos {
-    margin-bottom: var(--space-lg);
-    padding-block: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    padding-block: var(--space-xl);
+    border-block: 1px solid var(--color-line);
     background: var(--color-bg-subtle);
   }
 
-  /* 白い文字ではコントラストが足りないため、文字は黒にする（spec の「現行サイトからの変更」） */
+  .deliver-cta {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .deliver-cta .prose {
+    text-align: left;
+  }
+
+  /* 山吹の地に墨の文字（コントラスト比 7 以上） */
   .deliver-link {
-    display: block;
-    padding: var(--space-sm) var(--space-xs);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--size-tap-min);
+    padding: var(--space-sm) var(--space-lg);
     border-radius: var(--radius-pill);
     background: var(--color-deliver);
     color: var(--color-text);
     font-family: var(--font-family-mincho);
-    font-size: var(--font-size-md);
-    text-align: center;
+    font-size: var(--font-size-base);
+    letter-spacing: var(--letter-spacing-wide);
     text-decoration: none;
   }
 
   .deliver-link:hover {
+    color: var(--color-text);
     text-decoration: underline;
   }
 
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  /* 768px 以上（tokens.css --breakpoint-md） */
   @media (min-width: 768px) {
+    .deliver-text,
+    .deliver-photos {
+      margin-bottom: var(--space-2xl);
+    }
+
     .deliver-link {
-      font-size: var(--font-size-xl);
+      font-size: var(--font-size-md);
     }
   }
 </style>

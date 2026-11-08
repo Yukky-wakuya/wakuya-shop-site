@@ -1,70 +1,103 @@
 ---
-// ヘッダー。現行サイトと同じく、左にロゴ、右に縦書きのナビとSNSアイコン（docs/current-site/design.md）
-import { Image } from 'astro:assets';
+// ヘッダー（007 の仮のデザイン）。左に文字のロゴ（こけしのモチーフ＋明朝の「わくや」）、右に横並びのナビとSNSアイコン。
+// 元のデザイン（画像のロゴと縦書きのナビ）は、タグ design-original にある（docs/design-original.md）
 import GlobalNav from './GlobalNav.astro';
 import SocialLinks from './SocialLinks.astro';
-import logo from '../assets/brand/header_logo.svg';
+import Mingei from './Mingei.astro';
 import { siteName } from '../data/site';
 ---
 
 <header class="header">
   <div class="header__inner">
     <a class="header__logo" href="/">
-      <Image src={logo} alt={`民芸クラフト${siteName} トップページへ`} />
+      <Mingei kind="kokeshi" class="header__mark" />
+      <span class="header__words">
+        <span class="header__sub">民芸くらふと</span>
+        <span class="header__name">{siteName}<span class="visually-hidden"> トップページへ</span></span>
+      </span>
     </a>
     <div class="header__nav">
       <GlobalNav />
     </div>
     <div class="header__social">
-      <SocialLinks variant="dark" size={27} />
+      <SocialLinks variant="dark" size={20} />
     </div>
   </div>
 </header>
 
 <style>
   .header {
-    padding-block: var(--space-sm);
+    border-bottom: 1px solid var(--color-line);
   }
 
   .header__inner {
     position: relative;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
     width: var(--size-content-ratio);
     max-width: var(--size-content-max);
     margin-inline: auto;
+    padding-block: var(--space-sm);
   }
 
   .header__logo {
-    display: block;
-    width: var(--size-logo-sp);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-right: auto;
+    color: var(--color-text);
+    text-decoration: none;
   }
 
-  .header__logo img {
-    width: 100%;
+  .header__logo :global(.header__mark) {
+    width: 20px; /* 2行のロゴ文字に釣り合うこけしの幅 */
+  }
+
+  .header__words {
+    display: grid;
+  }
+
+  .header__sub {
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-2xs);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
+  }
+
+  .header__name {
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-xl);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
   }
 
   .header__social {
-    position: absolute;
-    right: calc(var(--size-tap-min) + var(--space-xs));
-    top: 0;
+    display: none;
   }
 
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md） */
+  /* 768px 以上（tokens.css --breakpoint-md） */
   @media (min-width: 768px) {
-    .header {
-      padding-block: var(--space-lg) var(--space-xl);
+    .header__inner {
+      padding-block: var(--space-md);
     }
 
-    .header__logo {
-      width: var(--size-logo-pc);
+    .header__logo :global(.header__mark) {
+      width: 24px; /* PC のロゴ文字に釣り合う幅 */
     }
 
+    .header__name {
+      font-size: var(--font-size-2xl);
+    }
+  }
+
+  /* ナビと SNS を1行に並べられる広さ（tokens.css --breakpoint-lg） */
+  @media (min-width: 1025px) {
     .header__social {
-      right: 0;
-      top: auto;
-      bottom: calc(-1 * var(--space-lg));
+      display: block;
+      padding-left: var(--space-xs);
+      border-left: 1px solid var(--color-line);
     }
   }
 </style>

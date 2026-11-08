@@ -3,7 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import photo from '../assets/pages/contact_hero.jpg';
-import icon from '../assets/brand/icon_red.png';
+import Fukidashi from '../components/Fukidashi.astro';
 import { store } from '../data/site';
 import { breadcrumbJsonLd, contactPageJsonLd } from '../lib/structured-data';
 
@@ -24,9 +24,11 @@ const description = 'わくや（有限会社和久屋）へのお問い合わ�
     ]),
   ]}
 >
-  <PageHero title="お問い合わせ" photo={photo} photoAlt="「和久屋」の文字を染め抜いた紺色の半纏" icon={icon} />
+  <PageHero title="お問い合わせ" photo={photo} photoAlt="「和久屋」の文字を染め抜いた紺色の半纏" en="Contact" motif="koma" />
   <section class="contact" aria-label="連絡先">
-    <dl class="contact__list content-inner">
+    <div class="content-inner contact__inner">
+    <Fukidashi speaker="kokeshi" class="contact__bubble">民芸品のこと、出張のご依頼も、お気軽にどうぞ。</Fukidashi>
+    <dl class="contact__list">
       <div class="contact__item">
         <dt>メール</dt>
         <dd><a href={`mailto:${store.email}`}>{store.email}</a></dd>
@@ -39,40 +41,62 @@ const description = 'わくや（有限会社和久屋）へのお問い合わ�
         </dd>
       </div>
     </dl>
+    </div>
   </section>
 </BaseLayout>
 
 <style>
   .contact {
     margin-bottom: var(--space-xl);
-    padding-block: var(--space-lg);
+    padding-block: var(--space-xl);
+    border-block: 1px solid var(--color-line);
     background: var(--color-bg-subtle);
+  }
+
+  .contact__inner {
+    display: grid;
+    gap: var(--space-md);
+    max-width: 640px; /* 連絡先が読みやすい幅 */
   }
 
   .contact__list {
     display: grid;
     gap: var(--space-sm);
-    max-width: 600px; /* 現行 .contact_tb の幅（本文幅の 55%）に近い読みやすい幅 */
   }
 
   .contact__item {
-    padding: var(--space-sm);
-    background: var(--color-bg);
+    padding: var(--space-md) var(--space-sm);
+    border: 1px solid var(--color-line);
+    background: var(--color-bg-raised);
+    text-align: center;
   }
 
   .contact__item dt {
     margin-bottom: var(--space-2xs);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mincho);
     font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
   }
 
   .contact__item a {
     display: inline-flex;
     align-items: center;
     min-height: var(--size-tap-min);
-    font-size: var(--font-size-lg);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-xl);
+    letter-spacing: var(--letter-spacing-base);
   }
 
   .contact__note {
     font-size: var(--font-size-xs);
+  }
+
+  /* 768px 以上（tokens.css --breakpoint-md） */
+  @media (min-width: 768px) {
+    .contact {
+      margin-bottom: var(--space-2xl);
+      padding-block: var(--space-2xl);
+    }
   }
 </style>

@@ -1,14 +1,327 @@
-<{* 共通レイアウト。公開中のショップの見た目を再現する（specs/005-colorme-shop/spec.md） *}>
+<{* 共通レイアウト。公開中のショップの構造を再現し、見た目は 007 の仮のデザイン（specs/007-temporary-design/spec.md）。元のデザインはタグ design-original *}>
+<{* ホームページの URL。ドメインが決まったらここだけ変える（docs/deploy.md） *}>
+<{assign var="site_url" value="https://wakuya-shop-site.pages.dev"}>
 <link href="https://img.shop-pro.jp/tmpl_js/88/slick.css" rel="stylesheet" type="text/css">
 <link href="https://img.shop-pro.jp/tmpl_js/88/slick-theme.css" rel="stylesheet" type="text/css">
 <link href="https://img.shop-pro.jp/tmpl_js/88/magnific-popup.css" rel="stylesheet" type="text/css">
+<{* 007 仮のデザインの CSS（scripts/temporary-design/shop-layout.css から入れる）。index.css は容量の上限（64KB 程度）に近いため、ここに書く *}>
+<style>
+/******************************/
+/* 007 仮のデザイン（specs/007-temporary-design/spec.md）
+ * ホームページと同じ色・書体・民芸の図に合わせて、元の見た目の上に重ねる。
+ * scripts/temporary-design/apply-shop.ts が colorme/template/index.html の style に入れる。
+ * 元のファイルはタグ design-original にある（docs/design-original.md）
+ * 色：和紙 #f7f3ea／生成り #ece5d6／胡粉 #fffdf8／砂色の線 #d6ccb8／墨 #24211d／薄墨 #635c52
+ *     赤べこの朱 #a8322b／藍 #1f2d3d／山吹 #c99a3e／若草 #4f7a52
+ */
+/******************************/
+body {
+  background: #f7f3ea;
+  color: #24211d;
+  font-family: "Yu Mincho", YuMincho, "游明朝体", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  letter-spacing: 0.04em;
+}
+body a,
+body a:hover,
+body a:focus {
+  color: inherit;
+}
+body a:hover {
+  color: #a8322b;
+}
+body :focus-visible {
+  outline: 3px solid #a8322b;
+  outline-offset: 2px;
+}
+
+/* 民芸の図（ホームページの src/components/Mingei.astro と同じ） */
+.w-mingei {
+  display: block;
+  overflow: visible;
+}
+.w-red { fill: #a8322b; }
+.w-ink { fill: #24211d; }
+.w-paper { fill: #fffdf8; }
+.w-ochre { fill: #c99a3e; }
+.w-green { fill: #4f7a52; }
+.w-spot { fill: #24211d; stroke: #fffdf8; stroke-width: 1.2; }
+.w-ink-line, .w-ochre-line, .w-green-line { fill: none; stroke-linecap: round; stroke-width: 2; }
+.w-ink-line { stroke: #24211d; }
+.w-ochre-line { stroke: #c99a3e; }
+.w-green-line { stroke: #4f7a52; }
+.w-ink-line.w-thin, .w-ochre-line.w-thin { stroke-width: 1.2; }
+
+/* 英字の添え書き（展示の解説札のような小さな欧文） */
+.w-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  color: #635c52;
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* ---- ヘッダー ---- */
+body .l-header,
+body .l-header-main {
+  background: #f7f3ea;
+}
+body .l-header-main {
+  border-bottom: 1px solid #d6ccb8;
+}
+.w-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #24211d;
+  text-decoration: none;
+}
+.w-logo .w-mingei--kokeshi {
+  width: 20px;
+}
+.w-logo__words {
+  display: grid;
+  text-align: left;
+}
+.w-logo__sub {
+  color: #635c52;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+}
+.w-logo__name {
+  font-size: 26px;
+  letter-spacing: 0.2em;
+  line-height: 1.3;
+}
+@media screen and (max-width: 767px) {
+  .w-logo .w-mingei--kokeshi { width: 16px; }
+  .w-logo__sub { font-size: 10px; }
+  .w-logo__name { font-size: 20px; }
+}
+body .l-main-navi-list__link,
+body .l-dropdown-menu-list__link,
+body .l-header-account-list__link {
+  font-family: "Yu Mincho", YuMincho, "游明朝体", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  letter-spacing: 0.15em;
+}
+body .l-dropdown-menu,
+body .l-main-navi {
+  background: #f7f3ea;
+}
+body .l-header-cart-btn__count,
+body .l-sp-header-cart-btn__count {
+  background: #a8322b;
+  color: #ffffff;
+}
+
+/* ---- 見出し ---- */
+body .c-ttl-main {
+  font-family: inherit;
+  font-size: 26px;
+  letter-spacing: 0.2em;
+}
+body .c-ttl-main::after {
+  content: "";
+  display: block;
+  width: 40px;
+  margin: 18px auto 0;
+  border-top: 1px solid #a8322b;
+}
+body .c-ttl-main.is-s {
+  font-size: 20px;
+}
+@media screen and (max-width: 767px) {
+  body .c-ttl-main { font-size: 20px; }
+}
+body .l-side-navi__ttl {
+  font-family: inherit;
+  letter-spacing: 0.15em;
+  border-bottom: 1px solid #d6ccb8;
+}
+
+/* ---- 商品の写真：額装の台紙（白い余白と細い線） ---- */
+body .u-square-img:before {
+  background: #fffdf8;
+}
+body .c-item-list__img.u-square-img,
+body .p-ranking-list__img.u-square-img {
+  border: 1px solid #d6ccb8;
+  background: #fffdf8;
+}
+body .u-square-img a {
+  top: 8px;
+  left: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+}
+body .c-item-list__ttl {
+  letter-spacing: 0.06em;
+}
+body .c-item-list__price {
+  color: #635c52;
+  font-family: "Times New Roman", Georgia, serif;
+  letter-spacing: 0.1em;
+}
+@media screen and (max-width: 767px) {
+  body .c-item-list__price {
+    background: none;
+  }
+}
+body .c-item-list__price.is-soldout {
+  color: #a8322b;
+}
+body .c-item-list__icon.is-soldout {
+  background: #a8322b;
+  color: #ffffff;
+}
+
+/* ---- ボタン ---- */
+body .c-btn {
+  border-color: #24211d;
+  border-radius: 9999px;
+  color: #24211d;
+  font-weight: normal;
+  letter-spacing: 0.15em;
+}
+body .c-btn:before {
+  border-radius: 9999px;
+  background: #1f2d3d;
+}
+body .c-btn:hover {
+  color: #ffffff;
+}
+/* カートに入れる：のれんの藍 */
+body .c-btn-cart {
+  border-color: #1f2d3d;
+  border-radius: 9999px;
+  background: #1f2d3d;
+  font-family: inherit;
+  font-weight: normal;
+  letter-spacing: 0.2em;
+}
+body .c-btn-cart:hover {
+  background: #a8322b;
+  border-color: #a8322b;
+}
+
+/* ---- パンくず ---- */
+body .c-breadcrumbs-list__item,
+body .c-breadcrumbs-list__link {
+  color: #635c52;
+}
+
+/* ---- ショッピングガイド ---- */
+body .p-shopguide {
+  border-top: 1px solid #d6ccb8;
+  background: #ece5d6;
+}
+body .p-shopguide-box {
+  box-sizing: border-box;
+  padding: 24px 20px;
+  border: 1px solid #d6ccb8;
+  background: #fffdf8;
+}
+body .p-shopguide-box__ttl,
+body .p-shopguide__ttl,
+body .p-shopguide__body {
+  font-family: inherit;
+}
+
+/* ---- 棚に並んだ民芸とフッター（藍） ---- */
+.w-shelf {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 24px;
+  padding: 40px 24px 0;
+}
+.w-shelf .w-mingei--koma { width: 44px; }
+.w-shelf .w-mingei--kokeshi { width: 22px; }
+.w-shelf .w-mingei--akabeko { width: 52px; }
+.w-shelf .w-mingei--koboshi { width: 24px; }
+body .l-footer {
+  background: #1f2d3d;
+  color: #f7f3ea;
+}
+body .l-footer a,
+body .l-footer a:hover,
+body .l-footer-navi-list__link {
+  color: #f7f3ea;
+}
+body .l-footer a:hover {
+  text-decoration: underline;
+}
+.w-footer-name {
+  display: block;
+  font-size: 28px;
+  letter-spacing: 0.2em;
+  line-height: 1.3;
+}
+.w-footer-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+body .l-footer-other,
+body .l-copyright__txt,
+body .l-copyright__logo a {
+  color: #f7f3ea;
+}
+body .l-footer-other {
+  border-top: 1px solid rgba(247, 243, 234, 0.25);
+}
+
+/* ---- ふきだし ---- */
+.w-fukidashi {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+.w-fukidashi .w-mingei--akabeko {
+  flex: none;
+  width: 52px;
+}
+.w-fukidashi__bubble {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 8px 16px;
+  border: 1px solid #d6ccb8;
+  border-radius: 16px;
+  background: #fffdf8;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.w-fukidashi__bubble::before,
+.w-fukidashi__bubble::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+.w-fukidashi__bubble::before {
+  bottom: 10px;
+  left: -9px;
+  border-width: 6px 9px 6px 0;
+  border-color: transparent #d6ccb8 transparent transparent;
+}
+.w-fukidashi__bubble::after {
+  bottom: 11px;
+  left: -7px;
+  border-width: 5px 8px 5px 0;
+  border-color: transparent #fffdf8 transparent transparent;
+}
+</style>
 
 <div class="l-header is-<{$tpl_name}>" id="js-header-scroll">
   <div class="l-header-main">
     <div class="l-header-main__in">
       <div class="l-header-logo">
         <h1 class="l-header-logo__img">
-          <a class="l-header-logo__txt" href="<{$home_url}>"><{$logo}></a>
+          <a class="l-header-logo__txt" href="<{$home_url}>"><span class="w-logo"><svg class="w-mingei w-mingei--kokeshi" viewBox="0 0 40 80" aria-hidden="true" focusable="false"><rect class="w-red" x="11" y="33" width="18" height="45" rx="4"/><path class="w-ochre-line" d="M11 40 H29 M11 71 H29"/><circle class="w-paper" cx="20" cy="55" r="4.5"/><circle class="w-ochre" cx="20" cy="55" r="1.8"/><path class="w-green-line" d="M15 62 q2 -3 5 -2 M25 62 q-2 -3 -5 -2"/><circle class="w-paper" cx="20" cy="19" r="16"/><path class="w-ink" d="M4.2 18 A15.8 15.8 0 0 1 35.8 18 C31 13.5 26 12.5 20 14.5 C14 12.5 9 13.5 4.2 18 Z"/><circle class="w-red" cx="6" cy="22" r="2.4"/><circle class="w-red" cx="34" cy="22" r="2.4"/><path class="w-ink-line w-thin" d="M12.5 22.5 q2.5 -2 5 0 M22.5 22.5 q2.5 -2 5 0"/><circle class="w-red" cx="20" cy="28.5" r="1.3"/></svg><span class="w-logo__words"><span class="w-logo__sub">民芸くらふと</span><span class="w-logo__name">わくや</span></span></span></a>
         </h1>
       </div>
       <div class="l-sp-header-cart-btn">
@@ -77,10 +390,10 @@
           <div class="l-dropdown-menu js-toggle-contents">
             <div class="u-container">
               <ul class="l-dropdown-menu-list">
-                <li class="l-dropdown-menu-list__item"><a class="l-dropdown-menu-list__link" href="https://waku-8.com/summary/" target="_blank" rel="noopener noreferrer">わくや概要</a></li>
-                <li class="l-dropdown-menu-list__item"><a class="l-dropdown-menu-list__link" href="https://waku-8.com/thought/" target="_blank" rel="noopener noreferrer">わくやの想い</a></li>
-                <li class="l-dropdown-menu-list__item"><a class="l-dropdown-menu-list__link" href="https://waku-8.com/deliver/" target="_blank" rel="noopener noreferrer">出張わくや</a></li>
-                <li class="l-dropdown-menu-list__item"><a class="l-dropdown-menu-list__link" href="https://waku-8.com/blogs/" target="_blank" rel="noopener noreferrer">ブログ</a></li>
+                <li class="l-dropdown-menu-list__item"><a class="l-dropdown-menu-list__link" href="<{$site_url}>/summary/" target="_blank" rel="noopener noreferrer">わくや概要</a></li>
+                <li class="l-dropdown-menu-list__item"><a class="l-dropdown-menu-list__link" href="<{$site_url}>/thought/" target="_blank" rel="noopener noreferrer">わくやの想い</a></li>
+                <li class="l-dropdown-menu-list__item"><a class="l-dropdown-menu-list__link" href="<{$site_url}>/deliver/" target="_blank" rel="noopener noreferrer">出張わくや</a></li>
+                <li class="l-dropdown-menu-list__item"><a class="l-dropdown-menu-list__link" href="<{$site_url}>/blogs/" target="_blank" rel="noopener noreferrer">ブログ</a></li>
               </ul>
             </div>
           </div>
@@ -280,15 +593,17 @@
   </div>
 </div>
 
+<{* 007：棚に並んだ民芸。フッターの上端を棚板に見立てる *}>
+<div class="w-shelf u-container" aria-hidden="true"><svg class="w-mingei w-mingei--koma" viewBox="0 0 72 60" aria-hidden="true" focusable="false"><path class="w-ink" d="M10 8 L16 2 L19 9 L24 16 L32 24 L58 24 L64 21 L69 27 L67 40 L62 33 L60 37 L60 56 L51 56 L49 42 L30 42 L28 56 L19 56 L20 36 L16 26 L8 28 L4 24 L6 16 Z"/><rect class="w-red" x="34" y="24" width="15" height="7"/><path class="w-ochre-line" d="M34 31 H49 M23 28 L31 26"/><path class="w-ochre-line w-thin" d="M8 18 L14 15 L18 22"/><circle class="w-paper" cx="10.5" cy="14" r="1.4"/><circle class="w-green" cx="55" cy="33" r="2.6"/><circle class="w-ochre" cx="25" cy="20" r="1.3"/><circle class="w-ochre" cx="22" cy="16" r="1.1"/></svg><svg class="w-mingei w-mingei--kokeshi" viewBox="0 0 40 80" aria-hidden="true" focusable="false"><rect class="w-red" x="11" y="33" width="18" height="45" rx="4"/><path class="w-ochre-line" d="M11 40 H29 M11 71 H29"/><circle class="w-paper" cx="20" cy="55" r="4.5"/><circle class="w-ochre" cx="20" cy="55" r="1.8"/><path class="w-green-line" d="M15 62 q2 -3 5 -2 M25 62 q-2 -3 -5 -2"/><circle class="w-paper" cx="20" cy="19" r="16"/><path class="w-ink" d="M4.2 18 A15.8 15.8 0 0 1 35.8 18 C31 13.5 26 12.5 20 14.5 C14 12.5 9 13.5 4.2 18 Z"/><circle class="w-red" cx="6" cy="22" r="2.4"/><circle class="w-red" cx="34" cy="22" r="2.4"/><path class="w-ink-line w-thin" d="M12.5 22.5 q2.5 -2 5 0 M22.5 22.5 q2.5 -2 5 0"/><circle class="w-red" cx="20" cy="28.5" r="1.3"/></svg><svg class="w-mingei w-mingei--akabeko" viewBox="0 0 80 60" aria-hidden="true" focusable="false"><rect class="w-ink" x="29" y="40" width="6" height="14" rx="1"/><rect class="w-ink" x="39" y="42" width="5" height="12" rx="1"/><rect class="w-ink" x="57" y="42" width="5" height="12" rx="1"/><rect class="w-ink" x="66" y="40" width="6" height="14" rx="1"/><path class="w-ink-line" d="M74 27 q6 3 4 11"/><rect class="w-red" x="26" y="19" width="50" height="27" rx="13"/><path class="w-red" d="M31 21 L19 26 L18 42 L33 44 Z"/><ellipse class="w-red" cx="13" cy="37" rx="11.5" ry="8.5" transform="rotate(28 13 37)"/><ellipse class="w-ink" cx="6.5" cy="43.5" rx="4.2" ry="3.4" transform="rotate(28 6.5 43.5)"/><path class="w-ink" d="M15 28 Q13 22 17 19 Q16 24 19 28 Z M20 29 Q20 23 24 21 Q22 25 23 30 Z"/><circle class="w-paper" cx="12" cy="34" r="2.6"/><circle class="w-ink" cx="11.6" cy="34.3" r="1.3"/><path class="w-ochre-line" d="M29 22 L31 43"/><circle class="w-spot" cx="44" cy="30" r="3.6"/><circle class="w-spot" cx="56" cy="27" r="3.4"/><circle class="w-spot" cx="64" cy="36" r="3"/></svg><svg class="w-mingei w-mingei--koboshi" viewBox="0 0 40 46" aria-hidden="true" focusable="false"><path class="w-red" d="M20 2 C31 2 37 16 37 28 C37 38 29 44 20 44 C11 44 3 38 3 28 C3 16 9 2 20 2 Z"/><ellipse class="w-paper" cx="20" cy="19" rx="9.5" ry="8.5"/><path class="w-ink" d="M10.6 17 C11 11 15 9.5 20 9.5 C25 9.5 29 11 29.4 17 C26 13.5 23 13 20 14 C17 13 14 13.5 10.6 17 Z"/><circle class="w-ink" cx="16.5" cy="20" r="1.1"/><circle class="w-ink" cx="23.5" cy="20" r="1.1"/><circle class="w-red" cx="20" cy="24" r="1"/><path class="w-ochre-line" d="M8 34 Q20 39 32 34"/></svg></div>
 <div class="l-footer">
   <div class="u-container">
     <div class="l-footer-main">
       <div class="l-footer-shopinfo">
-        <div class="l-footer-shopinfo__logo"><a href="<{$home_url}>"><{$logo}></a></div>
+        <div class="l-footer-shopinfo__logo"><a href="<{$home_url}>"><span class="w-footer-name">わくや</span><span class="w-footer-sub">民芸くらふと 和久屋 ─ 福島・郡山</span></a></div>
         <ul class="l-footer-sns-list u-opa">
-          <{if $instagram_url}><li class="l-footer-sns-list__item"><a href="<{$instagram_url}>" target="_blank"><i class="icon-lg-b icon-instagram" aria-label="instagram"></i></a></li><{/if}>
-          <{if $facebook_url}><li class="l-footer-sns-list__item"><a href="<{$facebook_url}>" target="_blank"><i class="icon-lg-b icon-facebook" aria-label="Facebook"></i></a></li><{/if}>
-          <{if $twitter_url}><li class="l-footer-sns-list__item"><a href="<{$twitter_url}>" target="_blank"><i class="icon-lg-b icon-twitter" aria-label="Twitter"></i></a></li><{/if}>
+          <{if $instagram_url}><li class="l-footer-sns-list__item"><a href="<{$instagram_url}>" target="_blank"><i class="icon-lg-w icon-instagram" aria-label="instagram"></i></a></li><{/if}>
+          <{if $facebook_url}><li class="l-footer-sns-list__item"><a href="<{$facebook_url}>" target="_blank"><i class="icon-lg-w icon-facebook" aria-label="Facebook"></i></a></li><{/if}>
+          <{if $twitter_url}><li class="l-footer-sns-list__item"><a href="<{$twitter_url}>" target="_blank"><i class="icon-lg-w icon-twitter" aria-label="Twitter"></i></a></li><{/if}>
         </ul>
       </div>
       <div class="l-footer-navi">
@@ -300,11 +615,11 @@
           <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="<{$privacy_url}>">プライバシーポリシー</a></li>
         </ul>
         <ul class="l-footer-navi-list">
-          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="https://waku-8.com/" target="_blank" rel="noopener noreferrer">公式サイト</a></li>
-          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="https://waku-8.com/summary/" target="_blank" rel="noopener noreferrer">わくや概要</a></li>
-          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="https://waku-8.com/thought/" target="_blank" rel="noopener noreferrer">わくやの想い</a></li>
-          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="https://waku-8.com/deliver/" target="_blank" rel="noopener noreferrer">出張わくや</a></li>
-          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="https://waku-8.com/blogs/" target="_blank" rel="noopener noreferrer">ブログ</a></li>
+          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="<{$site_url}>/" target="_blank" rel="noopener noreferrer">公式サイト</a></li>
+          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="<{$site_url}>/summary/" target="_blank" rel="noopener noreferrer">わくや概要</a></li>
+          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="<{$site_url}>/thought/" target="_blank" rel="noopener noreferrer">わくやの想い</a></li>
+          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="<{$site_url}>/deliver/" target="_blank" rel="noopener noreferrer">出張わくや</a></li>
+          <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="<{$site_url}>/blogs/" target="_blank" rel="noopener noreferrer">ブログ</a></li>
         </ul>
         <ul class="l-footer-navi-list">
           <li class="l-footer-navi-list__item"><a class="l-footer-navi-list__link" href="<{$view_myaccount_url}>">マイアカウント</a></li>

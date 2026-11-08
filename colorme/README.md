@@ -1,6 +1,6 @@
 # カラーミーショップのテンプレート
 
-`template/` は、公開中のショップ（`waku-8.shop-pro.jp`）の見た目を再現したテンプレートです。プロジェクト用のショップ（`wakuya.shop-pro.jp`）で動作を確かめています。
+`template/` は、公開中のショップ（`waku-8.shop-pro.jp`）の構造を再現したテンプレートです。**2026-11-08 から、見た目はホームページと同じ 007 の仮のデザインです**（[specs/007-temporary-design/spec.md](../specs/007-temporary-design/spec.md)）。元の見た目はタグ `design-original` にあります。プロジェクト用のショップ（`wakuya.shop-pro.jp`）で動作を確かめています。
 
 - 方針と経緯：[specs/005-colorme-shop/spec.md](../specs/005-colorme-shop/spec.md)
 - 外から見えない画面の案：[specs/005-colorme-shop/mockups/index.html](../specs/005-colorme-shop/mockups/index.html)
@@ -21,6 +21,21 @@ colorme template preview --path colorme/template
 ```
 
 `push` は、対象のテンプレートにすぐ反映されます。**公開中のショップに対して実行するときは、先に今のテンプレートを `colorme template pull` で控えてください。**
+
+## ホームページとのリンク
+
+公式サイトへのリンクは `template/index.html` の先頭の `site_url` で決めています。ドメインが決まったら、この値だけを変えます。ホームページ側のショップの URL は `src/data/site.ts` です。
+
+商品の旧 ID と新 ID の対応は [product-map.json](product-map.json) です。
+
+## 007 の仮のデザイン
+
+- 変更は `scripts/temporary-design/apply-shop.ts` が元のテンプレートに当てたものです。追加した CSS の元は `scripts/temporary-design/shop-layout.css`（`index.html` の先頭の `<style>` に入る）と `shop-top.css`（`top.css` の末尾に入る）です。
+- `index.css` は容量の上限（64KB 程度。超えると `push` が 422 で失敗する）に近いため、触っていません。
+- ロゴは管理画面の画像（`<{$logo}>`）をやめて、こけしの図と文字にしました。民芸の図・ふきだしの部品は `w-` で始まるクラスです。
+- 元に戻すときは、タグ `design-original` から元のファイルを取り出して（`git checkout design-original -- colorme/template`）、`colorme template push --path colorme/template` で反映します。
+
+カートの画面の色は管理画面でしか変えられないため、緑のままです。仮のデザインに合わせるときは、下の表の `#357029`・`#2b5c21` を藍 `#1f2d3d` に変えます（元のデザインに戻すときは表の値に戻す）。
 
 ## 管理画面で設定するもの
 

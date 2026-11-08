@@ -1,0 +1,88 @@
+---
+// ふきだし（007 の仮のデザイン）。民芸のモチーフが、ひとことを話しているように見せる。
+// 文字は本文として読み上げる。モチーフは飾り
+import Mingei, { type MingeiKind } from './Mingei.astro';
+
+interface Props {
+  speaker: MingeiKind;
+  /** モチーフを右に置く */
+  reverse?: boolean;
+  class?: string;
+}
+
+const { speaker, reverse = false, class: className } = Astro.props;
+---
+
+<div class:list={['fukidashi', { 'fukidashi--reverse': reverse }, className]}>
+  <Mingei kind={speaker} class="fukidashi__speaker" />
+  <p class="fukidashi__bubble"><slot /></p>
+</div>
+
+<style>
+  .fukidashi {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-sm);
+  }
+
+  .fukidashi--reverse {
+    flex-direction: row-reverse;
+  }
+
+  .fukidashi :global(.fukidashi__speaker) {
+    flex: none;
+    width: 52px; /* ふきだしの文字1〜2行に釣り合う大きさ */
+  }
+
+  .fukidashi :global(.mingei--kokeshi.fukidashi__speaker) {
+    width: 26px; /* こけしは縦長のため、高さをほかのモチーフにそろえる */
+  }
+
+  .fukidashi__bubble {
+    position: relative;
+    margin-bottom: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-soft);
+    background: var(--color-bg-raised);
+    font-family: var(--font-family-mincho);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-tight);
+  }
+
+  /* しっぽ：枠線の色の三角の上に、地の色の三角を重ねる */
+  .fukidashi__bubble::before,
+  .fukidashi__bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 10px; /* 角丸を避けた位置 */
+    border-style: solid;
+  }
+
+  .fukidashi__bubble::before {
+    left: -9px;
+    border-width: 6px 9px 6px 0; /* しっぽの三角の大きさ */
+    border-color: transparent var(--color-line) transparent transparent;
+  }
+
+  .fukidashi__bubble::after {
+    left: -7px;
+    border-width: 5px 8px 5px 0; /* 1px 内側に重ねる三角 */
+    border-color: transparent var(--color-bg-raised) transparent transparent;
+    bottom: 11px;
+  }
+
+  .fukidashi--reverse .fukidashi__bubble::before {
+    right: -9px;
+    left: auto;
+    border-width: 6px 0 6px 9px;
+    border-color: transparent transparent transparent var(--color-line);
+  }
+
+  .fukidashi--reverse .fukidashi__bubble::after {
+    right: -7px;
+    left: auto;
+    border-width: 5px 0 5px 8px;
+    border-color: transparent transparent transparent var(--color-bg-raised);
+  }
+</style>

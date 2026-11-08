@@ -13,7 +13,7 @@ migratedFrom: "https://waku-8.com/251/"
 - **新拠点：** 有限会社和久屋 事務所 （現所在地のまま：郡山市中町10-14 和久屋ビル）
 - **お電話：** 024-922-1250 （不在時は携帯へ転送、または折り返しいたします）
 - **メール：** [https://waku-8.com/contact/](/contact/)
-- **オンラインショップ：** [https://waku-8.shop-pro.jp/](https://waku-8.shop-pro.jp/)
+- **オンラインショップ：** [https://wakuya.shop-pro.jp/](https://wakuya.shop-pro.jp/)
 
 実店舗は事務所へ姿を変え、これからも地域とのかかわりをつづけていきます。
 

@@ -43,7 +43,7 @@ heroAlt: 催事の会場に並べた張り子の干支
 
 ![ブースに並べた赤べこ](./photo-1.jpg)
 
-オンラインショップでも[同じ商品](https://waku-8.shop-pro.jp/?pid=177769621)をお求めいただけます。
+オンラインショップでも[同じ商品](https://wakuya.shop-pro.jp/?pid=177769621)をお求めいただけます。
 ```
 
 `---` で囲んだ部分に、記事の情報を書きます。
@@ -124,7 +124,7 @@ http://localhost:4321/ を開き、次の5か所に記事が出ていること�
 3. 下の `recommended` の一覧の、入れ替えたい行を書き換えます
 
    ```ts
-   { name: '土湯こけし', image: kokeshi, alt: '赤い着物の柄の土湯こけし', url: 'https://waku-8.shop-pro.jp/?pid=123456789' },
+   { name: '土湯こけし', image: kokeshi, alt: '赤い着物の柄の土湯こけし', url: 'https://wakuya.shop-pro.jp/?pid=123456789' },
    ```
 
    | 項目 | 書くこと |
