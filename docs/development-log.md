@@ -123,3 +123,22 @@ SEO の減点は4ページとも「Page is blocked from indexing」（テスト�
 
 - テスト公開の確認で、存在しない URL を開くとトップページが 200 で返ることが分かった。Cloudflare Pages は `404.html` がないとトップページを返す。自動テストはサイト内のリンクしか見ていなかったので気づかなかった。
 - `src/pages/404.astro` を追加し、存在しない URL のステータスをテストするようにした。
+
+## 005〜007 ショップの再現・商品の移行・仮のデザイン（2026-11-05〜2026-11-08）
+
+- 使っていたデザインが使えなくなるかもしれないため、ホームページとカラーミーショップを仮のデザインに差し替えた（specs/007-temporary-design/spec.md）。元のデザインはタグ `design-original` に残した（docs/design-original.md）。
+- develop の CI が一度、テストの中身ではなく CI のマシンのディスク不足（ENOSPC）で失敗した。失敗したジョブを再実行して成功を確かめた。
+
+### Lighthouse（モバイル、2026-11-08、develop のプレビュー）
+
+| ページ | Performance | Accessibility | Best Practices | SEO |
+|--------|-------------|---------------|----------------|-----|
+| `/` | 94 | 100 | 100 | 69 |
+| `/summary/` | 100 | 100 | 100 | 69 |
+| `/thought/` | 99 | 100 | 100 | 69 |
+| `/deliver/` | 100 | 100 | 100 | 69 |
+| `/contact/` | 100 | 100 | 100 | 69 |
+| `/257/` | 100 | 100 | 100 | 69 |
+| `/82/`（写真が多い記事） | 100 | 100 | 100 | 69 |
+
+SEO の減点は全ページとも「Page is blocked from indexing」（テスト公開の noindex）の1項目だけ。構造化データ（`Store`・`WebSite`・`AboutPage`・`BlogPosting`・`BreadcrumbList`）は、プレビューの HTML から読み取れることを確かめた。リッチリザルトテストは公開後の URL で行う。
