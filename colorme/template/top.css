@@ -656,3 +656,56 @@
 .p-shop__url a {
   color: #ffffff;
 }
+
+/******************************/
+/* 007 仮のデザイン（specs/007-temporary-design/spec.md）。元に戻すときは、この印から下を消す */
+/******************************/
+/* 紹介：写真を旅館の花頭窓の形に切り抜く */
+body .p-concept {
+  background: #f7f3ea;
+}
+body .p-concept__img {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125' preserveAspectRatio='none'%3E%3Cpath d='M0 125 L0 52 C0 41 5 36 10 33 C16 29 19 20 27 14 C35 8 44 6 50 0 C56 6 65 8 73 14 C81 20 84 29 90 33 C95 36 100 41 100 52 L100 125 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125' preserveAspectRatio='none'%3E%3Cpath d='M0 125 L0 52 C0 41 5 36 10 33 C16 29 19 20 27 14 C35 8 44 6 50 0 C56 6 65 8 73 14 C81 20 84 29 90 33 C95 36 100 41 100 52 L100 125 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  min-height: 460px;
+}
+@media screen and (max-width: 767px) {
+  body .p-concept__img {
+    width: 80%;
+    min-height: 360px;
+    margin: 0 auto;
+  }
+}
+body .p-concept__ttl,
+body .p-gallery__ttl {
+  font-family: inherit;
+  letter-spacing: 0.2em;
+}
+body .p-concept__txt {
+  color: #24211d;
+}
+body .p-concept__txt .w-eyebrow {
+  color: #635c52;
+}
+body .p-concept__body {
+  line-height: 2.1;
+}
+
+/* わくやの想い：一段沈んだ生成りの帯、写真は上の丸いアーチ窓 */
+body .p-gallery {
+  border-top: 1px solid #d6ccb8;
+  border-bottom: 1px solid #d6ccb8;
+  background: #ece5d6;
+}
+body .p-gallery__img .p-gallery-slider__item {
+  border-radius: 9999px 9999px 0 0;
+}
+body .p-gallery__img .slick-dots li button {
+  background: #a8322b;
+}
+body .p-gallery__img .slick-dots li.slick-active button:before {
+  border-color: #a8322b;
+}
+body .p-ranking {
+  background: #f7f3ea;
+}

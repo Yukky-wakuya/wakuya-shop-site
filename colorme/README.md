@@ -30,9 +30,12 @@ colorme template preview --path colorme/template
 
 ## 007 の仮のデザイン
 
-- 追加した CSS は  の先頭の  と、 の末尾にあります（どちらも「007 仮のデザイン」の印から）。 は容量の上限（64KB 程度。超えると push が 422 で失敗する）に近いため、触っていません。
-- ロゴは管理画面の画像（）をやめて、こけしの図と文字にしました。民芸の図・ふきだしの部品は  で始まるクラスです。
-- 元に戻すときは  で元のファイルを取り出し、 で反映します。
+- 変更は `scripts/temporary-design/apply-shop.ts` が元のテンプレートに当てたものです。追加した CSS の元は `scripts/temporary-design/shop-layout.css`（`index.html` の先頭の `<style>` に入る）と `shop-top.css`（`top.css` の末尾に入る）です。
+- `index.css` は容量の上限（64KB 程度。超えると `push` が 422 で失敗する）に近いため、触っていません。
+- ロゴは管理画面の画像（`<{$logo}>`）をやめて、こけしの図と文字にしました。民芸の図・ふきだしの部品は `w-` で始まるクラスです。
+- 元に戻すときは、タグ `design-original` から元のファイルを取り出して（`git checkout design-original -- colorme/template`）、`colorme template push --path colorme/template` で反映します。
+
+カートの画面の色は管理画面でしか変えられないため、緑のままです。仮のデザインに合わせるときは、下の表の `#357029`・`#2b5c21` を藍 `#1f2d3d` に変えます（元のデザインに戻すときは表の値に戻す）。
 
 ## 管理画面で設定するもの
 
