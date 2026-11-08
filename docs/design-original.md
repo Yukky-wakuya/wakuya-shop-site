@@ -10,6 +10,7 @@
 | 差し替える直前のサイト全体 | git のタグ `design-original`（`git show design-original` で確かめられる） |
 | 元のデザインの画像（ロゴ・模様・フッターの写真） | `src/assets/brand/`（今はどこからも使っていない。消さずに置いている） |
 | 元のファビコン・OGP 画像・写真のない記事の画像 | タグ `design-original` の `public/favicon.png`・`public/apple-touch-icon.png`・`public/og-default.png`・`src/assets/brand/no-image.png` |
+| 元のカラーミーショップのテンプレート | タグ `design-original` の `colorme/template/`（戻し方は colorme/README.md） |
 | 元のデザインの値（色・余白など）と出典 | タグ `design-original` の `src/styles/tokens.css`、`docs/current-site/design.md` |
 
 元のデザインの見た目は、タグに切り替えて手元で表示すれば見られる。

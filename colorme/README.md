@@ -1,6 +1,6 @@
 # カラーミーショップのテンプレート
 
-`template/` は、公開中のショップ（`waku-8.shop-pro.jp`）の見た目を再現したテンプレートです。プロジェクト用のショップ（`wakuya.shop-pro.jp`）で動作を確かめています。
+`template/` は、公開中のショップ（`waku-8.shop-pro.jp`）の構造を再現したテンプレートです。**2026-11-08 から、見た目はホームページと同じ 007 の仮のデザインです**（[specs/007-temporary-design/spec.md](../specs/007-temporary-design/spec.md)）。元の見た目はタグ `design-original` にあります。プロジェクト用のショップ（`wakuya.shop-pro.jp`）で動作を確かめています。
 
 - 方針と経緯：[specs/005-colorme-shop/spec.md](../specs/005-colorme-shop/spec.md)
 - 外から見えない画面の案：[specs/005-colorme-shop/mockups/index.html](../specs/005-colorme-shop/mockups/index.html)
@@ -27,6 +27,12 @@ colorme template preview --path colorme/template
 公式サイトへのリンクは `template/index.html` の先頭の `site_url` で決めています。ドメインが決まったら、この値だけを変えます。ホームページ側のショップの URL は `src/data/site.ts` です。
 
 商品の旧 ID と新 ID の対応は [product-map.json](product-map.json) です。
+
+## 007 の仮のデザイン
+
+- 追加した CSS は  の先頭の  と、 の末尾にあります（どちらも「007 仮のデザイン」の印から）。 は容量の上限（64KB 程度。超えると push が 422 で失敗する）に近いため、触っていません。
+- ロゴは管理画面の画像（）をやめて、こけしの図と文字にしました。民芸の図・ふきだしの部品は  で始まるクラスです。
+- 元に戻すときは  で元のファイルを取り出し、 で反映します。
 
 ## 管理画面で設定するもの
 
