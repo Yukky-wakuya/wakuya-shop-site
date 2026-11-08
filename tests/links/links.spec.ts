@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { getPublicPaths } from '../helpers/pages.ts';
 import { PENDING_PAGES } from './pending-pages.ts';
 
-const SHOP = 'https://waku-8.shop-pro.jp/';
+const SHOP = 'https://wakuya.shop-pro.jp/';
 
 // 内部リンクの確認は幅に関係ないため PC 幅の project だけで行う
 test.beforeEach(({}, testInfo) => {

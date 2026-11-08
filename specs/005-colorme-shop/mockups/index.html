@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ja" data-theme="green">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>わくやオンラインショップ 画面例（見本）</title>
+<style>
+  /* 色は公開中のショップから測った値（2026-11-05）。案ごとに主要な操作の色だけを変える */
+  :root {
+    --text: #2d2d2d;
+    --muted: #5f5a52;
+    --line: #d8d2ca;
+    --subtle: #efeae6;
+    --bg: #ffffff;
+    --error: #b60000;
+    --font: "Noto Serif JP", 游明朝体, "Yu Mincho", YuMincho, serif;
+  }
+  [data-theme="green"] { --primary: #357029; --on-primary: #ffffff; --link: #2b5c21; --step: #357029; }
+  [data-theme="red"] { --primary: #a61f29; --on-primary: #ffffff; --link: #a61f29; --step: #a61f29; }
+  [data-theme="tan"] { --primary: #b3a37e; --on-primary: #2d2d2d; --link: #6b5c39; --step: #6b5c39; }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #8a8a8a; color: var(--text); font: 14px/1.8 var(--font); letter-spacing: .04em; }
+  .bar { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 12px 16px; background: #2d2d2d; color: #fff; }
+  .bar strong { font-size: 15px; }
+  .bar label { display: inline-flex; gap: 6px; align-items: center; min-height: 32px; cursor: pointer; }
+  .note { max-width: 960px; margin: 16px auto; padding: 12px 16px; background: #fff; }
+  .screen { max-width: 960px; margin: 24px auto; background: var(--bg); }
+  .caption { padding: 12px 16px; background: #fff8d8; border-bottom: 1px solid #e4d88f; font-size: 13px; }
+  .caption b { display: block; font-size: 15px; }
+  .tag { display: inline-block; margin-right: 6px; padding: 0 8px; background: #2d2d2d; color: #fff; font-size: 12px; }
+
+  .head { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; border-bottom: 1px solid var(--line); }
+  .head img { display: block; height: 48px; }
+  .head span { color: var(--link); font-size: 13px; text-decoration: underline; }
+  .body { padding: 32px 24px 40px; }
+  .narrow { max-width: 460px; margin-inline: auto; }
+  h2 { margin: 0 0 20px; font-size: 22px; font-weight: 500; text-align: center; }
+  h3 { margin: 24px 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); font-size: 16px; font-weight: 500; }
+  p { margin: 0 0 12px; }
+
+  .steps { display: flex; justify-content: center; gap: 4px; margin: 0 0 28px; padding: 0; list-style: none; font-size: 12px; }
+  .steps li { flex: 1 1 0; max-width: 150px; padding: 6px 4px; background: var(--subtle); color: var(--muted); text-align: center; }
+  .steps li.on { background: var(--step); color: #fff; }
+
+  .item { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .item img { width: 96px; height: 96px; object-fit: cover; background: var(--subtle); }
+  .item__name { margin-bottom: 4px; }
+  .item__row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center; }
+  .qty { display: inline-block; min-width: 56px; padding: 4px 10px; border: 1px solid var(--line); }
+  .remove { color: var(--link); font-size: 13px; text-decoration: underline; }
+  .total { padding: 16px; margin: 20px 0; background: var(--subtle); }
+  .total div { display: flex; justify-content: space-between; }
+  .total .sum { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--line); font-size: 18px; }
+
+  .btn { display: flex; align-items: center; justify-content: center; min-height: 56px; margin-top: 12px; padding: 8px 16px; border-radius: 3px; background: var(--primary); color: var(--on-primary); font-weight: 600; text-align: center; }
+  .btn--sub { background: var(--bg); border: 1px solid var(--text); color: var(--text); font-weight: 400; }
+  .text-link { display: block; margin-top: 12px; color: var(--link); text-align: center; text-decoration: underline; }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; margin-bottom: 4px; font-size: 13px; }
+  .req { margin-left: 6px; color: var(--error); font-size: 12px; }
+  .field input { width: 100%; min-height: 44px; padding: 8px 10px; border: 1px solid #8b857c; background: #fff; font: inherit; }
+  .field--error input { border: 2px solid var(--error); }
+  .err { margin-top: 4px; color: var(--error); font-size: 13px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .center { text-align: center; }
+  .mark { width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 50%; background: var(--primary); color: var(--on-primary); font-size: 28px; line-height: 56px; }
+  .box { padding: 16px; margin: 16px 0; background: var(--subtle); text-align: left; }
+  .foot { padding: 16px 24px; background: var(--subtle); font-size: 12px; text-align: center; }
+  .sold { display: flex; align-items: center; justify-content: center; min-height: 56px; margin-top: 12px; border-radius: 3px; background: #d8d8d8; color: #2d2d2d; }
+  .product { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .product img { width: 100%; background: var(--subtle); }
+  @media (max-width: 600px) {
+    .body { padding: 24px 16px 32px; }
+    .head { padding: 10px 16px; }
+    .product { grid-template-columns: 1fr; }
+    .steps { font-size: 11px; }
+    .screen { margin: 16px 0; }
+    .note { margin: 16px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="bar">
+  <strong>画面例（見本）</strong>
+  <label><input type="radio" name="t" value="green" checked /> 案1 緑（おすすめ）</label>
+  <label><input type="radio" name="t" value="red" /> 案2 赤</label>
+  <label><input type="radio" name="t" value="tan" /> 案3 金茶</label>
+</div>
+
+<div class="note">
+  デザインの見本です。入力欄は無効で、どこにも送信されません。商品と金額は表示の例です。
+  各画面の黄色い帯に、カラーミーショップで実現できる範囲を書いています。
+</div>
+
+<section class="screen">
+  <div class="caption"><b>1. カート（商品あり）</b><span class="tag">色のみ</span>配置はカラーミーの標準のまま。実物の配置は、見本と違う場合があります</div>
+  <div class="head"><img src="../../../src/assets/brand/header_logo.svg" alt="わくや" /><span>買い物を続ける</span></div>
+  <div class="body">
+    <ol class="steps"><li class="on">カート</li><li>お客様情報</li><li>確認</li><li>完了</li></ol>
+    <h2>ショッピングカート</h2>
+    <div class="item">
+      <img src="../../../src/assets/recommend/recommend01.png" alt="" />
+      <div>
+        <p class="item__name">会津張り子 赤べこ（表示の例）</p>
+        <div class="item__row"><span>0,000円（税込）</span><span class="qty">数量 1</span><span class="remove">削除</span></div>
+      </div>
+    </div>
+    <div class="item">
+      <img src="../../../src/assets/recommend/recommend03.png" alt="" />
+      <div>
+        <p class="item__name">蔵王木地玩具 野菜こま5種セット（表示の例）</p>
+        <div class="item__row"><span>0,000円（税込）</span><span class="qty">数量 2</span><span class="remove">削除</span></div>
+      </div>
+    </div>
+    <div class="total">
+      <div><span>商品合計</span><span>0,000円</span></div>
+      <div class="sum"><span>合計（税込）</span><span>0,000円</span></div>
+    </div>
+    <div class="narrow">
+      <div class="btn">ご注文手続きへ進む</div>
+      <span class="text-link">買い物を続ける</span>
+    </div>
+  </div>
+</section>
+
+<section class="screen">
+  <div class="caption"><b>2. 購入手続き（お客様情報の入力）</b><span class="tag">色のみ</span>配置と項目はカラーミーの標準のまま。入力の誤りの見せ方も示しています</div>
+  <div class="head"><img src="../../../src/assets/brand/header_logo.svg" alt="わくや" /><span>カートに戻る</span></div>
+  <div class="body">
+    <ol class="steps"><li>カート</li><li class="on">お客様情報</li><li>確認</li><li>完了</li></ol>
+    <div class="narrow">
+      <h2>お客様情報</h2>
+      <div class="two">
+        <div class="field"><label>姓<span class="req">必須</span></label><input disabled placeholder="見本" /></div>
+        <div class="field"><label>名<span class="req">必須</span></label><input disabled placeholder="見本" /></div>
+      </div>
+      <div class="field field--error"><label>メールアドレス<span class="req">必須</span></label><input disabled placeholder="見本" /><p class="err">メールアドレスの形式を確かめてください</p></div>
+      <div class="field"><label>郵便番号<span class="req">必須</span></label><input disabled placeholder="見本" /></div>
+      <div class="field"><label>住所<span class="req">必須</span></label><input disabled placeholder="見本" /></div>
+      <div class="field"><label>電話番号<span class="req">必須</span></label><input disabled placeholder="見本" /></div>
+      <div class="btn">確認画面へ進む</div>
+      <div class="btn btn--sub">カートに戻る</div>
+    </div>
+  </div>
+</section>
+
+<section class="screen">
+  <div class="caption"><b>3. 注文完了</b><span class="tag">ほぼ標準</span>完了やエラーの色は変えられない可能性が高い画面です。雰囲気の目標として示しています</div>
+  <div class="head"><img src="../../../src/assets/brand/header_logo.svg" alt="わくや" /></div>
+  <div class="body center">
+    <ol class="steps"><li>カート</li><li>お客様情報</li><li>確認</li><li class="on">完了</li></ol>
+    <div class="narrow">
+      <div class="mark" aria-hidden="true">✓</div>
+      <h2>ご注文ありがとうございます</h2>
+      <p>ご登録のメールアドレスに、確認のメールをお送りしました。</p>
+      <div class="box">ご注文番号：0000000（表示の例）</div>
+      <div class="btn btn--sub">ショップのトップへ</div>
+    </div>
+  </div>
+</section>
+
+<section class="screen">
+  <div class="caption"><b>4. 会員ログイン</b><span class="tag">要確認</span>今はロゴが大きすぎ、ボタンが薄いピンクです。CSS をどこまで変更できるかは管理画面で確かめます</div>
+  <div class="head"><img src="../../../src/assets/brand/header_logo.svg" alt="わくや" /><span>ショップへ戻る</span></div>
+  <div class="body">
+    <div class="narrow">
+      <h2>ログイン</h2>
+      <div class="field"><label>メールアドレス</label><input disabled placeholder="見本" /></div>
+      <div class="field"><label>パスワード</label><input disabled placeholder="見本" /></div>
+      <span class="text-link">パスワードを忘れた方はこちら</span>
+      <div class="btn">ログイン</div>
+    </div>
+  </div>
+</section>
+
+<section class="screen">
+  <div class="caption"><b>5. カートが空のとき</b><span class="tag">色のみ</span>今は青い背景に青いボタンで、ショップの雰囲気と離れています</div>
+  <div class="head"><img src="../../../src/assets/brand/header_logo.svg" alt="わくや" /></div>
+  <div class="body center">
+    <div class="narrow">
+      <h2>カートに商品がありません</h2>
+      <p>福島の民芸品を、ぜひご覧ください。</p>
+      <div class="btn">買い物を続ける</div>
+    </div>
+  </div>
+</section>
+
+<section class="screen">
+  <div class="caption"><b>6. 検索で見つからないとき</b><span class="tag">編集できる</span>検索結果のページは HTML と CSS を編集できます。今は「該当する商品がありません」だけで、次の案内がありません</div>
+  <div class="head"><img src="../../../src/assets/brand/header_logo.svg" alt="わくや" /></div>
+  <div class="body center">
+    <div class="narrow">
+      <h2>見つかりませんでした</h2>
+      <p>別の言葉で探すか、カテゴリーからご覧ください。</p>
+      <div class="field"><input disabled placeholder="キーワード（見本）" /></div>
+      <div class="btn">すべての商品を見る</div>
+    </div>
+  </div>
+</section>
+
+<section class="screen">
+  <div class="caption"><b>7. 売り切れの商品</b><span class="tag">編集できる</span>今の商品ページに合わせ、カートのボタンを押せない表示にします。実際の表示は売り切れの商品で確かめます</div>
+  <div class="head"><img src="../../../src/assets/brand/header_logo.svg" alt="わくや" /></div>
+  <div class="body">
+    <div class="product">
+      <img src="../../../src/assets/recommend/recommend02.png" alt="" />
+      <div>
+        <h2 style="text-align: left">会津張り子 招福玉うさぎ（表示の例）</h2>
+        <p>0,000円（税込）</p>
+        <div class="sold">売り切れ</div>
+        <span class="text-link">この商品について問い合わせる</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  for (const r of document.querySelectorAll('input[name="t"]')) {
+    r.addEventListener('change', () => { document.documentElement.dataset.theme = r.value; });
+  }
+</script>
+</body>
+</html>

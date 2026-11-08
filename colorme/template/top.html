@@ -1,0 +1,169 @@
+<{* トップページ。文章は公開中のショップと同じ。画像は colorme/README.md を参照。見た目は 007 の仮のデザイン（元のデザインはタグ design-original） *}>
+<div class="p-main-slider">
+  <{if $slideshow_html}>
+  <div class="slider">
+    <{$slideshow_html}>
+    <style>
+      .bx-wrapper .bx-pager {
+        padding-top: 10px;
+        bottom: -20px;
+      }
+      .bx-wrapper {
+        margin-bottom: 30px;
+      }
+    </style>
+  </div>
+  <script type="text/javascript">
+    $(function() {
+      $('#slider').bxSlider({
+        auto: true,
+        pause: 2000,
+        speed: 1000,
+        controls: false,
+        captions: true,
+        pager: true,
+        mode: 'fade',
+        responsive: true,
+        easing: 'ease'
+      });
+    });
+  </script>
+  <{/if}>
+</div>
+
+<div class="p-concept">
+  <div class="p-concept__img fadeIn fromLeft"></div>
+  <div class="p-concept__txt fadeIn fromRight">
+    <span class="w-eyebrow" aria-hidden="true">Fukushima Folk Craft — since 1975</span>
+    <h2 class="p-concept__ttl">福島の民芸品を、みなさまに。</h2>
+    <div class="p-concept__body">
+      ふくしまで、長く愛されてきた民芸品、めんこい和雑貨たち、心の琴線にふれるお気に入りにめぐり会う「わくや」です。<br><br>
+      どうぞ店内ごゆるりとお楽しみくださいませ。
+    </div>
+    <div class="w-fukidashi"><svg class="w-mingei w-mingei--akabeko" viewBox="0 0 80 60" aria-hidden="true" focusable="false"><rect class="w-ink" x="29" y="40" width="6" height="14" rx="1"/><rect class="w-ink" x="39" y="42" width="5" height="12" rx="1"/><rect class="w-ink" x="57" y="42" width="5" height="12" rx="1"/><rect class="w-ink" x="66" y="40" width="6" height="14" rx="1"/><path class="w-ink-line" d="M74 27 q6 3 4 11"/><rect class="w-red" x="26" y="19" width="50" height="27" rx="13"/><path class="w-red" d="M31 21 L19 26 L18 42 L33 44 Z"/><ellipse class="w-red" cx="13" cy="37" rx="11.5" ry="8.5" transform="rotate(28 13 37)"/><ellipse class="w-ink" cx="6.5" cy="43.5" rx="4.2" ry="3.4" transform="rotate(28 6.5 43.5)"/><path class="w-ink" d="M15 28 Q13 22 17 19 Q16 24 19 28 Z M20 29 Q20 23 24 21 Q22 25 23 30 Z"/><circle class="w-paper" cx="12" cy="34" r="2.6"/><circle class="w-ink" cx="11.6" cy="34.3" r="1.3"/><path class="w-ochre-line" d="M29 22 L31 43"/><circle class="w-spot" cx="44" cy="30" r="3.6"/><circle class="w-spot" cx="56" cy="27" r="3.4"/><circle class="w-spot" cx="64" cy="36" r="3"/></svg><p class="w-fukidashi__bubble">ようこそ、わくやへ。</p></div>
+  </div>
+</div>
+
+<{if $recommend_num != 0}>
+<div class="p-recommend">
+  <div class="u-container">
+    <h2 class="c-ttl-main"><span class="w-eyebrow" aria-hidden="true">Selection</span>おすすめ商品</h2>
+    <div class="p-recommend-list">
+      <ul class="p-recommend-item-list u-opa">
+        <{section name=num loop=$recommend}>
+        <li class="p-recommend-item-list__item fadeIn fromBottom">
+          <div class="c-item-list__img u-square-img">
+            <a href="<{$recommend[num].link_url}>">
+              <{if $recommend[num].img_url != ""}>
+              <img src="<{$recommend[num].img_url}>" alt="<{$recommend[num].name|escape:'html'}>" />
+              <{else}>
+              <img src="https://img.shop-pro.jp/tmpl_img/86/no-image.jpg" alt="<{$recommend[num].name|escape:'html'}>" />
+              <{/if}>
+            </a>
+            <button class="c-item-list__btn" type="button" data-favorite-button-selector="DOMSelector" data-product-id="<{$recommend[num].id}>" data-added-class="is-added">
+              <svg role="img" aria-hidden="true"><use xlink:href="#heart"></use></svg>
+            </button>
+          </div>
+          <div class="c-item-list__txt">
+            <div class="c-item-list__ttl"><a href="<{$recommend[num].link_url}>"><{$recommend[num].name}></a></div>
+            <{if !$recommend[num].soldout_flg}>
+            <div class="c-item-list__price"><{$recommend[num].price}></div>
+            <{else}>
+            <div class="c-item-list__price is-soldout">売り切れ</div>
+            <{/if}>
+          </div>
+        </li>
+        <{/section}>
+      </ul>
+    </div>
+  </div>
+</div>
+<{/if}>
+
+<div class="p-gallery">
+  <div class="u-container">
+    <div class="p-gallery__wrap">
+      <div class="p-gallery__img">
+        <div class="p-gallery-slider js-top-gallery-slider">
+          <div class="p-gallery-slider__item p-gallery-slider__item01"></div>
+          <div class="p-gallery-slider__item p-gallery-slider__item02"></div>
+          <div class="p-gallery-slider__item p-gallery-slider__item03"></div>
+        </div>
+      </div>
+      <div class="p-gallery__txt fadeIn fromBottom">
+        <span class="w-eyebrow" aria-hidden="true">Our Thoughts</span>
+        <h2 class="p-gallery__ttl">わくやの想い</h2>
+        <div class="p-gallery__body">
+          <p>はじまりは「来て。」から、<br>
+          こんどは「かなえる。」ために。</p>
+          <p>つながった交流をより豊かに持続可能に、<br>
+          深く確かなものとするために、<br>
+          はじめます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<{if $seller_num != 0}>
+<div class="p-ranking">
+  <h2 class="c-ttl-main"><span class="w-eyebrow" aria-hidden="true">Ranking</span>人気商品</h2>
+  <div class="u-container">
+    <div class="p-ranking-list js-ranking-slider u-opa">
+      <{section name=num loop=$seller}>
+      <div class="p-ranking-list__item">
+        <div class="p-ranking-list__img u-square-img">
+          <a href="<{$seller[num].link_url}>">
+            <{if $seller[num].img_url != ""}>
+            <img src="<{$seller[num].img_url}>" alt="<{$seller[num].name|escape:'html'}>" />
+            <{else}>
+            <img src="https://img.shop-pro.jp/tmpl_img/86/no-image.jpg" alt="<{$seller[num].name|escape:'html'}>" />
+            <{/if}>
+          </a>
+          <button class="c-item-list__btn" type="button" data-favorite-button-selector="DOMSelector" data-product-id="<{$seller[num].id}>" data-added-class="is-added">
+            <svg role="img" aria-hidden="true"><use xlink:href="#heart"></use></svg>
+          </button>
+        </div>
+        <div class="p-ranking-list__txt">
+          <div class="c-item-list__ttl"><a href="<{$seller[num].link_url}>"><{$seller[num].name}></a></div>
+          <{if !$seller[num].soldout_flg}>
+          <div class="c-item-list__price"><{$seller[num].price}></div>
+          <{else}>
+          <div class="c-item-list__price is-soldout">売り切れ</div>
+          <{/if}>
+        </div>
+      </div>
+      <{/section}>
+    </div>
+  </div>
+</div>
+<{/if}>
+
+<script type="text/javascript">
+  $(function() {
+    $(".js-top-gallery-slider").slick({
+      autoplay: true,
+      autoplaySpeed: 3000,
+      fade: true,
+      speed: 1500,
+      arrows: false,
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    });
+    $(".js-ranking-slider").slick({
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows: false,
+      dots: false,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [
+        { breakpoint: 1030, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+        { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+      ]
+    });
+  });
+</script>

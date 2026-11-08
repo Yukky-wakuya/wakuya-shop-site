@@ -1,0 +1,309 @@
+
+/******************************/
+/* 007 仮のデザイン（specs/007-temporary-design/spec.md）
+ * ホームページと同じ色・書体・民芸の図に合わせて、元の見た目の上に重ねる。
+ * scripts/temporary-design/apply-shop.ts が colorme/template/index.html の style に入れる。
+ * 元のファイルはタグ design-original にある（docs/design-original.md）
+ * 色：和紙 #f7f3ea／生成り #ece5d6／胡粉 #fffdf8／砂色の線 #d6ccb8／墨 #24211d／薄墨 #635c52
+ *     赤べこの朱 #a8322b／藍 #1f2d3d／山吹 #c99a3e／若草 #4f7a52
+ */
+/******************************/
+body {
+  background: #f7f3ea;
+  color: #24211d;
+  font-family: "Yu Mincho", YuMincho, "游明朝体", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  letter-spacing: 0.04em;
+}
+body a,
+body a:hover,
+body a:focus {
+  color: inherit;
+}
+body a:hover {
+  color: #a8322b;
+}
+body :focus-visible {
+  outline: 3px solid #a8322b;
+  outline-offset: 2px;
+}
+
+/* 民芸の図（ホームページの src/components/Mingei.astro と同じ） */
+.w-mingei {
+  display: block;
+  overflow: visible;
+}
+.w-red { fill: #a8322b; }
+.w-ink { fill: #24211d; }
+.w-paper { fill: #fffdf8; }
+.w-ochre { fill: #c99a3e; }
+.w-green { fill: #4f7a52; }
+.w-spot { fill: #24211d; stroke: #fffdf8; stroke-width: 1.2; }
+.w-ink-line, .w-ochre-line, .w-green-line { fill: none; stroke-linecap: round; stroke-width: 2; }
+.w-ink-line { stroke: #24211d; }
+.w-ochre-line { stroke: #c99a3e; }
+.w-green-line { stroke: #4f7a52; }
+.w-ink-line.w-thin, .w-ochre-line.w-thin { stroke-width: 1.2; }
+
+/* 英字の添え書き（展示の解説札のような小さな欧文） */
+.w-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  color: #635c52;
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* ---- ヘッダー ---- */
+body .l-header,
+body .l-header-main {
+  background: #f7f3ea;
+}
+body .l-header-main {
+  border-bottom: 1px solid #d6ccb8;
+}
+.w-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #24211d;
+  text-decoration: none;
+}
+.w-logo .w-mingei--kokeshi {
+  width: 20px;
+}
+.w-logo__words {
+  display: grid;
+  text-align: left;
+}
+.w-logo__sub {
+  color: #635c52;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+}
+.w-logo__name {
+  font-size: 26px;
+  letter-spacing: 0.2em;
+  line-height: 1.3;
+}
+@media screen and (max-width: 767px) {
+  .w-logo .w-mingei--kokeshi { width: 16px; }
+  .w-logo__sub { font-size: 10px; }
+  .w-logo__name { font-size: 20px; }
+}
+body .l-main-navi-list__link,
+body .l-dropdown-menu-list__link,
+body .l-header-account-list__link {
+  font-family: "Yu Mincho", YuMincho, "游明朝体", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  letter-spacing: 0.15em;
+}
+body .l-dropdown-menu,
+body .l-main-navi {
+  background: #f7f3ea;
+}
+body .l-header-cart-btn__count,
+body .l-sp-header-cart-btn__count {
+  background: #a8322b;
+  color: #ffffff;
+}
+
+/* ---- 見出し ---- */
+body .c-ttl-main {
+  font-family: inherit;
+  font-size: 26px;
+  letter-spacing: 0.2em;
+}
+body .c-ttl-main::after {
+  content: "";
+  display: block;
+  width: 40px;
+  margin: 18px auto 0;
+  border-top: 1px solid #a8322b;
+}
+body .c-ttl-main.is-s {
+  font-size: 20px;
+}
+@media screen and (max-width: 767px) {
+  body .c-ttl-main { font-size: 20px; }
+}
+body .l-side-navi__ttl {
+  font-family: inherit;
+  letter-spacing: 0.15em;
+  border-bottom: 1px solid #d6ccb8;
+}
+
+/* ---- 商品の写真：額装の台紙（白い余白と細い線） ---- */
+body .u-square-img:before {
+  background: #fffdf8;
+}
+body .c-item-list__img.u-square-img,
+body .p-ranking-list__img.u-square-img {
+  border: 1px solid #d6ccb8;
+  background: #fffdf8;
+}
+body .u-square-img a {
+  top: 8px;
+  left: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+}
+body .c-item-list__ttl {
+  letter-spacing: 0.06em;
+}
+body .c-item-list__price {
+  color: #635c52;
+  font-family: "Times New Roman", Georgia, serif;
+  letter-spacing: 0.1em;
+}
+@media screen and (max-width: 767px) {
+  body .c-item-list__price {
+    background: none;
+  }
+}
+body .c-item-list__price.is-soldout {
+  color: #a8322b;
+}
+body .c-item-list__icon.is-soldout {
+  background: #a8322b;
+  color: #ffffff;
+}
+
+/* ---- ボタン ---- */
+body .c-btn {
+  border-color: #24211d;
+  border-radius: 9999px;
+  color: #24211d;
+  font-weight: normal;
+  letter-spacing: 0.15em;
+}
+body .c-btn:before {
+  border-radius: 9999px;
+  background: #1f2d3d;
+}
+body .c-btn:hover {
+  color: #ffffff;
+}
+/* カートに入れる：のれんの藍 */
+body .c-btn-cart {
+  border-color: #1f2d3d;
+  border-radius: 9999px;
+  background: #1f2d3d;
+  font-family: inherit;
+  font-weight: normal;
+  letter-spacing: 0.2em;
+}
+body .c-btn-cart:hover {
+  background: #a8322b;
+  border-color: #a8322b;
+}
+
+/* ---- パンくず ---- */
+body .c-breadcrumbs-list__item,
+body .c-breadcrumbs-list__link {
+  color: #635c52;
+}
+
+/* ---- ショッピングガイド ---- */
+body .p-shopguide {
+  border-top: 1px solid #d6ccb8;
+  background: #ece5d6;
+}
+body .p-shopguide-box {
+  box-sizing: border-box;
+  padding: 24px 20px;
+  border: 1px solid #d6ccb8;
+  background: #fffdf8;
+}
+body .p-shopguide-box__ttl,
+body .p-shopguide__ttl,
+body .p-shopguide__body {
+  font-family: inherit;
+}
+
+/* ---- 棚に並んだ民芸とフッター（藍） ---- */
+.w-shelf {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 24px;
+  padding: 40px 24px 0;
+}
+.w-shelf .w-mingei--koma { width: 44px; }
+.w-shelf .w-mingei--kokeshi { width: 22px; }
+.w-shelf .w-mingei--akabeko { width: 52px; }
+.w-shelf .w-mingei--koboshi { width: 24px; }
+body .l-footer {
+  background: #1f2d3d;
+  color: #f7f3ea;
+}
+body .l-footer a,
+body .l-footer a:hover,
+body .l-footer-navi-list__link {
+  color: #f7f3ea;
+}
+body .l-footer a:hover {
+  text-decoration: underline;
+}
+.w-footer-name {
+  display: block;
+  font-size: 28px;
+  letter-spacing: 0.2em;
+  line-height: 1.3;
+}
+.w-footer-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+body .l-footer-other,
+body .l-copyright__txt,
+body .l-copyright__logo a {
+  color: #f7f3ea;
+}
+body .l-footer-other {
+  border-top: 1px solid rgba(247, 243, 234, 0.25);
+}
+
+/* ---- ふきだし ---- */
+.w-fukidashi {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+.w-fukidashi .w-mingei--akabeko {
+  flex: none;
+  width: 52px;
+}
+.w-fukidashi__bubble {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 8px 16px;
+  border: 1px solid #d6ccb8;
+  border-radius: 16px;
+  background: #fffdf8;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.w-fukidashi__bubble::before,
+.w-fukidashi__bubble::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+.w-fukidashi__bubble::before {
+  bottom: 10px;
+  left: -9px;
+  border-width: 6px 9px 6px 0;
+  border-color: transparent #d6ccb8 transparent transparent;
+}
+.w-fukidashi__bubble::after {
+  bottom: 11px;
+  left: -7px;
+  border-width: 5px 8px 5px 0;
+  border-color: transparent #fffdf8 transparent transparent;
+}

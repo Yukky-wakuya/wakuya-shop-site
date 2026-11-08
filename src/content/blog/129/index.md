@@ -14,4 +14,4 @@ migratedFrom: "https://waku-8.com/129/"
 
 福島の春を、そして新しい出会いを想う「おみやげ」にどうぞ。
 
-**⇒[さくら色の会津絵ろうそくの商品はこちらから](https://waku-8.shop-pro.jp/?pid=177767722)**
+**⇒[さくら色の会津絵ろうそくの商品はこちらから](https://wakuya.shop-pro.jp/?pid=194348746)**

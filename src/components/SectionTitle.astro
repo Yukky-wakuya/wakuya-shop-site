@@ -1,46 +1,76 @@
 ---
-// セクション見出し。現行 .h2_title と同じく、アイコン＋明朝の見出し
-import { Image } from 'astro:assets';
-import icon from '../assets/brand/h_icon.svg';
+// セクション見出し（007 の仮のデザイン）。展示室の表示のように、小さな英字の添え書き＋明朝の見出し＋右へ伸びる細い罫線。
+// 元のデザイン（模様のアイコン＋見出し）はタグ design-original にある
+import Mingei, { type MingeiKind } from './Mingei.astro';
 
 interface Props {
   level?: 'h1' | 'h2';
   /** 見出しの id（セクションの aria-labelledby から参照する） */
   id?: string;
+  /** 英字の添え書き（飾り。読み上げない） */
+  en?: string;
+  /** 見出しの前に添える民芸のモチーフ */
+  motif?: MingeiKind;
 }
 
-const { level: Tag = 'h2', id } = Astro.props;
+const { level: Tag = 'h2', id, en, motif } = Astro.props;
 ---
 
-<div class="section-title">
-  <Image class="section-title__icon" src={icon} alt="" />
-  <Tag class="section-title__text" id={id}><slot /></Tag>
+<div class:list={['section-title', `section-title--${Tag}`]}>
+  {en && <span class="eyebrow" aria-hidden="true">{en}</span>}
+  <div class="section-title__row">
+    {motif && <Mingei kind={motif} class:list={['section-title__motif', `section-title__motif--${motif}`]} />}
+    <Tag class="section-title__text" id={id}><slot /></Tag>
+  </div>
 </div>
 
 <style>
   .section-title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
+    display: grid;
+    gap: var(--space-xs);
     margin-bottom: var(--space-md);
   }
 
-  .section-title :global(.section-title__icon) {
-    width: 30px; /* 現行 .title_icon（SP）の幅 */
+  .section-title__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  /* 見出しの右へ伸びる細い罫線（記事の h1 は長いため付けない） */
+  .section-title--h2 .section-title__row::after {
+    content: '';
+    flex: 1;
+    min-width: var(--space-md);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .section-title :global(.section-title__motif) {
+    flex: none;
+    width: 36px; /* 見出しの文字に釣り合う大きさ */
+  }
+
+  .section-title :global(.section-title__motif--kokeshi),
+  .section-title :global(.section-title__motif--koboshi) {
+    width: 18px; /* 縦長のモチーフは高さをそろえる */
   }
 
   .section-title__text {
     font-size: var(--font-size-lg);
   }
 
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  /* 768px 以上（tokens.css --breakpoint-md） */
   @media (min-width: 768px) {
-    .section-title :global(.section-title__icon) {
-      width: 46px; /* 現行 .title_icon の幅 */
+    .section-title {
+      margin-bottom: var(--space-lg);
     }
 
     .section-title__text {
       font-size: var(--font-size-2xl);
+    }
+
+    .section-title--h1 .section-title__text {
+      font-size: var(--font-size-xl);
     }
   }
 </style>

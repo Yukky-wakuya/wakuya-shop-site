@@ -1,7 +1,7 @@
 ---
-// トップページの「わくやの想い」の紹介（現行 .thought）。縦書きの文章と、切り抜いた写真3枚（FR-006）
-import { Image } from 'astro:assets';
-import title from '../assets/brand/wakuya.svg';
+// トップページの「わくやの想い」の紹介（FR-006）。縦書きの文章と、民芸の形（丸・起き上がり小法師・こけし）に切り抜いた写真3枚。
+// 007 の仮のデザイン。元のデザイン（画像の見出しと曲線の写真）はタグ design-original にある
+import ClippedPhoto from './ClippedPhoto.astro';
 import photo1 from '../assets/top/thought01.png';
 import photo2 from '../assets/top/thought02.png';
 import photo3 from '../assets/top/thought03.png';
@@ -10,9 +10,7 @@ import MoreLink from './MoreLink.astro';
 
 <section class="thought content-inner" aria-labelledby="thought-title">
   <div class="thought__body">
-    <h2 id="thought-title" class="thought__title">
-      <Image src={title} alt="わくやの想い" />
-    </h2>
+    <h2 id="thought-title" class="thought__title">わくやの想い</h2>
     <div class="thought__text">
       <p>はじまりは「来て。」から、</p>
       <p>こんどは「かなえる。」ために。</p>
@@ -25,35 +23,43 @@ import MoreLink from './MoreLink.astro';
   </div>
   <MoreLink href="/thought/" what="わくやの想いを" align="start" />
   <div class="thought__photos" aria-hidden="true">
-    <Image class="thought__photo thought__photo--1" src={photo1} alt="" widths={[250, 500]} sizes="125px" />
-    <Image class="thought__photo thought__photo--2" src={photo2} alt="" widths={[330, 660]} sizes="165px" />
-    <Image class="thought__photo thought__photo--3" src={photo3} alt="" widths={[350, 700]} sizes="175px" />
+    <ClippedPhoto class="thought__photo thought__photo--1" src={photo1} alt="" shape="circle" zoom={1.7} />
+    <ClippedPhoto class="thought__photo thought__photo--2" src={photo2} alt="" shape="koboshi" zoom={1.8} />
+    <ClippedPhoto class="thought__photo thought__photo--3" src={photo3} alt="" shape="kokeshi" zoom={1.3} />
   </div>
 </section>
 
 <style>
   .thought {
     position: relative;
-    margin-bottom: var(--space-xl);
+    margin-block: var(--space-xl);
   }
 
-  /* 縦書きを右から読む順に並べる（現行と同じ並び：見出し → 1つ目 → 2つ目） */
+  /* 縦書きを右から読む順に並べる（見出し → 1つ目 → 2つ目） */
   .thought__body {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
     gap: var(--space-md);
     font-family: var(--font-family-mincho);
-    line-height: 1.8; /* 現行 .thought_content の line-height 1.8em。縦書きの行間 */
+    line-height: 2; /* 縦書きの行の間 */
   }
 
-  .thought__title :global(img) {
-    width: 60px; /* 現行 .thought_wakuya の幅 */
+  .thought__title {
+    padding-left: var(--space-sm);
+    border-left: 1px solid var(--color-accent);
+    font-size: var(--font-size-xl);
+    writing-mode: vertical-rl;
   }
 
   .thought__text {
     writing-mode: vertical-rl;
     white-space: nowrap;
+  }
+
+  .thought > :global(.more-link) {
+    margin-top: var(--space-md);
+    text-align: center;
   }
 
   .thought__photos {
@@ -68,22 +74,20 @@ import MoreLink from './MoreLink.astro';
     grid-row: span 2;
   }
 
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  /* 768px 以上（tokens.css --breakpoint-md）：写真3枚を文章の周りに置く */
   @media (min-width: 768px) {
     .thought {
-      min-height: 520px; /* 写真3枚を周りに置く高さ（現行 .thought の上下 padding 70px・130px を含めた見た目に合わせる） */
-      margin-bottom: var(--space-2xl);
-      padding-block: var(--space-xl);
-    }
-
-    .thought__body,
-    .thought > :global(.more-link) {
-      width: 364px; /* 現行 .thought_content_wrap の幅 */
-      margin-inline: auto;
+      min-height: 560px; /* 写真3枚を周りに置く高さ */
+      margin-block: var(--space-2xl);
+      padding-block: var(--space-lg);
     }
 
     .thought__body {
-      justify-content: space-between;
+      gap: var(--space-lg);
+    }
+
+    .thought__title {
+      font-size: var(--font-size-2xl);
     }
 
     .thought__photos {
@@ -97,34 +101,34 @@ import MoreLink from './MoreLink.astro';
     .thought__photos :global(.thought__photo--1) {
       top: 0;
       left: 0;
-      width: 123px; /* 現行 .thought_img01 の幅 */
+      width: 140px; /* 文章に重ならない大きさ */
     }
 
     .thought__photos :global(.thought__photo--2) {
-      top: 50%;
-      left: 0;
-      width: 163px; /* 現行 .thought_img02 の幅 */
+      bottom: 0;
+      left: 6%;
+      width: 150px;
     }
 
     .thought__photos :global(.thought__photo--3) {
+      top: 10%;
       right: 0;
-      bottom: 0;
-      width: 172px; /* 現行 .thought_img03 の幅 */
+      width: 150px;
     }
   }
 
-  /* 写真が文章に重ならない広さでは、現行と同じく写真を大きく見せる */
+  /* 写真が文章に重ならない広さでは、写真を大きく見せる（tokens.css --breakpoint-lg） */
   @media (min-width: 1025px) {
     .thought__photos :global(.thought__photo--1) {
-      width: 250px; /* 1025px 以上で写真を大きく見せる幅（現行の PC での見た目に合わせた値） */
+      width: 220px; /* 1025px 以上で写真を大きく見せる幅 */
     }
 
     .thought__photos :global(.thought__photo--2) {
-      width: 330px; /* 同上 */
+      width: 230px;
     }
 
     .thought__photos :global(.thought__photo--3) {
-      width: 350px; /* 同上 */
+      width: 240px;
     }
   }
 </style>

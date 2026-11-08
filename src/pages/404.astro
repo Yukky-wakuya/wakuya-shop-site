@@ -1,6 +1,7 @@
 ---
 // 存在しない URL の案内（specs/004-not-found）。dist/404.html があると、Cloudflare Pages は存在しない URL にステータス 404 でこのページを返す
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Fukidashi from '../components/Fukidashi.astro';
 ---
 
 <BaseLayout
@@ -10,7 +11,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   noindex
 >
   <div class="content-inner not-found">
+    <span class="eyebrow" aria-hidden="true">404 — Not Found</span>
     <h1 class="not-found__title">ページが見つかりません</h1>
+    <Fukidashi speaker="kokeshi" class="not-found__bubble">道に迷ってしまったようです。</Fukidashi>
     <p>お探しのページは、移動または削除されたか、URL が間違っている可能性があります。</p>
     <ul class="not-found__links">
       <li><a href="/">トップページへ</a></li>
@@ -21,12 +24,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .not-found {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-sm);
     padding-block: var(--space-xl);
   }
 
   .not-found__title {
-    margin-bottom: var(--space-md);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
   }
 
   .not-found__links {
@@ -40,5 +45,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: inline-flex;
     align-items: center;
     min-height: var(--size-tap-min);
+    font-family: var(--font-family-mincho);
   }
 </style>

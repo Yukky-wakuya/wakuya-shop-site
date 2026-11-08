@@ -15,12 +15,12 @@ export interface RecommendedProduct {
 }
 
 /** 「もっと見る」のリンク先（現行と同じ、おすすめ商品のグループ） */
-export const recommendedMoreUrl = 'https://waku-8.shop-pro.jp/?mode=grp&gid=2935801';
+export const recommendedMoreUrl = 'https://wakuya.shop-pro.jp/?mode=grp&gid=3226045';
 
 export const recommended: RecommendedProduct[] = [
-  { name: '会津張り子 赤べこ', image: akabeko, alt: '大きさ違いの赤べこを4つ重ねた張り子', url: 'https://waku-8.shop-pro.jp/?mode=grp&gid=2935798' },
-  { name: '会津張り子 招福玉うさぎ', image: usagi, alt: '赤い耳と花の模様の白いうさぎの張り子', url: 'https://waku-8.shop-pro.jp/?mode=grp&gid=2935799' },
+  { name: '会津張り子 赤べこ', image: akabeko, alt: '大きさ違いの赤べこを4つ重ねた張り子', url: 'https://wakuya.shop-pro.jp/?mode=grp&gid=3226046' },
+  { name: '会津張り子 招福玉うさぎ', image: usagi, alt: '赤い耳と花の模様の白いうさぎの張り子', url: 'https://wakuya.shop-pro.jp/?mode=grp&gid=3226047' },
   // 現行のリンク先（?pid=177769279）は 2026-11-03 時点で 404（販売終了とみられる）。差し替える商品を店に確認するまで、おすすめのグループページへ
   { name: '蔵王木地玩具 野菜こま5種セット', image: koma, alt: 'なすやにんじんの形をした小さな木のこま5つ', url: recommendedMoreUrl },
-  { name: '江戸千代紙 ぽち袋', image: pochi, alt: '鮮やかな色の模様のぽち袋4枚', url: 'https://waku-8.shop-pro.jp/?pid=177769621' },
+  { name: '江戸千代紙 ぽち袋', image: pochi, alt: '鮮やかな色の模様のぽち袋4枚', url: 'https://wakuya.shop-pro.jp/?pid=194348791' },
 ];

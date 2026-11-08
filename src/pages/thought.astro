@@ -1,16 +1,14 @@
 ---
-// わくやの想い（FR-016、specs/003-fixed-pages/research.md §5）。4つの章を現行の文章・写真・模様で並べる
-import { Image } from 'astro:assets';
+// わくやの想い（FR-016、specs/003-fixed-pages/research.md §5）。4つの章を現行の文章・写真で並べる。
+// 007 の仮のデザイン：章ごとに番号の添え書きと明朝の見出し、写真は民芸の形に切り抜く。
+// 元のデザイン（朱と灰色の模様の上の見出し）はタグ design-original にある（docs/design-original.md）
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import ShopBanner from '../components/ShopBanner.astro';
 import RecommendedProducts from '../components/RecommendedProducts.astro';
+import ClippedPhoto from '../components/ClippedPhoto.astro';
+import Mingei from '../components/Mingei.astro';
 import photo from '../assets/pages/thought_hero.jpg';
-import icon from '../assets/brand/icon_red.png';
-import red1 from '../assets/brand/bg_red01.svg';
-import red2 from '../assets/brand/bg_red02.svg';
-import gray1 from '../assets/brand/bg_gray01.svg';
-import gray2 from '../assets/brand/bg_gray02.svg';
 import photo1 from '../assets/top/thought01.png';
 import photo2 from '../assets/top/thought02.png';
 import photo3 from '../assets/top/thought03.png';
@@ -31,20 +29,16 @@ const path = '/thought/';
     ]),
   ]}
 >
-  <PageHero title="わくやの想い" photo={photo} photoAlt="白い手袋で支えられた、色鮮やかな張り子の面" icon={icon} />
+  <PageHero title="わくやの想い" photo={photo} photoAlt="白い手袋で支えられた、色鮮やかな張り子の面" en="Our Thoughts" motif="akabeko" />
 
-  <div class="thought-wrap">
   <div class="content-inner thought-page">
     <section class="chapter">
       <div class="chapter__side">
-        <h2 class="blob-title">
-          <Image class="blob-title__bg" src={red1} alt="" />
-          <span>はじまりは<br />「来て。」から、<br />こんどは<br />「かなえる。」ために。</span>
-        </h2>
-        <Image class="chapter__photo" src={photo1} alt="" widths={[300, 600]} sizes="300px" />
+        <span class="eyebrow" aria-hidden="true">01</span>
+        <h2 class="chapter__title">はじまりは<br />「来て。」から、<br />こんどは<br />「かなえる。」ために。</h2>
+        <ClippedPhoto class="chapter__photo" src={photo1} alt="" shape="circle" zoom={1.7} />
       </div>
-      <div class="chapter__body chapter__body--tint">
-        <Image class="chapter__tint" src={gray1} alt="" />
+      <div class="chapter__body chapter__body--tint prose">
         <p>つながった交流をより豊かに持続可能に、深く確かなものとするために、はじめます。</p>
         <p>
           東日本大震災と福島第一原子力発電所の事故にあってから、多くの方々が、ふくしまからの「来て。」という呼びかけに、応えてきてくださってきたことにとても感謝しています。県の「そと」の日常をうらやましく思う時期もありましたが、県の「うち」で互いに助け合い、つながっていくことで取り戻してきた日常にも幾度となく助けられました。
@@ -56,49 +50,44 @@ const path = '/thought/';
       </div>
     </section>
 
-    <section class="chapter">
+    <section class="chapter chapter--reverse">
       <div class="chapter__side">
-        <h2 class="blob-title blob-title--high">
-          <Image class="blob-title__bg" src={red2} alt="" />
-          <span>会社から毎日<br />拝んでいる<br />『安積国造神社』に<br />続く道は、</span>
-        </h2>
+        <span class="eyebrow" aria-hidden="true">02</span>
+        <h2 class="chapter__title">会社から毎日<br />拝んでいる<br />『安積国造神社』に<br />続く道は、</h2>
+        <Mingei kind="koma" class="chapter__motif" />
       </div>
-      <div class="chapter__body">
+      <div class="chapter__body prose">
         <p>明治時代から立ち続ける石造りの鳥居の佇まいもあいまって、今なお表参道と呼ばれています。旧奥州街道と交わるこの要衝は、かって江戸時代に町を上町と下町に区分けする「まちのどまんなか」でもありました。</p>
         <p>郡山の名を有名にした明治政府の国づくり『安積開拓』からはじまり、現在では交通や経済の要衝でもある郡山を創業の地と選び、多くの企業が大きく成長した歴史もあります。</p>
       </div>
     </section>
 
-    <section class="chapter chapter--reverse">
+    <section class="chapter">
       <div class="chapter__side">
-        <Image class="chapter__photo" src={photo2} alt="" widths={[300, 600]} sizes="300px" />
+        <span class="eyebrow" aria-hidden="true">03</span>
+        <h2 class="chapter__title">有限会社和久屋は、</h2>
+        <ClippedPhoto class="chapter__photo" src={photo2} alt="" shape="koboshi" zoom={1.8} />
       </div>
-      <div class="chapter__body chapter__body--tint">
-        <Image class="chapter__tint" src={gray2} alt="" />
-        <h2 class="plain-title">有限会社和久屋は、</h2>
+      <div class="chapter__body chapter__body--tint prose">
         <p>じいちゃん、とうちゃん、わたくしで三代続いてきた法人です。</p>
         <p>会社成立は１９５７年（昭和３２年）で、屋号「和久屋」は、江戸時代の郡山宿とともに歴史を重ねた『和久屋旅館』から引き継ぎました。</p>
         <p>代々の旅館業は昭和とともにその役割を終えましたが、先代と女将の「かあちゃん」が、１９７５年（昭和５０年）から創業した民芸品の販売業、１９９１年（平成３年）建立の自社ビル賃貸経営を事業に加え、現在に至っています。</p>
       </div>
     </section>
 
-    <section class="chapter chapter--stack">
+    <section class="chapter chapter--reverse">
       <div class="chapter__side">
-        <h2 class="blob-title">
-          <Image class="blob-title__bg" src={red1} alt="" />
-          <span>郡山の<br />フロンティア<br />スピリット</span>
-        </h2>
-        <Image class="chapter__photo chapter__photo--large" src={photo3} alt="" widths={[400, 800]} sizes="400px" />
+        <span class="eyebrow" aria-hidden="true">04</span>
+        <h2 class="chapter__title">郡山の<br />フロンティア<br />スピリット</h2>
+        <ClippedPhoto class="chapter__photo chapter__photo--tall" src={photo3} alt="" shape="kokeshi" zoom={1.3} />
       </div>
-      <div class="chapter__body">
+      <div class="chapter__body prose">
         <p>
           先代と同じく郡山生まれ郡山育ちの三代目も、郡山のフロンティアスピリットにのっとって生きなければなりません。これから「うち」「そと」の出会いをガイドし、「そと」に学び、これを「かんまかす」ムーブメントを興す一員として、ひらがな『わくや』を育てていきたいと思います。
         </p>
         <p>「わくわくするね（わ）　楽しいね（わ）　粋だね（わ）　さりげないね（わ）　なごむね（わ）」と、 より多くの方々にお声がけを頂けるように、余生をかけて取り組んでまいります。</p>
       </div>
     </section>
-  </div>
-
   </div>
 
   <ShopBanner />
@@ -116,124 +105,71 @@ const path = '/thought/';
   .chapter__side {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-md);
-    justify-items: center;
+    gap: var(--space-sm);
+    justify-items: start;
+    align-content: start;
   }
 
-  /* 模様の上に白い文字を置く見出し（現行 .thought01 h3 と .thought_bg01）。isolation で模様を文字の後ろに固定する */
-  .blob-title {
-    position: relative;
-    display: grid;
-    align-content: end;
-    justify-content: center;
-    width: min(100%, 320px); /* 文字が模様の内側に収まる幅（現行 .thought_bg01 の 277px では、この文字の大きさだとはみ出す） */
-    aspect-ratio: 404 / 338; /* bg_red01.svg の縦横比 */
-    padding-bottom: 12%; /* 模様は上が細いため、文字を下寄りに置く */
-    color: var(--color-on-accent);
-    font-size: var(--font-size-base); /* 現行 .thought01 h3 の 16px */
+  /* 章の番号（01〜04）は朱の細い線の上に置く */
+  .chapter__side .eyebrow {
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+  }
+
+  .chapter__title {
+    font-size: var(--font-size-lg);
     line-height: var(--line-height-base);
-    isolation: isolate;
-  }
-
-  /* bg_red02 は下側が細いため、文字を上寄りに置く */
-  .blob-title--high {
-    padding-bottom: 24%;
-  }
-
-  .blob-title :global(.blob-title__bg) {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-  }
-
-  .plain-title {
-    margin-bottom: var(--space-sm);
-    font-size: var(--font-size-md);
-  }
-
-  .chapter__body p + p {
-    margin-top: var(--space-sm);
-  }
-
-  /* スマートフォンは生成り色の角丸の面（模様を置くと本文の幅が足りない）。PC は現行の bg_gray の模様 */
-  .chapter__body--tint {
-    position: relative;
-    padding: var(--space-md) var(--space-sm);
-    border-radius: var(--space-lg);
-    background: var(--color-bg-subtle);
-    isolation: isolate;
-  }
-
-  .chapter__body--tint :global(.chapter__tint) {
-    display: none;
   }
 
   .chapter :global(.chapter__photo) {
-    width: min(100%, 300px); /* 現行の写真の見た目に近い大きさ */
+    width: min(70%, 260px); /* 文章より目立ちすぎない大きさ */
+    margin-top: var(--space-xs);
   }
 
-  .chapter :global(.chapter__photo--large) {
-    width: min(100%, 400px); /* 現行の第4章の写真の大きさに近い値 */
+  .chapter :global(.chapter__photo--tall) {
+    width: min(50%, 200px); /* 縦長のこけしの形 */
   }
 
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  .chapter :global(.chapter__motif) {
+    width: 64px; /* 写真のない章に添える三春駒 */
+    margin-top: var(--space-xs);
+  }
+
+  /* 生成りを一段沈めた面（展示室の壁のパネル） */
+  .chapter__body--tint {
+    padding: var(--space-md) var(--space-sm);
+    border-left: 1px solid var(--color-line);
+    background: var(--color-bg-subtle);
+  }
+
+  /* 768px 以上（tokens.css --breakpoint-md）：見出しと写真を片側に、文章をもう片側に */
   @media (min-width: 768px) {
-    /* 模様が本文幅より広がるぶんを横スクロールにしない。はみ出しを隠すので、スマートフォン幅には適用しない（横スクロールのテストが効かなくなるため） */
-    .thought-wrap {
-      overflow-x: clip;
-    }
-
     .chapter {
-      position: relative; /* 本文幅の中央を基準に、模様を画面の端へ置く */
-      grid-template-columns: 40% 1fr;
-      gap: var(--space-lg);
-      align-items: center;
+      grid-template-columns: 34% 1fr;
+      gap: var(--space-xl);
       margin-bottom: var(--space-2xl);
-      isolation: isolate;
     }
 
     .chapter--reverse {
-      grid-template-columns: 1fr 40%;
+      grid-template-columns: 1fr 34%;
     }
 
     .chapter--reverse .chapter__side {
       order: 2;
     }
 
-    .chapter--stack {
-      grid-template-columns: 1fr;
+    .chapter__title {
+      font-size: var(--font-size-xl);
     }
 
-    .chapter--stack .chapter__side {
-      grid-template-columns: 320px minmax(0, 1fr); /* 見出しの模様の幅（.blob-title）を確保する */
-      align-items: end;
+    .chapter__body {
+      align-self: center;
     }
 
     .chapter__body--tint {
-      position: static;
       padding: var(--space-lg);
-      border-radius: 0;
-      background: none;
-      isolation: auto;
-    }
-
-    /* bg_gray の素材は片側がまっすぐ切れているため、現行と同じく、切れた辺を画面の端に合わせて隠す */
-    .chapter__body--tint :global(.chapter__tint) {
-      position: absolute;
-      top: 0;
-      right: calc(50% - 50vw);
-      z-index: -1;
-      display: block;
-      width: 60vw; /* 現行 .thought01 .thought_bg03 の幅 */
-      max-width: none;
-    }
-
-    .chapter--reverse .chapter__body--tint :global(.chapter__tint) {
-      right: auto;
-      left: calc(50% - 50vw);
-      width: 54vw; /* 現行 .thought03 .thought_bg01 の 46% では本文が模様の外に出るため広げる */
     }
   }
 </style>

@@ -1,0 +1,112 @@
+<{* 商品一覧（カテゴリーとグループ） *}>
+<div class="p-category">
+  <h2 class="p-category__ttl">
+    <{if $sid_name != ""}><{$sid_name}><{elseif $bid_name != ""}><{$bid_name}><{else}><{section name=num loop=$group_breadcrumb}><{if $smarty.section.num.last}><{$group_breadcrumb[num].name}><{/if}><{/section}><{/if}>
+  </h2>
+  <{if $category_desc_1}><div class="p-category-free"><{$category_desc_1}></div><{/if}>
+  <{if $subcategory_desc_1}><div class="p-category-free"><{$subcategory_desc_1}></div><{/if}>
+  <{if $group_desc_1}><div class="p-category-free"><{$group_desc_1}></div><{/if}>
+  <{if $subcategory_num != 0}>
+  <ul class="p-category-list">
+    <{section name=num loop=$sub_category}>
+    <li class="p-category-list__item"><a class="p-category-list__link" href="<{$sub_category[num].link_url}>"><{$sub_category[num].name}></a></li>
+    <{/section}>
+  </ul>
+  <{/if}>
+  <{if $subgroup_num != 0}>
+  <ul class="p-category-list">
+    <{section name=num loop=$sub_group}>
+    <li class="p-category-list__item"><a class="p-category-list__link" href="<{$sub_group[num].link_url}>"><{$sub_group[num].name}></a></li>
+    <{/section}>
+  </ul>
+  <{/if}>
+  <{if $productlist_num != 0}>
+    <div class="p-item-list-head">
+      <div class="p-item-list-num">全<{$productlist_num}>商品</div>
+      <div class="p-item-sort">
+        <div class="p-item-sort__ttl">並び替え：</div>
+        <select class="p-item-sort__select js-sort-switch">
+          <option value="<{$productlist_sort_def}>"<{if $productlist_sort_now == ""}> selected<{/if}>>おすすめ順</option>
+          <option value="<{$productlist_sort_price}>"<{if $productlist_sort_now == "p"}> selected<{/if}>>価格順</option>
+          <option value="<{$productlist_sort_new}>"<{if $productlist_sort_now == "n"}> selected<{/if}>>新着順</option>
+        </select>
+      </div>
+    </div>
+    <ul class="c-item-list u-opa">
+      <{section name=num loop=$productlist}>
+      <li class="c-item-list__item fadeIn fromBottom">
+        <div class="c-item-list__img u-square-img">
+          <a href="<{$productlist[num].link_url}>">
+            <{if $productlist[num].img_url != ""}>
+            <img src="<{$productlist[num].img_url}>" alt="<{$productlist[num].name|escape:'html'}>" />
+            <{else}>
+            <img src="https://img.shop-pro.jp/tmpl_img/86/no-image.jpg" alt="<{$productlist[num].name|escape:'html'}>" />
+            <{/if}>
+          </a>
+          <button class="c-item-list__btn" type="button" data-favorite-button-selector="DOMSelector" data-product-id="<{$productlist[num].id}>" data-added-class="is-added">
+            <svg role="img" aria-hidden="true"><use xlink:href="#heart"></use></svg>
+          </button>
+        </div>
+        <div class="c-item-list__txt">
+          <div class="c-item-list__ttl"><a href="<{$productlist[num].link_url}>"><{$productlist[num].name}></a></div>
+          <{if !$productlist[num].soldout_flg}>
+          <div class="c-item-list__price"><{$productlist[num].price}></div>
+          <{else}>
+          <div class="c-item-list__price is-soldout">売り切れ</div>
+          <{/if}>
+        </div>
+      </li>
+      <{/section}>
+    </ul>
+    <{if $productlist_total_pages != 1}>
+    <div class="c-pager">
+      <div class="c-pager__total">全<{$productlist_num}>商品中 <{$productlist_snum}> - <{$productlist_enum}>表示</div>
+      <ul class="c-pager-list">
+        <li class="c-pager-list__item is-visible">
+          <{if $productlist_prev_page != ""}>
+          <a href="<{$productlist_prev_page}>" class="c-pager-list__link is-prev">前へ</a>
+          <{else}>
+          <span class="c-pager-list__link is-prev is-disabled">前へ</span>
+          <{/if}>
+        </li>
+        <{section name=pager start=$productlist_first_page loop=$productlist_last_page+1}>
+        <{if $smarty.section.pager.first && $smarty.section.pager.index > 1}>
+        <li class="c-pager-list__item"><a href="<{$productlist_link_base}>" class="c-pager-list__link">1</a></li>
+        <li class="c-pager-list__item">...</li>
+        <{/if}>
+        <{if $smarty.section.pager.index == $productlist_current_page}>
+        <li class="c-pager-list__item is-visible"><span class="c-pager-list__link is-disabled is-current"><{$smarty.section.pager.index}><span class="c-pager-list__page">ページ目</span></span></li>
+        <{else}>
+        <li class="c-pager-list__item"><a href="<{$productlist_link_base}>&page=<{$smarty.section.pager.index}>" class="c-pager-list__link"><{$smarty.section.pager.index}></a></li>
+        <{/if}>
+        <{if $smarty.section.pager.last && $smarty.section.pager.index < $productlist_total_pages}>
+        <li class="c-pager-list__item">...</li>
+        <li class="c-pager-list__item"><a href="<{$productlist_link_base}>&page=<{$productlist_total_pages}>" class="c-pager-list__link"><{$productlist_total_pages}></a></li>
+        <{/if}>
+        <{/section}>
+        <li class="c-pager-list__item is-visible">
+          <{if $productlist_next_page != ""}>
+          <a href="<{$productlist_next_page}>" class="c-pager-list__link is-next">次へ</a>
+          <{else}>
+          <span class="c-pager-list__link is-next is-disabled">次へ</span>
+          <{/if}>
+        </li>
+      </ul>
+    </div>
+    <{/if}>
+  <{else}>
+    <{if $subcategory_num == 0 && $subgroup_num == 0}>
+    <p class="c-not-found">該当する商品がありません</p>
+    <{/if}>
+  <{/if}>
+  <{if $category_desc_2}><div class="p-category-free"><{$category_desc_2}></div><{/if}>
+  <{if $subcategory_desc_2}><div class="p-category-free"><{$subcategory_desc_2}></div><{/if}>
+  <{if $group_desc_2}><div class="p-category-free"><{$group_desc_2}></div><{/if}>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $(".js-sort-switch").on("change", function () {
+      if ($(this).val() !== "") { location.href = $(this).val(); }
+    });
+  });
+</script>

@@ -22,12 +22,12 @@ migratedFrom: "https://waku-8.com/243/"
 
 野沢民芸　首振り招福午＜小＞￥3,080（税込）
 
-[https://waku-8.shop-pro.jp/?pid=190271475](https://waku-8.shop-pro.jp/?pid=190271475)
+[https://wakuya.shop-pro.jp/?pid=194348745](https://wakuya.shop-pro.jp/?pid=194348745)
 
 野沢民芸　首振り松竹梅＜小＞￥3,080（税込）
 
-[https://waku-8.shop-pro.jp/?pid=190271460](https://waku-8.shop-pro.jp/?pid=190271460)
+[https://wakuya.shop-pro.jp/?pid=194348744](https://wakuya.shop-pro.jp/?pid=194348744)
 
 工房いけだ　氏原忠夫＜卓上＞カレンダー２０２６午　￥880（税込）
 
-[https://waku-8.shop-pro.jp/?pid=177770544](https://waku-8.shop-pro.jp/?pid=177770544)
+[https://wakuya.shop-pro.jp/?pid=194348793](https://wakuya.shop-pro.jp/?pid=194348793)

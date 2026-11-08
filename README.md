@@ -76,14 +76,19 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 
 | 機能 | 工程 | 作業項目 | 完了率 |
 |------|------|----------|--------|
-| [004 ページが見つからないときの案内（404 ページ）](specs/004-not-found/spec.md) | 実装中 | 7 / 8 | 87% |
+| [005 カラーミーショップのテンプレートの控えと調整](specs/005-colorme-shop/spec.md) | 仕様作成中 | — | — |
+| [006 商品の移行とホームページ・ショップの相互リンク](specs/006-shop-products/spec.md) | 実装中 | 5 / 8 | 62% |
+| [007 007-temporary-design](specs/007-temporary-design/spec.md) | 仕様作成中 | — | — |
 
-### 004 ページが見つからないときの案内（404 ページ）：未完了の作業
+### 006 商品の移行とホームページ・ショップの相互リンク：未完了の作業
 
-<details><summary>1 件</summary>
+<details><summary>3 件</summary>
 
-- **Phase 2: Polish & Cross-Cutting Concerns**
-  - T008 main へ反映し、テスト公開の URL で存在しない URL のステータスが 404 になることを確かめる（SC-001）
+- **Phase 1: User Story 1**
+  - T003 商品画像を登録する（API の認証エラーの解消が必要）
+  - T004 オプションと在庫数を登録する（管理画面または CSV。所有者）
+- **Phase 2: User Story 2**
+  - T008 `npm run test:local` と `npm run check:shop-links` を実行し、develop と main へ反映する。公開先でリンクを確かめる
 
 </details>
 
@@ -115,5 +120,12 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 - US2（P1）：お店がどんな店で、今どう営んでいるかが分かる
 - US3（P2）：店の想いと歩みを読める
 - US4（P2）：出張わくやを知り、依頼できる
+
+### [004 ページが見つからないときの案内（404 ページ）](specs/004-not-found/spec.md)
+
+テスト公開の確認で、存在しない URL を開くとトップページが 200 で返ることが分かった。404 ページを追加する
+
+- US1（P1）：存在しない URL から目的のページへ戻れる
+- US2（P1）：検索エンジンに、ないページとして伝わる
 
 <!-- speckit-readme:end -->

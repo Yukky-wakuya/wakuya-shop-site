@@ -1,70 +1,94 @@
 ---
-// トップページのメインビジュアル（現行 .topHero）。キャッチコピーは画像ではなく文字で出す（FR-002）
-import { Image } from 'astro:assets';
+// トップページのメインビジュアル（007 の仮のデザイン）。旅館の花頭窓の形に切り抜いた写真と、縦書きの明朝のキャッチコピー。
+// キャッチコピーは画像ではなく文字で出す（FR-002）。元のデザインはタグ design-original にある（docs/design-original.md）
 import ClippedPhoto from './ClippedPhoto.astro';
+import Fukidashi from './Fukidashi.astro';
 import photo from '../assets/top/top_hero.jpg';
-import logo from '../assets/brand/logo_w.svg';
 ---
 
-<section class="top-hero" aria-label="わくやの紹介">
-  <ClippedPhoto class="top-hero__photo" src={photo} alt="" shape="top" />
+<section class="top-hero content-inner" aria-label="わくやの紹介">
   <div class="top-hero__text">
+    <span class="eyebrow" aria-hidden="true">Fukushima Folk Craft — since 1975</span>
     <h1 class="top-hero__catch">
       ふくしまで、<br />長く愛されてきた民芸品、<br />めんこい和雑貨たち、<br />心の琴線にふれるお気に入りに<br />めぐり会う「わくや」です。
     </h1>
-    <Image class="top-hero__logo" src={logo} alt="" />
   </div>
+  <figure class="top-hero__figure">
+    <ClippedPhoto class="top-hero__photo" src={photo} alt="" shape="katomado" align="xMaxYMid" />
+    <Fukidashi speaker="akabeko" class="top-hero__bubble">ようこそ、わくやへ。</Fukidashi>
+  </figure>
 </section>
 
 <style>
   .top-hero {
-    position: relative;
-    margin-bottom: var(--space-xl);
-  }
-
-  .top-hero :global(.top-hero__photo) {
-    display: block;
-    width: 90%; /* 現行 .tophero_svg の幅 */
-    max-width: calc((100vw - var(--size-content-max)) / 2 + 900px); /* 現行と同じく、本文の右端から画面の右端まで広げる */
-    height: auto;
-    margin-left: auto;
+    display: grid;
+    gap: var(--space-lg);
+    margin-block: var(--space-lg) var(--space-xl);
   }
 
   .top-hero__text {
-    position: absolute;
-    top: 50%;
-    left: 20%; /* 現行 .topHero_text の位置 */
-    transform: translateY(-50%);
-    color: var(--color-on-accent);
-    /* 写真の上でも読めるよう、文字の周りをわずかに暗くする（現行にはない。原則IV のコントラスト） */
-    text-shadow: 0 0 6px rgb(0 0 0 / 60%); /* 写真の上の文字だけに使う影のため、トークンにせず直接書く */
+    display: grid;
+    gap: var(--space-sm);
   }
 
   .top-hero__catch {
-    margin-bottom: var(--space-sm);
-    font-family: var(--font-family-mincho);
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-md);
+    letter-spacing: var(--letter-spacing-wide);
     line-height: var(--line-height-base);
   }
 
-  .top-hero__text :global(.top-hero__logo) {
-    width: 100px; /* 現行 .topHero_logo（SP）の幅 */
-    margin-left: auto;
+  .top-hero__figure {
+    position: relative;
+    width: min(100%, 420px); /* 窓の形が間延びしない大きさ */
+    margin-inline: auto;
   }
 
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  .top-hero__figure :global(.top-hero__photo) {
+    width: 100%;
+  }
+
+  .top-hero__figure :global(.top-hero__bubble) {
+    position: absolute;
+    bottom: var(--space-sm);
+    left: calc(-1 * var(--space-xs));
+  }
+
+  /* 768px 以上（tokens.css --breakpoint-md）：右に窓、左に縦書きのキャッチコピー */
   @media (min-width: 768px) {
     .top-hero {
-      margin-bottom: var(--space-2xl);
+      grid-template-columns: 1fr minmax(0, 460px);
+      align-items: center;
+      gap: var(--space-xl);
+      margin-block: var(--space-xl) var(--space-2xl);
+    }
+
+    .top-hero__text {
+      grid-template-columns: auto auto;
+      justify-content: center;
+      align-items: start;
+      gap: var(--space-lg);
+    }
+
+    /* 英字の添え書きは縦に置き、キャッチコピーの左の細い柱にする */
+    .top-hero__text .eyebrow {
+      order: 2;
+      writing-mode: vertical-rl;
+      padding-left: var(--space-sm);
+      border-left: 1px solid var(--color-line);
     }
 
     .top-hero__catch {
-      margin-bottom: var(--space-md);
       font-size: var(--font-size-hero);
+      line-height: 2.2; /* 縦書きの行の間をゆったり取る */
+      writing-mode: vertical-rl;
     }
 
-    .top-hero__text :global(.top-hero__logo) {
-      width: 200px; /* 現行 .topHero_logo の幅 */
+    .top-hero__figure {
+      width: 100%;
+    }
+
+    .top-hero__figure :global(.top-hero__bubble) {
+      left: calc(-1 * var(--space-lg));
     }
   }
 </style>

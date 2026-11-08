@@ -1,0 +1,39 @@
+/******************************/
+/* option table */
+/******************************/
+.p-popup-option-tbl {
+  padding: 20px;
+}
+.container-section {
+  border-top: 1px solid #e7e7e7;
+  margin-bottom: 60px;
+  overflow: auto;
+  padding-top: 40px;
+}
+.shopkeeper-h2 {
+  text-align: left;
+  margin: 0;
+  padding: 0 0 20px;
+}
+.def-lst {
+  margin: 0;
+  padding: 0 0 0 30px;
+}
+.def-lst-dt {
+}
+.def-lst-dd {
+  margin: 0;
+  padding: 0 0 20px 0;
+}
+@media (max-width: 768px) {
+  .container-section {
+    margin-bottom: 30px;
+    padding-top: 20px;
+  }
+  .shopkeeper-h2 {
+    padding-left: 6px
+  }
+  .def-lst {
+    padding-left: 0;
+  }
+}

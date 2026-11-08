@@ -1,52 +1,131 @@
 ---
-// オンラインショップ（カラーミーショップ）への帯。現行 .shop_link と同じ見た目（開発原則III）
-import { Image } from 'astro:assets';
-import logo from '../assets/brand/logo_w.svg';
+// オンラインショップ（カラーミーショップ）への帯（007 の仮のデザイン）。旅館の藍ののれんに見立て、
+// 白く染め抜いた丸の紋にあかべこを置く。元のデザイン（朱の帯と白抜きのロゴ）はタグ design-original にある
+import Mingei from './Mingei.astro';
 import { shopUrl } from '../data/site';
 ---
 
 <div class="content-inner">
   <a class="shop-banner" href={shopUrl} target="_blank" rel="noopener">
-    <span class="shop-banner__text">オンラインショップ<span class="visually-hidden">（外部サイト・新しいタブで開きます）</span></span>
-    <Image class="shop-banner__logo" src={logo} alt="" />
+    <span class="shop-banner__crest" aria-hidden="true"><Mingei kind="akabeko" class="shop-banner__motif" /></span>
+    <span class="shop-banner__words">
+      <span class="shop-banner__en" aria-hidden="true">Online Shop</span>
+      <span class="shop-banner__text">オンラインショップ<span class="visually-hidden">（外部サイト・新しいタブで開きます）</span></span>
+      <span class="shop-banner__note">ふくしまの民芸を、お手元に。</span>
+    </span>
+    <span class="shop-banner__arrow" aria-hidden="true">→</span>
   </a>
 </div>
 
 <style>
   .shop-banner {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: var(--space-sm);
     margin-bottom: var(--space-xl);
-    padding: var(--space-md) var(--space-sm);
-    background: var(--color-accent);
+    padding: var(--space-lg) var(--space-sm) var(--space-xl);
+    border-top: 6px solid var(--color-text); /* のれんを掛ける竿 */
+    background: var(--color-footer-bg);
     color: var(--color-on-accent);
     text-decoration: none;
+  }
+
+  /* のれんの切れ目（下から上へ、地の色の細い隙間を2本） */
+  .shop-banner::before,
+  .shop-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 4px; /* 切れ目の幅 */
+    height: var(--space-lg); /* 下の余白の中に収め、文字に重ねない */
+    background: var(--color-bg);
+  }
+
+  .shop-banner::before {
+    left: 33.3%;
+  }
+
+  .shop-banner::after {
+    left: 66.6%;
+  }
+
+  .shop-banner:hover {
+    color: var(--color-on-accent);
+  }
+
+  .shop-banner__crest {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 56px; /* 染め抜きの丸の紋 */
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-bg-raised);
+  }
+
+  .shop-banner__crest :global(.shop-banner__motif) {
+    width: 70%;
+  }
+
+  .shop-banner__words {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  .shop-banner__en {
+    font-family: var(--font-family-latin);
+    font-size: var(--font-size-2xs);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
   }
 
   .shop-banner__text {
     font-family: var(--font-family-mincho);
     font-size: var(--font-size-md);
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-tight);
   }
 
-  .shop-banner :global(.shop-banner__logo) {
-    width: 100px; /* 現行 .shop_link_logo（SP）の幅 */
+  .shop-banner__note {
+    font-size: var(--font-size-xs);
   }
 
-  /* 現行の切り替え幅 768px（tokens.css --breakpoint-md）。@media では var() が使えないため直接書く */
+  .shop-banner__arrow {
+    display: none;
+  }
+
+  .shop-banner:hover .shop-banner__arrow {
+    transform: translateX(6px); /* 押せることを示す小さな動き */
+  }
+
+  /* 768px 以上（tokens.css --breakpoint-md） */
   @media (min-width: 768px) {
     .shop-banner {
+      gap: var(--space-lg);
       margin-bottom: var(--space-2xl);
-      padding: var(--space-lg) 45px; /* 左右は現行 .shop_link の 45px */
+      padding: var(--space-lg) var(--space-xl) calc(var(--space-xl) + var(--space-sm));
+    }
+
+    .shop-banner__crest {
+      width: 120px; /* PC の染め抜きの丸の紋 */
     }
 
     .shop-banner__text {
       font-size: var(--font-size-display);
     }
 
-    .shop-banner :global(.shop-banner__logo) {
-      width: 232px; /* 現行 .shop_link_logo の幅 */
+    .shop-banner__arrow {
+      display: block;
+      margin-left: auto;
+      font-size: var(--font-size-2xl);
+      transition: transform 0.2s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shop-banner__arrow {
+      transition: none;
     }
   }
 </style>

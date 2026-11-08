@@ -1,40 +1,79 @@
 ---
-// 写真を曲線の形に切り抜いて表示する（現行 .tophero_svg・.subhero_svg と同じ SVG の clipPath）
-// 形は現行サイトの path をそのまま使う（docs/current-site/design.md）
+// 写真を形に切り抜いて表示する（SVG の clipPath）。007 の仮のデザインの形：
+//   katomado … 旅館や寺の花頭窓（かとうまど）   arch … 上の丸いアーチ窓   wide-arch … 横長のアーチ窓
+//   kokeshi … こけしの形
+//   koboshi … 起き上がり小法師の卵形          circle … 丸
+// 元のデザインの曲線の形（top・sub）は、タグ design-original の同じファイルにある（docs/design-original.md）
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { uid } from '../lib/uid';
 
 const SHAPES = {
-  top: {
-    viewBox: '0 0 1006.6 660.36',
-    d: 'm928.45,78.79c-76.47,1.41-163.14,3.01-256.55-8.29-85.51-10.35-161.29-26.16-228.15-40.12C370.59,15.11,303.83,1.17,244.72,0h-15.8c-22.68.48-44.16,3.09-64.37,8.51-47.2,12.68-87.46,40.77-119.8,93.1-58.49,94.65-59.69,202.84-3.37,304.65,73.01,131.94,229.83,227.39,409.27,249.11,24.79,3,50.4,4.64,76.55,4.99h22.33c153.94-2.13,323.95-47.18,457.05-121.59V78.03c-25.13-.22-51.35.26-78.14.76Z',
+  katomado: {
+    viewBox: '0 0 100 125',
+    d: 'M0 125 L0 52 C0 41 5 36 10 33 C16 29 19 20 27 14 C35 8 44 6 50 0 C56 6 65 8 73 14 C81 20 84 29 90 33 C95 36 100 41 100 52 L100 125 Z',
   },
-  sub: {
-    viewBox: '0 0 755.93 468.47',
-    d: 'm656.03,56.36c-54.04.95-115.29,2.03-181.31-6.04-60.44-7.39-114-18.65-161.26-28.59C236.76,5.6,170.03-8.43,116.13,6.05c-33.35,8.96-61.78,28.85-84.6,65.92-41.28,67.06-42.05,143.76-2.18,215.97,51.68,93.58,162.57,161.36,289.4,176.87,141.33,17.28,320.29-27.94,437.19-110.13V57.81c-30.28-2.67-64.38-2.07-99.9-1.44Z',
+  arch: {
+    viewBox: '0 0 100 120',
+    d: 'M0 120 L0 50 A50 50 0 0 1 100 50 L100 120 Z',
+  },
+  'wide-arch': {
+    viewBox: '0 0 160 110',
+    d: 'M0 110 L0 60 A80 60 0 0 1 160 60 L160 110 Z',
+  },
+  kokeshi: {
+    viewBox: '0 0 100 150',
+    d: 'M12 40 A38 38 0 1 1 88 40 A38 38 0 1 1 12 40 Z M30 70 H70 A10 10 0 0 1 80 80 V140 A10 10 0 0 1 70 150 H30 A10 10 0 0 1 20 140 V80 A10 10 0 0 1 30 70 Z',
+  },
+  koboshi: {
+    viewBox: '0 0 100 115',
+    d: 'M50 0 C80 0 98 38 98 68 C98 96 76 115 50 115 C24 115 2 96 2 68 C2 38 20 0 50 0 Z',
+  },
+  circle: {
+    viewBox: '0 0 100 100',
+    d: 'M0 50 A50 50 0 1 1 100 50 A50 50 0 1 1 0 50 Z',
   },
 } as const;
+
+export type PhotoShape = keyof typeof SHAPES;
 
 interface Props {
   src: ImageMetadata;
   /** 空文字なら装飾として読み上げない */
   alt: string;
-  shape: keyof typeof SHAPES;
+  shape: PhotoShape;
   class?: string;
+  /** 写真を拡大して中央を使う倍率（元の写真の縁が透明なときに、透明な部分を形の外に出す） */
+  zoom?: number;
+  /** 写真のどこを見せるか（preserveAspectRatio の値） */
+  align?: 'xMidYMid' | 'xMidYMin' | 'xMidYMax' | 'xMinYMid' | 'xMaxYMid';
 }
 
-const { src, alt, shape, class: className } = Astro.props;
+const { src, alt, shape, class: className, zoom = 1, align = 'xMidYMid' } = Astro.props;
 const { viewBox, d } = SHAPES[shape];
 // SVG の <image> は srcset を持てないため、高精細の画面でも足りる幅で1枚に最適化する
 const image = await getImage({ src, width: Math.min(src.width, 1600), format: 'webp', quality: 80 });
-const clipId = `clip-${shape}`;
+// 同じ形を1ページで何度使っても id が重ならないようにする
+const clipId = uid(`clip-${shape}`);
+const offset = `${(-(zoom - 1) / 2) * 100}%`;
+const size = `${zoom * 100}%`;
 ---
 
-<svg class={className} viewBox={viewBox} role={alt ? 'img' : undefined} aria-label={alt || undefined} aria-hidden={alt ? undefined : 'true'} focusable="false">
+<svg class:list={['clipped-photo', className]} viewBox={viewBox} role={alt ? 'img' : undefined} aria-label={alt || undefined} aria-hidden={alt ? undefined : 'true'} focusable="false">
   <defs>
     <clipPath id={clipId}>
       <path d={d}></path>
     </clipPath>
   </defs>
-  <image href={image.src} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path={`url(#${clipId})`}></image>
+  <g clip-path={`url(#${clipId})`}>
+    <rect width="100%" height="100%" class="clipped-photo__mat"></rect>
+    <image href={image.src} x={offset} y={offset} width={size} height={size} preserveAspectRatio={`${align} slice`}></image>
+  </g>
 </svg>
+
+<style>
+  /* 写真が透明な部分は、生成りの台紙の色にする */
+  .clipped-photo__mat {
+    fill: var(--color-bg-subtle);
+  }
+</style>

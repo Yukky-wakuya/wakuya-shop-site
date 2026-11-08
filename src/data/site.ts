@@ -9,7 +9,7 @@ export interface NavItem {
 
 export const siteName = 'わくや';
 export const siteUrl = siteConfig.url;
-export const shopUrl = 'https://waku-8.shop-pro.jp/';
+export const shopUrl = 'https://wakuya.shop-pro.jp/';
 
 /**
  * ヘッダーナビ。並び順は現行サイトの見た目の順（縦書きを右から読んだ順。docs/current-site/design.md）。
@@ -27,9 +27,9 @@ export const nav: NavItem[] = [
 /** フッターナビ（現行サイトと同じ。概要以外はカラーミーショップ内のページ） */
 export const footerNav: NavItem[] = [
   { label: 'わくや概要', href: '/summary/' },
-  { label: 'プライバシーポリシー', href: 'https://waku-8.shop-pro.jp/?mode=privacy', external: true },
-  { label: '特定商取引法に基づく表記', href: 'https://waku-8.shop-pro.jp/?mode=sk#info', external: true },
-  { label: '送料について', href: 'https://waku-8.shop-pro.jp/?mode=sk', external: true },
+  { label: 'プライバシーポリシー', href: 'https://wakuya.shop-pro.jp/?mode=privacy', external: true },
+  { label: '特定商取引法に基づく表記', href: 'https://wakuya.shop-pro.jp/?mode=sk#info', external: true },
+  { label: '送料について', href: 'https://wakuya.shop-pro.jp/?mode=sk', external: true },
 ];
 
 export interface SocialLink {
