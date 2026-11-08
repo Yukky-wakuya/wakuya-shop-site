@@ -77,6 +77,20 @@ $env:UV_TOOL_DIR = "$PWD\.tools\uv-tools"
 | 機能 | 工程 | 作業項目 | 完了率 |
 |------|------|----------|--------|
 | [005 カラーミーショップのテンプレートの控えと調整](specs/005-colorme-shop/spec.md) | 仕様作成中 | — | — |
+| [006 商品の移行とホームページ・ショップの相互リンク](specs/006-shop-products/spec.md) | 実装中 | 5 / 8 | 62% |
+| [007 007-temporary-design](specs/007-temporary-design/spec.md) | 仕様作成中 | — | — |
+
+### 006 商品の移行とホームページ・ショップの相互リンク：未完了の作業
+
+<details><summary>3 件</summary>
+
+- **Phase 1: User Story 1**
+  - T003 商品画像を登録する（API の認証エラーの解消が必要）
+  - T004 オプションと在庫数を登録する（管理画面または CSV。所有者）
+- **Phase 2: User Story 2**
+  - T008 `npm run test:local` と `npm run check:shop-links` を実行し、develop と main へ反映する。公開先でリンクを確かめる
+
+</details>
 
 ## 仕様一覧（完成した機能）
 
