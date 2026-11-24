@@ -18,6 +18,7 @@ npm run survey                           # 現行サイトの調査（docs/curre
 npm run readme:generate                  # このREADMEの「開発の進捗」以下を specs/ から作り直す
 npm run migrate:blog                     # 現行サイトのブログ記事を src/content/blog/ に取り込む（再実行しても同じ結果）
 npm run check:shop-links                 # カラーミーショップへのリンク切れを確認（外部にアクセスする）
+npm run check:dns -- --phase before      # waku-8.com の DNS（メールの設定）を確認（外部にアクセスする。docs/domain.md）
 ```
 
 - 現行サイトの調査資料：[docs/current-site/](docs/current-site/README.md)
@@ -25,6 +26,8 @@ npm run check:shop-links                 # カラーミーショップへのリ�
 - ブランチの保護の設定：[docs/branch-protection.md](docs/branch-protection.md)
 - ブログの記事の追加・おすすめ商品の入れ替え：[docs/updating.md](docs/updating.md)
 - テスト公開（Cloudflare Pages）とドメインの切り替え：[docs/deploy.md](docs/deploy.md)
+- 管理会社からの引き継ぎ（方針・受け取るもの・カラーミーショップ）：[docs/handover.md](docs/handover.md)
+- ドメイン（waku-8.com）とメールの引き継ぎ：[docs/domain.md](docs/domain.md)
 
 ## Spec Kitの使い方
 

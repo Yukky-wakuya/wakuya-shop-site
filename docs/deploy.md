@@ -47,6 +47,8 @@ GitHub 側に Cloudflare の API キーなどの秘密情報を置く必要は�
 
 > 写真の権利と写っている人の掲載の了承は、2026-11-04 に所有者の確認を受けている（`docs/development-log.md`）。その後に写真を足したときは、切り替えの前に確認する。
 
+> **今の `waku-8.com` を使うときは、先に [domain.md](domain.md) の A・B（DNS を Cloudflare に移す）を済ませる。** `waku-8.com` はメール（`shop@waku-8.com`）にも使っているため、DNS の設定を間違えるとメールが止まる。1 の DNS の設定は [domain.md](domain.md) の C のとおりに行う。
+
 1. Cloudflare Pages のプロジェクト →「Custom domains」→「Set up a custom domain」で、取得したドメイン（例：`waku-8.com`）を追加し、画面の案内どおりに DNS を設定する
 2. 「Settings」→「Environment variables」の **Production** を次のように変える
 

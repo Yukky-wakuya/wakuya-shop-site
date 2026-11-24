@@ -20,7 +20,8 @@
     "survey": "node scripts/survey/run.ts",
     "migrate:blog": "node scripts/migrate-blog/run.ts",
     "blog:next-id": "node scripts/blog-next-id.ts",
-    "check:shop-links": "node scripts/check-shop-links.ts"
+    "check:shop-links": "node scripts/check-shop-links.ts",
+    "check:dns": "node scripts/check-dns.ts"
   },
   "dependencies": {
     "@astrojs/check": "0.9.12",
