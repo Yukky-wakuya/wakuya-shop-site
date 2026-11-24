@@ -39,7 +39,7 @@ ${layoutCss}
 html = replaceOnce(html, '<a class="l-header-logo__txt" href="<{$home_url}>"><{$logo}></a>',
   `<a class="l-header-logo__txt" href="<{$home_url}>"><span class="w-logo">${kokeshi}<span class="w-logo__words"><span class="w-logo__sub">民芸くらふと</span><span class="w-logo__name">わくや</span></span></span></a>`);
 html = replaceOnce(html, '<div class="l-footer-shopinfo__logo"><a href="<{$home_url}>"><{$logo}></a></div>',
-  '<div class="l-footer-shopinfo__logo"><a href="<{$home_url}>"><span class="w-footer-name">わくや</span><span class="w-footer-sub">民芸くらふと 和久屋 ─ 福島・郡山</span></a></div>');
+  '<div class="l-footer-shopinfo__logo"><a href="<{$home_url}>"><span class="w-footer-name">わくや</span><span class="w-footer-sub">わくや | 福島県民芸雑貨 | 有限会社和久屋</span></a></div>');
 html = replaceOnce(html, '<div class="l-footer">',
   `<{* 007：棚に並んだ民芸。フッターの上端を棚板に見立てる *}>\n<div class="w-shelf u-container" aria-hidden="true">${koma}${kokeshi}${akabeko}${koboshi}</div>\n<div class="l-footer">`);
 // フッターは藍の地なので、SNS のアイコンを白にする

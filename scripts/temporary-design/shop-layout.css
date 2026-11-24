@@ -256,6 +256,7 @@ body .l-footer a:hover {
 .w-footer-sub {
   display: block;
   margin-top: 6px;
+  word-break: keep-all;
   font-size: 12px;
   letter-spacing: 0.2em;
 }
